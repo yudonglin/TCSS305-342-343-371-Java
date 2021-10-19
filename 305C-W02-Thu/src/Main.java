@@ -31,12 +31,19 @@ class Demo {
         studArray[0] = new Student("Jasper", 21_000_001, new Address(98401, "WA"));
         studArray[1] = new Student("Luke" , 21_000_002, new Address(98004, "WA"));
 
-        Student[] studArray2 = studArray;
-
-        studArray2 = studArray.clone();
+        //Student[] studArray2 = cloneStudentArray(studArray);
+        
+        Student[] studArray2 = studArray.clone();
 
     }
 
+    public Student[] cloneStudentArray(Student[] studArray_in) {
+        Student[] studArray_out = new Student[studArray_in.length];
+        for (int i=0; i < studArray_in.length; i++){
+            studArray_out[i] = studArray_in[i].clone();
+        }
+        return studArray_out;
+    }
 }
 
 class Student implements Cloneable {
@@ -52,7 +59,7 @@ class Student implements Cloneable {
     }
 
     public Student clone() {
-        return new Student(this.name, this.sID, this.address);
+        return new Student(this.name, this.sID, this.address.clone());
     }
 
 }
