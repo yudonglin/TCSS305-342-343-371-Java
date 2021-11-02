@@ -4,7 +4,8 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/305C-W02-Thu/305C-W02-Thu.iml" filepath="$PROJECT_DIR$/305C-W02-Thu/305C-W02-Thu.iml" />
       <module fileurl="file://$PROJECT_DIR$/In-Class-Group-Activity-W04/In-Class-Group-Activity-W04.iml" filepath="$PROJECT_DIR$/In-Class-Group-Activity-W04/In-Class-Group-Activity-W04.iml" />
-      <module fileurl="file://$PROJECT_DIR$/TCSS305.iml" filepath="$PROJECT_DIR$/TCSS305.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PRGA#01/PRGA#01.iml" filepath="$PROJECT_DIR$/PRGA#01/PRGA#01.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/TCSS305.iml" filepath="$PROJECT_DIR$/.idea/TCSS305.iml" />
     </modules>
   </component>
 </project>
