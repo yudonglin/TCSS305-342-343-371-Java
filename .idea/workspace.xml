@@ -2,22 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6328ae60-7d33-4aa1-8e41-27536e728b4b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/TCSS305.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PRGA#01/PRGA#01.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PRGA#01/src/ObjectOrientedCLICalculator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PRGA#01/src/ProceduralCLICalculator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.devcontainer/Dockerfile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.devcontainer/devcontainer.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/305C-W02-Thu/305C-W02-Thu.iml" beforeDir="false" afterPath="$PROJECT_DIR$/305C-W02-Thu/305C-W02-Thu.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/In-Class-Group-Activity-W04/In-Class-Group-Activity-W04.iml" beforeDir="false" afterPath="$PROJECT_DIR$/In-Class-Group-Activity-W04/In-Class-Group-Activity-W04.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PRGA#01/src/ObjectOrientedCLICalculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/PRGA#01/src/ObjectOrientedCLICalculator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PRGA#01/src/ProceduralCLICalculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/PRGA#01/src/ProceduralCLICalculator.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -34,6 +33,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="D:/文档" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RunManager" selected="Application.ProceduralCLICalculator">
     <configuration name="ObjectOrientedCLICalculator" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -66,7 +66,8 @@
       <option name="presentableId" value="Default" />
       <updated>1635738979246</updated>
       <workItem from="1635738982445" duration="5635000" />
-      <workItem from="1635804627033" duration="6593000" />
+      <workItem from="1635804627033" duration="13711000" />
+      <workItem from="1635828913462" duration="3249000" />
     </task>
     <servers />
   </component>

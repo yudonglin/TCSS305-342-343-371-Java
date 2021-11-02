@@ -5,7 +5,6 @@ import java.util.Scanner;
  * It will handle most of the calculation since it provides a way for converting both Binary and Hexadecimal class into decimal for calculation
  * Based on the {@param positionalNotation} provided by itself child class
  */
-
 abstract class GeneralDataType {
     private final String value;
     private final int positionalNotation;
@@ -42,7 +41,6 @@ abstract class GeneralDataType {
      *
      * @return a new Binary or Hexadecimal object based on the positional notation of this class
      */
-
     public GeneralDataType multiply(GeneralDataType o) {
         return this.positionalNotation == 2 ? new Binary(Long.toBinaryString(this.toDecimal() * o.toDecimal())) : new Hexadecimal(Long.toHexString(this.toDecimal() * o.toDecimal()));
     }
@@ -52,7 +50,6 @@ abstract class GeneralDataType {
      *
      * @return a new Binary or Hexadecimal object based on the positional notation of this class
      */
-
     public GeneralDataType divide(GeneralDataType o) {
         return this.positionalNotation == 2 ? new Binary(Long.toBinaryString(this.toDecimal() / o.toDecimal())) : new Hexadecimal(Long.toHexString(this.toDecimal() / o.toDecimal()));
     }
@@ -60,7 +57,6 @@ abstract class GeneralDataType {
     /**
      * @return a Long that represent the value of this object in decimal integer
      */
-
     public long toDecimal() {
         return Long.parseUnsignedLong(this.value, this.positionalNotation);
     }
@@ -70,7 +66,6 @@ abstract class GeneralDataType {
  * A {@code Binary} object is the child class of GeneralDataType.
  * It will pass the {@param value} to the super class {@code GeneralDataType} as well as 2 as {@param positionalNotation}.
  */
-
 class Binary extends GeneralDataType {
     public Binary(String value) {
         super(value, 2);

@@ -55,18 +55,18 @@ public class ProceduralCLICalculator {
         if (num_in == 0) {
             return "0";
         } else {
-            String binaryOutReversed = "";
-            boolean isNegative = num_in < 0;
-            while (Math.abs(num_in) > 0) {
-                binaryOutReversed = binaryOutReversed.concat(((num_in % 2) == 0 ? "0" : "1"));
-                num_in = num_in / 2;
-            }
-            if (isNegative) {
-                binaryOutReversed = binaryOutReversed.concat("-");
-            }
             String binaryOut = "";
-            for (int i = binaryOutReversed.length() - 1; i >= 0; i--) {
-                binaryOut = binaryOut.concat(String.valueOf(binaryOutReversed.charAt(i)));
+            if (num_in > 0) {
+                while (num_in > 0) {
+                    binaryOut = ((num_in % 2) == 0 ? "0" : "1") + binaryOut;
+                    num_in = num_in / 2;
+                }
+            } else {
+                while (num_in < 0) {
+                    binaryOut = ((num_in % 2) == 0 ? "0" : "1") + binaryOut;
+                    num_in = num_in / 2;
+                }
+                binaryOut = "-" + binaryOut;
             }
             return binaryOut;
         }
@@ -103,12 +103,25 @@ public class ProceduralCLICalculator {
      * @return hexadecimal format String
      */
     public static String decimalToHex(int decimal_in) {
-        String hex_out = "";
-        while (decimal_in > 0) {
-            hex_out = hex_chars_array.charAt(decimal_in % hex_chars_array.length()) + hex_out;
-            decimal_in /= 16;
+        if (decimal_in == 0) {
+            return "0";
+        } else {
+            String hex_out = "";
+            if (decimal_in > 0) {
+                while (decimal_in > 0) {
+                    hex_out = hex_chars_array.charAt(decimal_in % hex_chars_array.length()) + hex_out;
+                    decimal_in /= 16;
+                }
+            } else {
+                while (decimal_in < 0) {
+                    hex_out = hex_chars_array.charAt(-decimal_in % hex_chars_array.length()) + hex_out;
+                    decimal_in /= 16;
+                }
+                hex_out = "-" + hex_out;
+            }
+
+            return hex_out;
         }
-        return hex_out;
     }
 
     /**
@@ -117,13 +130,14 @@ public class ProceduralCLICalculator {
      * @param hexIn the hexadecimal String that will be converted to an integer
      * @return an int
      */
-
     public static int hexToDecimal(String hexIn) {
         int decimal_out = 0;
-        for (char char_letter : hexIn.toUpperCase().toCharArray()) {
-            decimal_out = 16 * decimal_out + hex_chars_array.indexOf(char_letter);
+        hexIn = hexIn.toUpperCase();
+        int starting_point = hexIn.charAt(0) == '-' ? 1 : 0;
+        for (int i = starting_point; i < hexIn.length(); i++) {
+            decimal_out = 16 * decimal_out + hex_chars_array.indexOf(hexIn.charAt(i));
         }
-        return decimal_out;
+        return starting_point == 1 ? -decimal_out : decimal_out;
     }
 
     /**
@@ -144,7 +158,6 @@ public class ProceduralCLICalculator {
      * @param binaryIn2 another Binary format String
      * @return a new Binary format String
      */
-
     public static String subtractBinary(String binaryIn1, String binaryIn2) {
         return decimalToBinary(binaryToDecimal(binaryIn1) - binaryToDecimal(binaryIn2));
     }
@@ -156,7 +169,6 @@ public class ProceduralCLICalculator {
      * @param binaryIn2 another Binary format String
      * @return a new Binary format String
      */
-
     public static String multiplyBinary(String binaryIn1, String binaryIn2) {
         return decimalToBinary(binaryToDecimal(binaryIn1) * binaryToDecimal(binaryIn2));
     }
@@ -168,7 +180,6 @@ public class ProceduralCLICalculator {
      * @param binaryIn2 another Binary format String
      * @return a new Binary format String
      */
-
     public static String divideBinary(String binaryIn1, String binaryIn2) {
         return decimalToBinary(binaryToDecimal(binaryIn1) / binaryToDecimal(binaryIn2));
     }
@@ -180,7 +191,6 @@ public class ProceduralCLICalculator {
      * @param hexIn2 another Hexadecimal format String
      * @return a new Hexadecimal format String
      */
-
     public static String addHex(String hexIn1, String hexIn2) {
         return decimalToHex(hexToDecimal(hexIn1) + hexToDecimal(hexIn2));
     }
