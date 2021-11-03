@@ -13,8 +13,8 @@ public class ProceduralCLICalculator {
         System.out.println("Please Enter your second " + dataType + ":");
         String dataIn2 = cliInput.nextLine();
         System.out.println("What kind of calculation do you want to perform (+, -, *, /):");
-        String result;
-        String action;
+        String result = "";
+        String action = "";
         switch (cliInput.nextLine().toLowerCase()) {
             case "add", "+" -> {
                 result = dataType.equals("Binary") ? addBinary(dataIn1, dataIn2) : addHex(dataIn1, dataIn2);
@@ -32,43 +32,42 @@ public class ProceduralCLICalculator {
                 result = dataType.equals("Binary") ? divideBinary(dataIn1, dataIn2) : divideHex(dataIn1, dataIn2);
                 action = "/";
             }
-            default -> {
-                result = "";
-                action = "";
-            }
         }
         System.out.printf("%s value: %s %s %s = %s", dataType, dataIn1, action, dataIn2, result);
+        String remainder = "null";
+        if (action.equals("/")) {
+            remainder = dataType.equals("Binary") ? moduloBinary(dataIn1, dataIn2) : moduloHex(dataIn1, dataIn2);
+            if (!remainder.equals("0")) {
+                System.out.printf(" Remainder: %s", remainder);
+            }
+        }
         System.out.println();
-        int dataInDecimal1 = dataType.equals("Binary") ? binaryToDecimal(dataIn1) : hexToDecimal(dataIn1);
-        int dataInDecimal2 = dataType.equals("Binary") ? binaryToDecimal(dataIn2) : hexToDecimal(dataIn2);
-        int resultInDecimal = dataType.equals("Binary") ? binaryToDecimal(result) : hexToDecimal(result);
+        long dataInDecimal1 = dataType.equals("Binary") ? binaryToDecimal(dataIn1) : hexToDecimal(dataIn1);
+        long dataInDecimal2 = dataType.equals("Binary") ? binaryToDecimal(dataIn2) : hexToDecimal(dataIn2);
+        long resultInDecimal = dataType.equals("Binary") ? binaryToDecimal(result) : hexToDecimal(result);
         System.out.printf("Decimal value: %d %s %d = %d", dataInDecimal1, action, dataInDecimal2, resultInDecimal);
+        if (!remainder.equals("null")) {
+            System.out.printf(" Remainder: %d", dataType.equals("Binary") ? binaryToDecimal(remainder) : hexToDecimal(remainder));
+        }
     }
 
     /**
      * Convert a decimal integer to a binary format String
      *
-     * @param num_in an int that will be converted to Binary String
+     * @param num_in a long that will be converted to Binary String
      * @return a binary format String
      */
-    public static String decimalToBinary(int num_in) {
+    public static String decimalToBinary(long num_in) {
         if (num_in == 0) {
             return "0";
         } else {
             String binaryOut = "";
-            if (num_in > 0) {
-                while (num_in > 0) {
-                    binaryOut = ((num_in % 2) == 0 ? "0" : "1") + binaryOut;
-                    num_in = num_in / 2;
-                }
-            } else {
-                while (num_in < 0) {
-                    binaryOut = ((num_in % 2) == 0 ? "0" : "1") + binaryOut;
-                    num_in = num_in / 2;
-                }
-                binaryOut = "-" + binaryOut;
+            boolean isNegative = num_in < 0;
+            while (num_in != 0) {
+                binaryOut = ((num_in % 2) == 0 ? "0" : "1") + binaryOut;
+                num_in = num_in / 2;
             }
-            return binaryOut;
+            return !isNegative ? binaryOut : "-" + binaryOut;
         }
     }
 
@@ -76,51 +75,40 @@ public class ProceduralCLICalculator {
      * Convert a binary format String to a decimal integer
      *
      * @param binaryIn the binary String that will be converted to an integer
-     * @return an int
+     * @return a long
      */
-    public static int binaryToDecimal(String binaryIn) {
-        int num_out = 0;
-        if (binaryIn.charAt(0) == '-') {
-            for (int i = 1; i < binaryIn.length(); i++) {
-                if (binaryIn.charAt(i) == '1') {
-                    num_out -= Math.pow(2, (binaryIn.length() - i - 1));
-                }
-            }
-        } else {
-            for (int i = 0; i < binaryIn.length(); i++) {
-                if (binaryIn.charAt(i) == '1') {
-                    num_out += Math.pow(2, (binaryIn.length() - i - 1));
-                }
+    public static long binaryToDecimal(String binaryIn) {
+        long num_out = 0;
+        int starting_point = binaryIn.charAt(0) == '-' ? 1 : 0;
+        for (int i = starting_point; i < binaryIn.length(); i++) {
+            if (binaryIn.charAt(i) == '1') {
+                num_out += Math.pow(2, (binaryIn.length() - i - 1));
             }
         }
-        return num_out;
+        return starting_point == 0 ? num_out : -num_out;
     }
 
     /**
      * Convert a decimal integer to a hexadecimal format String
      *
-     * @param decimal_in an int that will be converted to a hexadecimal String
+     * @param decimal_in a long that will be converted to a hexadecimal String
      * @return hexadecimal format String
      */
-    public static String decimalToHex(int decimal_in) {
+    public static String decimalToHex(long decimal_in) {
         if (decimal_in == 0) {
             return "0";
         } else {
             String hex_out = "";
-            if (decimal_in > 0) {
-                while (decimal_in > 0) {
-                    hex_out = hex_chars_array.charAt(decimal_in % hex_chars_array.length()) + hex_out;
-                    decimal_in /= 16;
-                }
-            } else {
-                while (decimal_in < 0) {
-                    hex_out = hex_chars_array.charAt(-decimal_in % hex_chars_array.length()) + hex_out;
-                    decimal_in /= 16;
-                }
-                hex_out = "-" + hex_out;
+            boolean isNegative = false;
+            if (decimal_in < 0) {
+                isNegative = true;
+                decimal_in = -decimal_in;
             }
-
-            return hex_out;
+            while (decimal_in != 0) {
+                hex_out = hex_chars_array.charAt((int) (decimal_in % hex_chars_array.length())) + hex_out;
+                decimal_in /= 16;
+            }
+            return !isNegative ? hex_out : "-" + hex_out;
         }
     }
 
@@ -128,10 +116,10 @@ public class ProceduralCLICalculator {
      * Convert a hexadecimal format String to a decimal integer
      *
      * @param hexIn the hexadecimal String that will be converted to an integer
-     * @return an int
+     * @return a long
      */
-    public static int hexToDecimal(String hexIn) {
-        int decimal_out = 0;
+    public static long hexToDecimal(String hexIn) {
+        long decimal_out = 0;
         hexIn = hexIn.toUpperCase();
         int starting_point = hexIn.charAt(0) == '-' ? 1 : 0;
         for (int i = starting_point; i < hexIn.length(); i++) {
@@ -141,7 +129,7 @@ public class ProceduralCLICalculator {
     }
 
     /**
-     * Add two Binary format Strings
+     * Add two Binary format Strings, return the production of the calculation
      *
      * @param binaryIn1 a Binary format String
      * @param binaryIn2 another Binary format String
@@ -152,7 +140,7 @@ public class ProceduralCLICalculator {
     }
 
     /**
-     * Subtract two Binary format Strings
+     * Subtract two Binary format Strings, return the production of the calculation
      *
      * @param binaryIn1 a Binary format String
      * @param binaryIn2 another Binary format String
@@ -163,7 +151,7 @@ public class ProceduralCLICalculator {
     }
 
     /**
-     * Multiply two Binary format Strings
+     * Multiply two Binary format Strings, return the production of the calculation
      *
      * @param binaryIn1 a Binary format String
      * @param binaryIn2 another Binary format String
@@ -174,7 +162,7 @@ public class ProceduralCLICalculator {
     }
 
     /**
-     * Divide two Binary format Strings
+     * Divide two Binary format Strings, return the production of the calculation
      *
      * @param binaryIn1 a Binary format String
      * @param binaryIn2 another Binary format String
@@ -185,7 +173,18 @@ public class ProceduralCLICalculator {
     }
 
     /**
-     * Add two Hexadecimal format Strings
+     * Modulo two Binary format Strings, return the production of the calculation
+     *
+     * @param binaryIn1 a Binary format String
+     * @param binaryIn2 another Binary format String
+     * @return a new Binary format String
+     */
+    public static String moduloBinary(String binaryIn1, String binaryIn2) {
+        return decimalToBinary(binaryToDecimal(binaryIn1) % binaryToDecimal(binaryIn2));
+    }
+
+    /**
+     * Add two Hexadecimal format Strings, return the production of the calculation
      *
      * @param hexIn1 a Hexadecimal format String
      * @param hexIn2 another Hexadecimal format String
@@ -196,7 +195,7 @@ public class ProceduralCLICalculator {
     }
 
     /**
-     * Subtract two Hexadecimal format Strings
+     * Subtract two Hexadecimal format Strings, return the production of the calculation
      *
      * @param hexIn1 a Hexadecimal format String
      * @param hexIn2 another Hexadecimal format String
@@ -207,7 +206,7 @@ public class ProceduralCLICalculator {
     }
 
     /**
-     * Multiply two Hexadecimal format Strings
+     * Multiply two Hexadecimal format Strings, return the production of the calculation
      *
      * @param hexIn1 a Hexadecimal format String
      * @param hexIn2 another Hexadecimal format String
@@ -218,7 +217,7 @@ public class ProceduralCLICalculator {
     }
 
     /**
-     * Divide two Hexadecimal format Strings
+     * Divide two Hexadecimal format Strings, return the production of the calculation
      *
      * @param hexIn1 a Hexadecimal format String
      * @param hexIn2 another Hexadecimal format String
@@ -226,5 +225,16 @@ public class ProceduralCLICalculator {
      */
     public static String divideHex(String hexIn1, String hexIn2) {
         return decimalToHex(hexToDecimal(hexIn1) / hexToDecimal(hexIn2));
+    }
+
+    /**
+     * Modulo two Hexadecimal format Strings, return the production of the calculation
+     *
+     * @param hexIn1 a Hexadecimal format String
+     * @param hexIn2 another Hexadecimal format String
+     * @return a new Hexadecimal format String
+     */
+    public static String moduloHex(String hexIn1, String hexIn2) {
+        return decimalToHex(hexToDecimal(hexIn1) % hexToDecimal(hexIn2));
     }
 }

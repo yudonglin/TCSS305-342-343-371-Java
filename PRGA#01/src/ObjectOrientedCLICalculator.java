@@ -55,6 +55,15 @@ abstract class GeneralDataType {
     }
 
     /**
+     * modulo two GeneralDataType, no matter whether they are Binary or Hexadecimal classes
+     *
+     * @return a new Binary or Hexadecimal object based on the positional notation of this class
+     */
+    public GeneralDataType modulo(GeneralDataType o) {
+        return this.positionalNotation == 2 ? new Binary(Long.toBinaryString(this.toDecimal() % o.toDecimal())) : new Hexadecimal(Long.toHexString(this.toDecimal() % o.toDecimal()));
+    }
+
+    /**
      * @return a Long that represent the value of this object in decimal integer
      */
     public long toDecimal() {
@@ -117,6 +126,18 @@ public class ObjectOrientedCLICalculator {
                 action = "";
             }
         }
-        System.out.printf("%s value: %s %s %s = %s\nDecimal value: %d %s %d = %d", dataType, dataIn1, action, dataIn2, result, dataIn1.toDecimal(), action, dataIn2.toDecimal(), result.toDecimal());
+        System.out.printf("%s value: %s %s %s = %s", dataType, dataIn1, action, dataIn2, result);
+        long remainderInDecimal = 0;
+        if (action.equals("/")) {
+            GeneralDataType remainder = dataIn1.modulo(dataIn2);
+            remainderInDecimal = remainder.toDecimal();
+            if (remainderInDecimal != 0) {
+                System.out.printf(" Remainder: %s", remainder);
+            }
+        }
+        System.out.printf("\nDecimal value: %d %s %d = %d", dataIn1.toDecimal(), action, dataIn2.toDecimal(), result.toDecimal());
+        if (remainderInDecimal != 0) {
+            System.out.printf(" Remainder: %s", remainderInDecimal);
+        }
     }
 }
