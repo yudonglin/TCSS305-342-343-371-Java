@@ -2,14 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6328ae60-7d33-4aa1-8e41-27536e728b4b" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/W05-GUI-Programming/W05-GUI-Programming.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/W05-GUI-Programming/src/SimpleCalculator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PRGA#01/src/ObjectOrientedCLICalculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/PRGA#01/src/ObjectOrientedCLICalculator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PRGA#01/src/ProceduralCLICalculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/PRGA#01/src/ProceduralCLICalculator.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExportToHTMLSettings">
+    <option name="printScope" value="1" />
+    <option name="OUTPUT_DIRECTORY" value="$PROJECT_DIR$/exportToHTML" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -22,6 +27,9 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="20IjQGJJ3CQGq1OzJPHwPHmaj7o" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -33,9 +41,10 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="D:/文档" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="reference.settings.project.statistic.project.settings" />
   </component>
-  <component name="RunManager" selected="Application.ObjectOrientedCLICalculator">
+  <component name="RunManager" selected="Application.SimpleCalculator">
     <configuration name="ObjectOrientedCLICalculator" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="ObjectOrientedCLICalculator" />
       <module name="PRGA#01" />
@@ -50,8 +59,16 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="SimpleCalculator" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="SimpleCalculator" />
+      <module name="W05-GUI-Programming" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.SimpleCalculator" />
         <item itemvalue="Application.ObjectOrientedCLICalculator" />
         <item itemvalue="Application.ProceduralCLICalculator" />
       </list>
@@ -69,6 +86,9 @@
       <workItem from="1635804627033" duration="13711000" />
       <workItem from="1635828913462" duration="3249000" />
       <workItem from="1635975461472" duration="7836000" />
+      <workItem from="1636082327933" duration="56000" />
+      <workItem from="1636082540625" duration="3208000" />
+      <workItem from="1636167859130" duration="9347000" />
     </task>
     <servers />
   </component>
