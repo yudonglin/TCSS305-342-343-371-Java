@@ -2,10 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6328ae60-7d33-4aa1-8e41-27536e728b4b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/statistic.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PRGA#01/ObjectOrientedCLICalculator/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PRGA#01/ObjectOrientedCLICalculator/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PRGA#01/ObjectOrientedCLICalculator/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PRGA#01/ObjectOrientedCLICalculator/.idea/runConfigurations.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PRGA#01/ProceduralCLICalculator/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PRGA#01/ProceduralCLICalculator/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PRGA#01/ProceduralCLICalculator/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PRGA#01/ProceduralCLICalculator/.idea/runConfigurations.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PRGA#01/ProceduralCLICalculator/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PRGA#01/ProceduralCLICalculator/ProceduralCLICalculator.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PRGA#01/src/ObjectOrientedCLICalculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/PRGA#01/src/ObjectOrientedCLICalculator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PRGA#01/src/ProceduralCLICalculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/PRGA#01/src/ProceduralCLICalculator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PRGA#01/PRGA#01.iml" beforeDir="false" afterPath="$PROJECT_DIR$/PRGA#01/ObjectOrientedCLICalculator/ObjectOrientedCLICalculator.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PRGA#01/src/ObjectOrientedCLICalculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/PRGA#01/ObjectOrientedCLICalculator/src/ObjectOrientedCLICalculator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PRGA#01/src/ProceduralCLICalculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/PRGA#01/ProceduralCLICalculator/src/ProceduralCLICalculator.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,11 +46,12 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/PRGA#01/ProceduralCLICalculator" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="reference.settings.project.statistic.project.settings" />
@@ -68,8 +80,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.ObjectOrientedCLICalculator" />
         <item itemvalue="Application.ProceduralCLICalculator" />
+        <item itemvalue="Application.ObjectOrientedCLICalculator" />
         <item itemvalue="Application.SimpleCalculator" />
       </list>
     </recent_temporary>
@@ -92,6 +104,11 @@
       <workItem from="1636219267502" duration="666000" />
       <workItem from="1636309381977" duration="7295000" />
       <workItem from="1636327268218" duration="5659000" />
+      <workItem from="1636338144305" duration="4355000" />
+      <workItem from="1636346535286" duration="22000" />
+      <workItem from="1636346637111" duration="18000" />
+      <workItem from="1636346772551" duration="416000" />
+      <workItem from="1636347246359" duration="117000" />
     </task>
     <servers />
   </component>
@@ -109,6 +126,9 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
