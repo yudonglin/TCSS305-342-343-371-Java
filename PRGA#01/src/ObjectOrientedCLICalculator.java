@@ -15,7 +15,7 @@ abstract class GeneralDataType {
     }
 
     public String toString() {
-        return this.value;
+        return this.value.toUpperCase();
     }
 
     /**
@@ -92,52 +92,56 @@ class Hexadecimal extends GeneralDataType {
 }
 
 public class ObjectOrientedCLICalculator {
+    // User input module
     private static final Scanner cliInput = new Scanner(System.in);
 
     public static void main(String[] args) {
-        System.out.println("What do you want to calculate (Binary / Hexadecimal):");
-        String dataType = cliInput.nextLine().equalsIgnoreCase("binary") ? "Binary" : "Hexadecimal";
-        System.out.println("Please Enter your first " + dataType + ":");
-        var dataIn1 = dataType.equals("Binary") ? new Binary(cliInput.nextLine()) : new Hexadecimal(cliInput.nextLine());
-        System.out.println("Please Enter your second " + dataType + ":");
-        var dataIn2 = dataType.equals("Binary") ? new Binary(cliInput.nextLine()) : new Hexadecimal(cliInput.nextLine());
-        System.out.println("What kind of calculation do you want to perform (+, -, *, /):");
-        GeneralDataType result;
-        String action;
-        switch (cliInput.nextLine().toLowerCase()) {
-            case "add", "+" -> {
-                result = dataIn1.add(dataIn2);
-                action = "+";
+        System.out.println("What do you want to do?\n1) Binary Calculation—Add, Subtract, Multiply, or Divide\n2) Convert Binary Value to Decimal Value\n3) Convert Decimal Value to Binary Value\n4) Hexadecimal Calculation—Add, Subtract, Multiply, or Divide\n5) Convert Hexadecimal Value to Decimal Value\n6) Convert Decimal Value to Hexadecimal Value\nPlease enter the index:");
+        var actionIndex = cliInput.nextLine();
+        String dataType = (actionIndex.equals("1") || actionIndex.equals("2") || actionIndex.equals("3")) ? "Binary" : "Hexadecimal";
+        switch (actionIndex) {
+            case "1", "4" -> {
+                System.out.println("Please Enter your first " + dataType + ":");
+                var dataIn1 = dataType.equals("Binary") ? new Binary(cliInput.nextLine()) : new Hexadecimal(cliInput.nextLine());
+                System.out.println("Please Enter your second " + dataType + ":");
+                var dataIn2 = dataType.equals("Binary") ? new Binary(cliInput.nextLine()) : new Hexadecimal(cliInput.nextLine());
+                System.out.println("What kind of calculation do you want to perform (+, -, *, /):");
+                GeneralDataType result;
+                String action;
+                switch (cliInput.nextLine().toLowerCase()) {
+                    case "add", "+" -> {
+                        result = dataIn1.add(dataIn2);
+                        action = "+";
+                    }
+                    case "subtract", "-" -> {
+                        result = dataIn1.subtract(dataIn2);
+                        action = "-";
+                    }
+                    case "multiply", "*" -> {
+                        result = dataIn1.multiply(dataIn2);
+                        action = "*";
+                    }
+                    case "divide", "/" -> {
+                        result = dataIn1.divide(dataIn2);
+                        action = "/";
+                    }
+                    default -> {
+                        result = new Binary("");
+                        action = "";
+                    }
+                }
+                GeneralDataType remainder = action.equals("/") ? dataIn1.modulo(dataIn2) : new Binary("0");
+                System.out.printf("%s value: %s %s %s = %s%s", dataType, dataIn1, action, dataIn2, result, (remainder.toDecimal() != 0 ? " Remainder: " + remainder : ""));
+                System.out.printf("\nDecimal value: %d %s %d = %d%s", dataIn1.toDecimal(), action, dataIn2.toDecimal(), result.toDecimal(), (remainder.toDecimal() != 0 ? " Remainder: " + remainder.toDecimal() : ""));
             }
-            case "subtract", "-" -> {
-                result = dataIn1.subtract(dataIn2);
-                action = "-";
+            case "2", "5" -> {
+                System.out.println("Please Enter your " + dataType + " value:");
+                System.out.println("Decimal value: " + (dataType.equals("Binary") ? new Binary(cliInput.nextLine()).toDecimal() : new Hexadecimal(cliInput.nextLine()).toDecimal()));
             }
-            case "multiply", "*" -> {
-                result = dataIn1.multiply(dataIn2);
-                action = "*";
+            case "3", "6" -> {
+                System.out.println("Please Enter your Decimal value:");
+                System.out.println(dataType + " value: " + (dataType.equals("Binary") ? Long.toBinaryString(Long.parseLong(cliInput.nextLine())) : Long.toHexString(Long.parseLong(cliInput.nextLine())).toUpperCase()));
             }
-            case "divide", "/" -> {
-                result = dataIn1.divide(dataIn2);
-                action = "/";
-            }
-            default -> {
-                result = new Binary("");
-                action = "";
-            }
-        }
-        System.out.printf("%s value: %s %s %s = %s", dataType, dataIn1, action, dataIn2, result);
-        long remainderInDecimal = 0;
-        if (action.equals("/")) {
-            GeneralDataType remainder = dataIn1.modulo(dataIn2);
-            remainderInDecimal = remainder.toDecimal();
-            if (remainderInDecimal != 0) {
-                System.out.printf(" Remainder: %s", remainder);
-            }
-        }
-        System.out.printf("\nDecimal value: %d %s %d = %d", dataIn1.toDecimal(), action, dataIn2.toDecimal(), result.toDecimal());
-        if (remainderInDecimal != 0) {
-            System.out.printf(" Remainder: %s", remainderInDecimal);
         }
     }
 }
