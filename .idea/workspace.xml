@@ -2,21 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6328ae60-7d33-4aa1-8e41-27536e728b4b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/PRGA#01/ObjectOrientedCLICalculator/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PRGA#01/ObjectOrientedCLICalculator/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PRGA#01/ObjectOrientedCLICalculator/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PRGA#01/ObjectOrientedCLICalculator/.idea/runConfigurations.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PRGA#01/ProceduralCLICalculator/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PRGA#01/ProceduralCLICalculator/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PRGA#01/ProceduralCLICalculator/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PRGA#01/ProceduralCLICalculator/.idea/runConfigurations.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PRGA#01/ProceduralCLICalculator/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PRGA#01/ProceduralCLICalculator/ProceduralCLICalculator.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/W06-GU-Design/W06-GU-Design.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/W06-GU-Design/ex_divide.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/W06-GU-Design/ex_minus.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/W06-GU-Design/ex_multiply.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/W06-GU-Design/ex_plus.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/W06-GU-Design/src/SimpleCalculator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PRGA#01/PRGA#01.iml" beforeDir="false" afterPath="$PROJECT_DIR$/PRGA#01/ObjectOrientedCLICalculator/ObjectOrientedCLICalculator.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PRGA#01/src/ObjectOrientedCLICalculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/PRGA#01/ObjectOrientedCLICalculator/src/ObjectOrientedCLICalculator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PRGA#01/src/ProceduralCLICalculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/PRGA#01/ProceduralCLICalculator/src/ProceduralCLICalculator.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,7 +49,7 @@
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="reference.settings.project.statistic.project.settings" />
   </component>
-  <component name="RunManager" selected="Application.ObjectOrientedCLICalculator">
+  <component name="RunManager" selected="Application.SimpleCalculator (1)">
     <configuration name="ObjectOrientedCLICalculator" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="ObjectOrientedCLICalculator" />
       <module name="PRGA#01" />
@@ -71,6 +64,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="SimpleCalculator (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="SimpleCalculator" />
+      <module name="W06-GU-Design" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="SimpleCalculator" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="SimpleCalculator" />
       <module name="W05-GUI-Programming" />
@@ -80,6 +80,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.SimpleCalculator (1)" />
         <item itemvalue="Application.ProceduralCLICalculator" />
         <item itemvalue="Application.ObjectOrientedCLICalculator" />
         <item itemvalue="Application.SimpleCalculator" />
@@ -109,6 +110,8 @@
       <workItem from="1636346637111" duration="18000" />
       <workItem from="1636346772551" duration="416000" />
       <workItem from="1636347246359" duration="117000" />
+      <workItem from="1636613834027" duration="1409000" />
+      <workItem from="1636651419480" duration="2292000" />
     </task>
     <servers />
   </component>
