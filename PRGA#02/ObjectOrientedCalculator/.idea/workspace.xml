@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="e070807e-f937-430f-bc93-b6a7ef4599b6" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/BigNumberCalculator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/BinaryCalculationPanel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/CalculatorPanel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/GeneralDataType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/HexadecimalCalculationPanel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/NormalTextLine.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ObjectOrientedGUICalculator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../W06-GUI-Design/W06-GU-Design.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../W06-GU-Design/W06-GU-Design.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ObjectOrientedGUICalculator.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../W06-GU-Design/ex_divide.png" beforeDir="false" afterPath="$PROJECT_DIR$/../../W06-GUI-Design/ex_divide.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../W06-GU-Design/ex_minus.png" beforeDir="false" afterPath="$PROJECT_DIR$/../../W06-GUI-Design/ex_minus.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../W06-GU-Design/ex_multiply.png" beforeDir="false" afterPath="$PROJECT_DIR$/../../W06-GUI-Design/ex_multiply.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../W06-GU-Design/ex_plus.png" beforeDir="false" afterPath="$PROJECT_DIR$/../../W06-GUI-Design/ex_plus.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../W06-GU-Design/src/SimpleCalculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../W06-GUI-Design/src/SimpleCalculator.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProjectId" id="20o8w1nRjKDEo33kRdXptHatLwy" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
+    <property name="settings.editor.selected.configurable" value="Errors" />
+  </component>
+  <component name="RunManager">
+    <configuration name="ObjectOrientedGUICalculator" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="ObjectOrientedGUICalculator" />
+      <module name="ObjectOrientedGUICalculator" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.ObjectOrientedGUICalculator" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e070807e-f937-430f-bc93-b6a7ef4599b6" name="Changes" comment="" />
+      <created>1636699814897</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1636699814897</updated>
+      <workItem from="1636699816110" duration="5000" />
+      <workItem from="1636699882873" duration="1128000" />
+      <workItem from="1636761078868" duration="16444000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>

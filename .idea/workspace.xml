@@ -2,14 +2,29 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6328ae60-7d33-4aa1-8e41-27536e728b4b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/W06-GU-Design/W06-GU-Design.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/W06-GU-Design/ex_divide.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/W06-GU-Design/ex_minus.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/W06-GU-Design/ex_multiply.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/W06-GU-Design/ex_plus.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/W06-GU-Design/src/SimpleCalculator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PRGA#02/ObjectOrientedCalculator/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PRGA#02/ObjectOrientedCalculator/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PRGA#02/ObjectOrientedCalculator/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PRGA#02/ObjectOrientedCalculator/.idea/runConfigurations.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PRGA#02/ObjectOrientedCalculator/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PRGA#02/ObjectOrientedCalculator/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PRGA#02/ObjectOrientedCalculator/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PRGA#02/ObjectOrientedCalculator/src/BigNumberCalculator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PRGA#02/ObjectOrientedCalculator/src/BinaryCalculationPanel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PRGA#02/ObjectOrientedCalculator/src/CalculatorPanel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PRGA#02/ObjectOrientedCalculator/src/GeneralDataType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PRGA#02/ObjectOrientedCalculator/src/HexadecimalCalculationPanel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PRGA#02/ObjectOrientedCalculator/src/NormalTextLine.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PRGA#02/ObjectOrientedCalculator/src/ObjectOrientedGUICalculator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/W06-GUI-Design/W06-GU-Design.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/W06-GU-Design/W06-GU-Design.iml" beforeDir="false" afterPath="$PROJECT_DIR$/PRGA#02/ObjectOrientedCalculator/ObjectOrientedGUICalculator.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/W06-GU-Design/ex_divide.png" beforeDir="false" afterPath="$PROJECT_DIR$/W06-GUI-Design/ex_divide.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/W06-GU-Design/ex_minus.png" beforeDir="false" afterPath="$PROJECT_DIR$/W06-GUI-Design/ex_minus.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/W06-GU-Design/ex_multiply.png" beforeDir="false" afterPath="$PROJECT_DIR$/W06-GUI-Design/ex_multiply.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/W06-GU-Design/ex_plus.png" beforeDir="false" afterPath="$PROJECT_DIR$/W06-GUI-Design/ex_plus.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/W06-GU-Design/src/SimpleCalculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/W06-GUI-Design/src/SimpleCalculator.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,10 +59,16 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/PRGA#01/ProceduralCLICalculator" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/PRGA#02/ObjectOrientedCalculator" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="reference.settings.project.statistic.project.settings" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\GitHub\TCSS305\PRGA#02\ObjectOrientedCalculator\src" />
+      <recent name="D:\GitHub\TCSS305\PRGA#02" />
+    </key>
   </component>
   <component name="RunManager" selected="Application.SimpleCalculator (1)">
     <configuration name="ObjectOrientedCLICalculator" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -81,9 +102,9 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.SimpleCalculator (1)" />
+        <item itemvalue="Application.SimpleCalculator" />
         <item itemvalue="Application.ProceduralCLICalculator" />
         <item itemvalue="Application.ObjectOrientedCLICalculator" />
-        <item itemvalue="Application.SimpleCalculator" />
       </list>
     </recent_temporary>
   </component>
@@ -112,6 +133,10 @@
       <workItem from="1636347246359" duration="117000" />
       <workItem from="1636613834027" duration="1409000" />
       <workItem from="1636651419480" duration="2292000" />
+      <workItem from="1636669572668" duration="111000" />
+      <workItem from="1636699555090" duration="324000" />
+      <workItem from="1636761818166" duration="1358000" />
+      <workItem from="1636780087487" duration="17000" />
     </task>
     <servers />
   </component>
