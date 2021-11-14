@@ -11,6 +11,11 @@ abstract class GeneralDataType {
     public GeneralDataType(String value, int positionalNotation) {
         this.value = value;
         this.positionalNotation = positionalNotation;
+        try {
+            this.toDecimal();
+        } catch (Exception e) {
+            throw new RuntimeException("Invalid value.");
+        }
     }
 
     public abstract GeneralDataType valueOf(long l);
