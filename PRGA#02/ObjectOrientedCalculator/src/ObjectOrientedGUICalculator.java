@@ -1,19 +1,14 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class ObjectOrientedGUICalculator {
-
-    public static void main(String[] args) {
-        // write your code here
-        new GUICalculator(600, 600);
-    }
-}
-
-
-class GUICalculator extends JFrame {
-
-
-    public GUICalculator(int width, int height) {
+public class ObjectOrientedGUICalculator extends JFrame {
+    /**
+     * create a calculator window that will handle all kinds of calculations
+     *
+     * @param width  the width of the window
+     * @param height the height of the window
+     */
+    public ObjectOrientedGUICalculator(int width, int height) {
 
         this.setTitle("Ultimate Calculator");
         // TODO add an icon
@@ -29,51 +24,45 @@ class GUICalculator extends JFrame {
 
         //add menu items
         var hexadecimalCalculationMenuItem = new JMenuItem("Hexadecimal Calculation");
-        var binaryCalculationMenuItem = new JMenuItem("Binary Calculation");
-        var bigNumberCalculationMenuItem = new JMenuItem("Big Number Calculation");
-        var decimalCalculationMenuItem = new JMenuItem("Decimal Calculation");
-
         calculatorMenu.add(hexadecimalCalculationMenuItem);
+        var binaryCalculationMenuItem = new JMenuItem("Binary Calculation");
         calculatorMenu.add(binaryCalculationMenuItem);
+        var bigNumberCalculationMenuItem = new JMenuItem("Big Number Calculation");
         calculatorMenu.add(bigNumberCalculationMenuItem);
+        var decimalCalculationMenuItem = new JMenuItem("Decimal Calculation");
         calculatorMenu.add(decimalCalculationMenuItem);
         this.setJMenuBar(menuBar);
 
-        //Hexadecimal Calculation
+        //Hexadecimal Calculation Panel
         JPanel mainHexadecimalCalculationPanel = new JPanel();
         mainHexadecimalCalculationPanel.setLayout(new GridLayout(3, 1));
         mainHexadecimalCalculationPanel.setVisible(false);
-
         this.add(mainHexadecimalCalculationPanel);
-
         mainHexadecimalCalculationPanel.add(new HexadecimalCalculationPanel());
         mainHexadecimalCalculationPanel.add(new HexadecimalToDecimalPanel());
         mainHexadecimalCalculationPanel.add(new DecimalToHexadecimalPanel());
 
-        //Binary Calculation
+        //Binary Calculation Panel
         JPanel mainBinaryCalculationPanel = new JPanel();
         mainBinaryCalculationPanel.setLayout(new GridLayout(3, 1));
         mainBinaryCalculationPanel.setVisible(false);
-
         this.add(mainBinaryCalculationPanel);
-
         mainBinaryCalculationPanel.add(new BinaryCalculationPanel());
         mainBinaryCalculationPanel.add(new BinaryToDecimalPanel());
         mainBinaryCalculationPanel.add(new DecimalToBinaryPanel());
 
-        //Big Number Calculation
+        //Big Number Calculation Panel
         var bigNumberCalculationPanel = new BigNumberCalculationPanel();
         bigNumberCalculationPanel.setVisible(false);
         this.add(bigNumberCalculationPanel);
 
-
-        //Decimal Calculation
+        //Decimal Calculation Panel
         var decimalCalculationPanel = new DecimalCalculationPanel();
         decimalCalculationPanel.setVisible(false);
         this.add(decimalCalculationPanel);
 
 
-        //add action listener for menu item
+        //add action listeners to menu items
         hexadecimalCalculationMenuItem.addActionListener(e -> {
             mainBinaryCalculationPanel.setVisible(false);
             bigNumberCalculationPanel.setVisible(false);
@@ -102,9 +91,18 @@ class GUICalculator extends JFrame {
             decimalCalculationPanel.setVisible(true);
         });
 
-
         // show menu
         this.setVisible(true);
+    }
+
+    /**
+     * Create the calculator window
+     *
+     * @param args in this case, it will do nothing
+     */
+    public static void main(String[] args) {
+        // write your code here
+        new ObjectOrientedGUICalculator(700, 700);
     }
 
 }

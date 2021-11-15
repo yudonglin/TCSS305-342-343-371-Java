@@ -4,23 +4,33 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.MathContext;
 import java.math.RoundingMode;
-import java.util.HashMap;
 
 public class BigNumberCalculationPanel extends CalculatorPanel {
 
+    // primary input text fields
     private final JTextField operand1 = new JTextField(10);
     private final JTextField operand2 = new JTextField(10);
+    private final JTextField precision = new JTextField(5);
+    // error messages
     private final NormalTextLine errorMsgForOperand1 = new NormalTextLine("");
     private final NormalTextLine errorMsgForOperand2 = new NormalTextLine("");
+    private final NormalTextLine errorMsgForPrecision = new NormalTextLine("");
+    // variables for store data that will be used for calculation
     private BigDecimal BigDecimalOperand1;
     private BigDecimal BigDecimalOperand2;
+    private BigInteger BigIntegerOperand1;
+    private BigInteger BigIntegerOperand2;
+    // precision, but in int
+    private int precisionInInt;
 
+    /**
+     * create the panel for Big Number Calculation
+     */
     public BigNumberCalculationPanel() {
         super("Big Number Calculator");
         this.setLayout(new GridLayout(8, 1));
 
         var moreDesPanel = new JPanel();
-
         moreDesPanel.add(new NormalTextLine("The calculator below can compute very large numbers. Acceptable formats include: integers, decimal,"));
         moreDesPanel.add(new NormalTextLine("or the E-notation form of scientific notation, i.e. 23E18, 3.5e19, etc."));
         this.add(moreDesPanel, 1);
@@ -35,14 +45,14 @@ public class BigNumberCalculationPanel extends CalculatorPanel {
 
         bottomPanel.removeAll();
         bottomPanel.add(new NormalTextLine("Precision:"));
-        JTextField precision = new JTextField(5);
         precision.setText("20");
         bottomPanel.add(precision);
-        bottomPanel.add(new NormalTextLine("digits after the decimal place in the result:"));
+        bottomPanel.add(new NormalTextLine("digits after the decimal place in the result"));
+        bottomPanel.add(errorMsgForPrecision);
 
         var resultPanel = new JPanel();
         resultPanel.add(new NormalTextLine("Result:"));
-        resultPanel.add(result);
+        resultPanel.add(getResult());
         this.add(resultPanel);
 
         var actionDesPanel = new JPanel();
@@ -50,128 +60,265 @@ public class BigNumberCalculationPanel extends CalculatorPanel {
         this.add(actionDesPanel);
 
 
-        // add buttons
-
+        // panel for manage action buttons
         var actionButtonsPanel = new JPanel();
         this.add(actionButtonsPanel);
 
-        HashMap<String, JButton> actionButtonsMap = new HashMap<>();
+        // create an array for storing action buttons
+        JButton[] actionButtonsArray = new JButton[11];
 
-        actionButtonsMap.put("add", new JButton("X + Y"));
-        actionButtonsMap.get("add").addActionListener(e -> {
-            if (this.hasValidInputs()) {
-                setResult(BigDecimalOperand1.add(BigDecimalOperand2).toString());
+        // add
+        actionButtonsArray[0] = new JButton("X + Y");
+        actionButtonsArray[0].addActionListener(e -> {
+            if (this.hasValidDecimalInputs() && this.hasValidPrecision()) {
+                var result = BigDecimalOperand1.add(BigDecimalOperand2).setScale(precisionInInt, RoundingMode.HALF_UP);
+                var resultInString = String.valueOf(result.doubleValue());
+                if (!resultInString.equals("infinity")) {
+                    setResult(resultInString);
+                } else {
+                    setResult(result.toString());
+                }
             }
         });
 
-        actionButtonsMap.put("subtract", new JButton("X - Y"));
-        actionButtonsMap.get("subtract").addActionListener(e -> {
-            if (this.hasValidInputs()) {
-                setResult(BigDecimalOperand1.subtract(BigDecimalOperand2).toString());
+        //subtract
+        actionButtonsArray[1] = new JButton("X - Y");
+        actionButtonsArray[1].addActionListener(e -> {
+            if (this.hasValidDecimalInputs() && this.hasValidPrecision()) {
+                var result = BigDecimalOperand1.subtract(BigDecimalOperand2).setScale(precisionInInt, RoundingMode.HALF_UP);
+                var resultInString = String.valueOf(result.doubleValue());
+                if (!resultInString.equals("infinity")) {
+                    setResult(resultInString);
+                } else {
+                    setResult(result.toString());
+                }
             }
         });
 
-        actionButtonsMap.put("multiply", new JButton("X * Y"));
-        actionButtonsMap.get("multiply").addActionListener(e -> {
-            if (this.hasValidInputs()) {
-                setResult(BigDecimalOperand1.multiply(BigDecimalOperand2).toString());
+        //multiply
+        actionButtonsArray[2] = new JButton("X * Y");
+        actionButtonsArray[2].addActionListener(e -> {
+            if (this.hasValidDecimalInputs() && this.hasValidPrecision()) {
+                var result = BigDecimalOperand1.multiply(BigDecimalOperand2).setScale(precisionInInt, RoundingMode.HALF_UP);
+                var resultInString = String.valueOf(result.doubleValue());
+                if (!resultInString.equals("infinity")) {
+                    setResult(resultInString);
+                } else {
+                    setResult(result.toString());
+                }
             }
         });
 
-        actionButtonsMap.put("divide", new JButton("X / Y"));
-        actionButtonsMap.get("divide").addActionListener(e -> {
-            if (this.hasValidInputs()) {
-                setResult(BigDecimalOperand1.divide(BigDecimalOperand2, Integer.parseInt(precision.getText()), RoundingMode.HALF_UP).toString());
+        //divide
+        actionButtonsArray[3] = new JButton("X / Y");
+        actionButtonsArray[3].addActionListener(e -> {
+            if (this.hasValidDecimalInputs() && this.hasValidPrecision()) {
+                var result = BigDecimalOperand1.divide(BigDecimalOperand2).setScale(precisionInInt, RoundingMode.HALF_UP);
+                var resultInString = String.valueOf(result.doubleValue());
+                if (!resultInString.equals("infinity")) {
+                    setResult(resultInString);
+                } else {
+                    setResult(result.toString());
+                }
             }
         });
 
-        actionButtonsMap.put("power", new JButton("X ^ Y"));
-        actionButtonsMap.get("power").addActionListener(e -> {
-            if (this.hasValidInputs()) {
-                setResult(String.valueOf(Math.pow(BigDecimalOperand1.doubleValue(), BigDecimalOperand2.doubleValue())));
+        //power
+        actionButtonsArray[4] = new JButton("X ^ Y");
+        actionButtonsArray[4].addActionListener(e -> {
+            if (this.hasValidDecimalInputs() && this.hasValidPrecision()) {
+                setResult(String.valueOf(Math.pow(BigDecimalOperand1.doubleValue(), BigDecimalOperand2.doubleValue())).formatted("%." + precision.getText() + "g%n"));
             }
         });
 
-        actionButtonsMap.put("squareRootX", new JButton("√X"));
-        actionButtonsMap.get("squareRootX").addActionListener(e -> {
-            if (this.hasValidInput()) {
-                setResult(BigDecimalOperand1.sqrt(new MathContext(Integer.parseInt(precision.getText()), RoundingMode.HALF_UP)).toString());
+        //square root
+        actionButtonsArray[5] = new JButton("√X");
+        actionButtonsArray[5].addActionListener(e -> {
+            if (this.hasValidDecimalInput() && this.hasValidPrecision()) {
+                try {
+                    setResult(BigDecimalOperand1.sqrt(new MathContext(precisionInInt, RoundingMode.HALF_UP)).toString());
+                } catch (Exception error) {
+                    setResult("");
+                    errorMsgForOperand1.setText("Please provide a positive integer as X value.");
+                }
             }
         });
 
-        actionButtonsMap.put("squareX", new JButton("X ^ 2"));
-        actionButtonsMap.get("squareX").addActionListener(e -> {
-            if (this.hasValidInput()) {
-                setResult(BigDecimalOperand1.pow(2).toString());
+        // square
+        actionButtonsArray[6] = new JButton("X ^ 2");
+        actionButtonsArray[6].addActionListener(e -> {
+            if (this.hasValidDecimalInput() && this.hasValidPrecision()) {
+                setResult(BigDecimalOperand1.pow(2).toString().formatted("%." + precision.getText() + "g%n"));
             }
         });
 
-        actionButtonsMap.put("xFactorial", new JButton("X!"));
-        actionButtonsMap.get("xFactorial").addActionListener(e -> {
-            var num1 = new BigInteger(operand1.getText());
-            var result = new BigInteger("1");
-            while (num1.compareTo(BigInteger.ONE) > 0) {
-                result = result.multiply(num1);
-                num1 = num1.subtract(BigInteger.ONE);
+        //factorial
+        actionButtonsArray[7] = new JButton("X!");
+        actionButtonsArray[7].addActionListener(e -> {
+            if (this.hasValidPositiveIntegerInput() && this.hasValidPrecision()) {
+                var result = new BigInteger("1");
+                while (BigIntegerOperand1.compareTo(BigInteger.ONE) > 0) {
+                    result = result.multiply(BigIntegerOperand1);
+                    BigIntegerOperand1 = BigIntegerOperand1.subtract(BigInteger.ONE);
+                }
+                setResult(result.toString());
             }
-            setResult(result.toString());
         });
 
-        actionButtonsMap.put("MOD", new JButton("MOD"));
-        actionButtonsMap.get("MOD").addActionListener(e -> {
-            var num1 = new BigInteger(operand1.getText());
-            var num2 = new BigInteger(operand2.getText());
-            setResult(num1.mod(num2).toString());
+        // MOD
+        actionButtonsArray[8] = new JButton("MOD");
+        actionButtonsArray[8].addActionListener(e -> {
+            if (this.hasValidPositiveIntegerInputs() && this.hasValidPrecision()) {
+                setResult(BigIntegerOperand1.mod(BigIntegerOperand2).toString());
+            }
         });
 
-        actionButtonsMap.put("GCD", new JButton("GCD"));
-        actionButtonsMap.get("GCD").addActionListener(e -> {
-            var num1 = new BigInteger(operand1.getText());
-            var num2 = new BigInteger(operand2.getText());
-            setResult(num1.gcd(num2).toString());
+        //GCD
+        actionButtonsArray[9] = new JButton("GCD");
+        actionButtonsArray[9].addActionListener(e -> {
+            if (this.hasValidPositiveIntegerInputs() && this.hasValidPrecision()) {
+                setResult(BigIntegerOperand1.gcd(BigIntegerOperand2).toString());
+            }
         });
 
-        actionButtonsMap.put("LCM", new JButton("LCM"));
-        actionButtonsMap.get("LCM").addActionListener(e -> {
-            var num1 = new BigInteger(operand1.getText());
-            var num2 = new BigInteger(operand2.getText());
-            setResult(num1.multiply(num2.divide(num1.gcd(num2))).toString());
+        //LCM
+        actionButtonsArray[10] = new JButton("LCM");
+        actionButtonsArray[10].addActionListener(e -> {
+            if (this.hasValidPositiveIntegerInputs() && this.hasValidPrecision()) {
+                setResult(BigIntegerOperand1.multiply(BigIntegerOperand2.divide(BigIntegerOperand1.gcd(BigIntegerOperand2))).toString());
+            }
         });
 
-        for (JButton actionButton : actionButtonsMap.values()) {
+        // add all buttons to action buttons panel
+        for (JButton actionButton : actionButtonsArray) {
             actionButtonsPanel.add(actionButton);
         }
 
     }
 
+    /**
+     * reset primary text fields' contents
+     */
     public void reset() {
         super.reset();
         operand1.setText("");
         operand2.setText("");
     }
 
-    private boolean hasValidInput() {
+    /**
+     * check if user is providing valid positive integer as precision
+     *
+     * @return true or false
+     */
+    private boolean hasValidPrecision() {
         try {
-            errorMsgForOperand2.setText("");
-            BigDecimalOperand1 = new BigDecimal(operand1.getText());
+            precisionInInt = Integer.parseInt(precision.getText());
+            if (precisionInInt >= 0) {
+                errorMsgForPrecision.setText("");
+                return true;
+            } else {
+                throw new RuntimeException();
+            }
+        } catch (Exception e) {
+            errorMsgForPrecision.setText("Please provide positive integer as precision.");
+            this.updateUI();
+        }
+        return false;
+    }
+
+    /**
+     * check if user is providing valid positive integer as operand 1
+     *
+     * @return true or false
+     */
+    private boolean hasValidPositiveIntegerInput() {
+        errorMsgForOperand2.setText("");
+        try {
+            BigIntegerOperand1 = new BigInteger(operand1.getText());
+            if (BigIntegerOperand1.compareTo(BigInteger.ONE) < 0) {
+                throw new RuntimeException();
+            }
             errorMsgForOperand1.setText("");
             return true;
-        } catch (Exception e) {
+        } catch (RuntimeException e) {
             errorMsgForOperand1.setText("Please provide a valid X value.");
             setResult("");
             return false;
         }
     }
 
-    private boolean hasValidInputs() {
+    /**
+     * check if user is providing valid decimal as operand 1
+     *
+     * @return true or false
+     */
+    private boolean hasValidDecimalInput() {
+        errorMsgForOperand2.setText("");
         try {
             BigDecimalOperand1 = new BigDecimal(operand1.getText());
-        } catch (Exception error) {
+            errorMsgForOperand1.setText("");
+            return true;
+        } catch (RuntimeException e) {
+            errorMsgForOperand1.setText("Please provide a valid X value.");
+            setResult("");
+            return false;
+        }
+    }
+
+    /**
+     * check if user is providing valid positive integers as operand 1 and operand 2
+     *
+     * @return true or false
+     */
+    private boolean hasValidPositiveIntegerInputs() {
+        try {
+            BigIntegerOperand1 = new BigInteger(operand1.getText());
+            if (BigIntegerOperand1.compareTo(BigInteger.ONE) < 0) {
+                throw new RuntimeException();
+            }
+        } catch (RuntimeException error) {
+            BigIntegerOperand1 = null;
+        }
+        try {
+            BigIntegerOperand2 = new BigInteger(operand2.getText());
+            if (BigIntegerOperand2.compareTo(BigInteger.ONE) < 0) {
+                throw new RuntimeException();
+            }
+        } catch (RuntimeException error) {
+            BigIntegerOperand2 = null;
+        }
+        if (BigIntegerOperand1 != null && BigIntegerOperand2 != null) {
+            errorMsgForOperand1.setText("");
+            errorMsgForOperand2.setText("");
+            return true;
+        } else {
+            errorMsgForOperand1.setText("Please provide a positive integer as X value.");
+            errorMsgForOperand2.setText("Please provide a positive integer as Y value.");
+            if (BigIntegerOperand1 != null) {
+                errorMsgForOperand1.setText("");
+            }
+            if (BigIntegerOperand2 != null) {
+                errorMsgForOperand2.setText("");
+            }
+            setResult("");
+        }
+        return false;
+    }
+
+    /**
+     * check if user is providing valid decimals as operand 1 and operand 2
+     *
+     * @return true or false
+     */
+    private boolean hasValidDecimalInputs() {
+        try {
+            BigDecimalOperand1 = new BigDecimal(operand1.getText());
+        } catch (RuntimeException error) {
             BigDecimalOperand1 = null;
         }
         try {
             BigDecimalOperand2 = new BigDecimal(operand2.getText());
-        } catch (Exception error) {
+        } catch (RuntimeException error) {
             BigDecimalOperand2 = null;
         }
         if (BigDecimalOperand1 != null && BigDecimalOperand2 != null) {

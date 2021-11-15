@@ -2,14 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e070807e-f937-430f-bc93-b6a7ef4599b6" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/BigNumberCalculationPanel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/DecimalCalculationPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BigNumberCalculator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BigNumberCalculationPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BigNumberCalculationPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/BinaryCalculationPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BinaryCalculationPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/CalculatorPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CalculatorPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DecimalCalculationPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DecimalCalculationPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GeneralDataType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GeneralDataType.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/HexadecimalCalculationPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/HexadecimalCalculationPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/NormalTextLine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/NormalTextLine.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ObjectOrientedGUICalculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ObjectOrientedGUICalculator.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -81,6 +82,10 @@
       <workItem from="1636837160750" duration="2280000" />
       <workItem from="1636841194889" duration="7732000" />
       <workItem from="1636853010420" duration="14532000" />
+      <workItem from="1636910166813" duration="2568000" />
+      <workItem from="1636921450372" duration="3912000" />
+      <workItem from="1636928241775" duration="9914000" />
+      <workItem from="1636939583178" duration="5284000" />
     </task>
     <servers />
   </component>

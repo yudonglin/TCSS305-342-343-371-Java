@@ -2,14 +2,21 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Objects;
 
+/**
+ * The basic structure of all primary panels
+ */
 abstract class CalculatorPanel extends JPanel {
-    protected final JTextField result = new JTextField(10);
-    protected JPanel topPanel = new JPanel();
-    protected JPanel middlePanel = new JPanel();
-    protected JPanel bottomPanel = new JPanel();
-    protected JPanel desPanel = new JPanel();
-    protected JButton calculateButton = new JButton("Calculate");
 
+    protected final JPanel topPanel = new JPanel();
+    protected final JPanel middlePanel = new JPanel();
+    protected final JPanel bottomPanel = new JPanel();
+    protected final JPanel desPanel = new JPanel();
+    protected final JButton calculateButton = new JButton("Calculate");
+    private final JTextField result = new JTextField(10);
+
+    /**
+     * @param title the title of the panel (the first line text)
+     */
     public CalculatorPanel(String title) {
         super(new GridLayout(4, 1));
         desPanel.add(new NormalTextLine(title));
@@ -18,7 +25,6 @@ abstract class CalculatorPanel extends JPanel {
         this.add(topPanel);
         this.add(middlePanel);
         this.add(bottomPanel);
-
         // add Calculate button
         bottomPanel.add(calculateButton);
         // add Clear button
@@ -27,24 +33,42 @@ abstract class CalculatorPanel extends JPanel {
         bottomPanel.add(clearButton);
     }
 
+    /**
+     * clear the result text field
+     */
     public void reset() {
         setResult("");
     }
 
+    /**
+     * @return the result text field itself, not the content
+     */
+    public JTextField getResult() {
+        return result;
+    }
+
+    /**
+     * reset the result text field's content
+     */
     public void setResult(String text) {
         this.result.setText(text);
         this.result.setColumns(Math.max(this.result.getText().length(), 10));
         this.updateUI();
     }
-
 }
 
+/**
+ * The basic structure of BinaryCalculationPanel and HexadecimalCalculationPanel
+ */
 abstract class CalculationPanel extends CalculatorPanel {
     private final JTextField operand1 = new JTextField(10);
     private final JTextField operand2 = new JTextField(10);
     private final JComboBox<String> operationComboBox = new JComboBox<>();
     private final JTextField equationInDecimal = new NormalTextLine("Decimal value: ? + ? = ?");
 
+    /**
+     * @param valueType what type of data that panel will need to deal with (Binary or Hexadecimal)
+     */
     public CalculationPanel(String valueType) {
         super(valueType + " Calculation—Add, Subtract, Multiply, or Divide");
 
@@ -127,11 +151,18 @@ abstract class CalculationPanel extends CalculatorPanel {
         topPanel.add(operationComboBox);
         topPanel.add(operand2);
         topPanel.add(new NormalTextLine("="));
-        topPanel.add(result);
+        topPanel.add(getResult());
     }
 
+    /**
+     * @param text the value that will be used to create return GeneralDataType
+     * @return a Binary or Hexadecimal depend on which kind of panel
+     */
     protected abstract GeneralDataType creatNumObject(String text);
 
+    /**
+     * reset all primary text fields' contents
+     */
     public void reset() {
         super.reset();
         operand1.setText("");
@@ -142,9 +173,15 @@ abstract class CalculationPanel extends CalculatorPanel {
 }
 
 
+/**
+ * The basic structure of BinaryToDecimalPanel and HexadecimalToDecimalPanel
+ */
 abstract class ToDecimalPanel extends CalculatorPanel {
     private final JTextField inputValue = new JTextField(10);
 
+    /**
+     * @param valueType what type of data that panel will need to deal with (Binary or Hexadecimal)
+     */
     public ToDecimalPanel(String valueType) {
         super("Convert " + valueType + " Value to Decimal Value");
         calculateButton.addActionListener(e -> {
@@ -160,20 +197,33 @@ abstract class ToDecimalPanel extends CalculatorPanel {
         topPanel.add(inputValue);
         topPanel.add(new NormalTextLine("= ?"));
         middlePanel.add(new NormalTextLine("Decimal:"));
-        middlePanel.add(result);
+        middlePanel.add(getResult());
     }
 
+    /**
+     * @param text the value that will be used to create return GeneralDataType
+     * @return a Binary or Hexadecimal depend on which kind of panel
+     */
     protected abstract GeneralDataType creatNumObject(String text);
 
+    /**
+     * reset all primary text fields' contents
+     */
     public void reset() {
         super.reset();
         inputValue.setText("");
     }
 }
 
+/**
+ * The basic structure of DecimalToBinaryPanel and DecimalToHexadecimalPanel
+ */
 abstract class FromDecimalPanel extends CalculatorPanel {
     private final JTextField inputValue = new JTextField(10);
 
+    /**
+     * @param valueType what type of data that panel will need to deal with (Binary or Hexadecimal)
+     */
     public FromDecimalPanel(String valueType) {
         super("Convert Decimal Value to " + valueType + " Value");
         calculateButton.addActionListener(e -> {
@@ -189,11 +239,18 @@ abstract class FromDecimalPanel extends CalculatorPanel {
         topPanel.add(inputValue);
         topPanel.add(new NormalTextLine("= ?"));
         middlePanel.add(new NormalTextLine(valueType + ":"));
-        middlePanel.add(result);
+        middlePanel.add(getResult());
     }
 
+    /**
+     * @param text the raw value that will be used to generate return GeneralDataType
+     * @return a Binary or Hexadecimal depend on which kind of panel
+     */
     protected abstract GeneralDataType fromDecimal(String text);
 
+    /**
+     * reset all primary text fields' contents
+     */
     public void reset() {
         super.reset();
         inputValue.setText("");

@@ -1,29 +1,55 @@
 /**
- * A {@code Hexadecimal} object is the child class of GeneralDataType.
+ * The child class of GeneralDataType.
  * It will pass the {@param value} to the super class {@code GeneralDataType} as well as 16 as {@param positionalNotation}.
  */
 class Hexadecimal extends GeneralDataType {
+
+    /**
+     * default method, create a Hexadecimal object that is equivalent to integer 0
+     */
+    public Hexadecimal() {
+        super("0", 16);
+    }
+
+    /**
+     * @param value is used to create a new Hexadecimal object
+     */
     public Hexadecimal(String value) {
         super(value, 16);
     }
 
-    public static Hexadecimal fromDecimal(String value) {
-        return new Hexadecimal(Long.toHexString(Long.parseLong(value)));
+    /**
+     * @param value a long format string that will be used to create a new Hexadecimal object
+     * @return a new Hexadecimal object has an equivalent value to the input value
+     */
+    public static Hexadecimal valueOf(String value) {
+        return new Hexadecimal().fromDecimal(Long.parseLong(value));
     }
 
-    public Hexadecimal valueOf(long value) {
-        return new Hexadecimal(Long.toHexString(value));
+    /**
+     * @param value a long number that will be used to create a new Hexadecimal object
+     * @return a new Hexadecimal object has an equivalent value to the input value
+     */
+    public Hexadecimal fromDecimal(long value) {
+        return new Hexadecimal(value >= 0 ? Long.toHexString(value) : "-" + Long.toHexString(Math.abs(value)));
     }
+
 }
 
 class HexadecimalCalculationPanel extends CalculationPanel {
 
-
+    /**
+     * create the panel for Hexadecimal Calculation
+     */
     public HexadecimalCalculationPanel() {
         super("Hexadecimal");
 
     }
 
+    /**
+     * @param text the value that will be used to create return Hexadecimal
+     * @return a new Hexadecimal object created using the input text
+     */
     protected Hexadecimal creatNumObject(String text) {
         return new Hexadecimal(text);
     }
@@ -31,10 +57,17 @@ class HexadecimalCalculationPanel extends CalculationPanel {
 
 class HexadecimalToDecimalPanel extends ToDecimalPanel {
 
+    /**
+     * create the panel for Hexadecimal To Decimal Conversion
+     */
     public HexadecimalToDecimalPanel() {
         super("Hexadecimal");
     }
 
+    /**
+     * @param text the value that will be used to create return Hexadecimal
+     * @return a new Hexadecimal object created using the input text
+     */
     protected Hexadecimal creatNumObject(String text) {
         return new Hexadecimal(text);
     }
@@ -43,13 +76,20 @@ class HexadecimalToDecimalPanel extends ToDecimalPanel {
 
 class DecimalToHexadecimalPanel extends FromDecimalPanel {
 
+    /**
+     * create the panel for Decimal To Hexadecimal Conversion
+     */
     public DecimalToHexadecimalPanel() {
         super("Hexadecimal");
 
     }
 
+    /**
+     * @param text the raw value that will be used to generate return Hexadecimal
+     * @return a new Hexadecimal object created using the input text
+     */
     protected Hexadecimal fromDecimal(String text) {
-        return Hexadecimal.fromDecimal(text);
+        return Hexadecimal.valueOf(text);
     }
 
 }
