@@ -1,7 +1,12 @@
 import javax.swing.*;
 import java.awt.*;
+import java.util.HashMap;
 
 public class ObjectOrientedGUICalculator extends JFrame {
+
+    // a hash map that is used to store primary panels
+    private final HashMap<String, JPanel> calculationPanelsHashMap = new HashMap<>();
+
     /**
      * create a calculator window that will handle all kinds of calculations
      *
@@ -11,8 +16,6 @@ public class ObjectOrientedGUICalculator extends JFrame {
     public ObjectOrientedGUICalculator(int width, int height) {
 
         this.setTitle("Ultimate Calculator");
-        // TODO add an icon
-        //Frame.setIconImage(Toolkit.getDefaultToolkit().getImage(“meme.jpg”))
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(width, height);
         this.setLayout(new CardLayout(1, 1));
@@ -33,63 +36,37 @@ public class ObjectOrientedGUICalculator extends JFrame {
         calculatorMenu.add(decimalCalculationMenuItem);
         this.setJMenuBar(menuBar);
 
+        // initialize primary panels
+        final String[] panelsNames = {"hex", "binary", "bigNum", "decimal"};
+        for (String name : panelsNames) {
+            this.calculationPanelsHashMap.put(name, new JPanel());
+            this.calculationPanelsHashMap.get(name).setLayout(new GridLayout(3, 1));
+            this.calculationPanelsHashMap.get(name).setVisible(false);
+            this.add(calculationPanelsHashMap.get(name));
+        }
+
         //Hexadecimal Calculation Panel
-        JPanel mainHexadecimalCalculationPanel = new JPanel();
-        mainHexadecimalCalculationPanel.setLayout(new GridLayout(3, 1));
-        mainHexadecimalCalculationPanel.setVisible(false);
-        this.add(mainHexadecimalCalculationPanel);
-        mainHexadecimalCalculationPanel.add(new HexadecimalCalculationPanel());
-        mainHexadecimalCalculationPanel.add(new HexadecimalToDecimalPanel());
-        mainHexadecimalCalculationPanel.add(new DecimalToHexadecimalPanel());
+        this.calculationPanelsHashMap.get("hex").add(new HexadecimalCalculationPanel());
+        this.calculationPanelsHashMap.get("hex").add(new HexadecimalToDecimalPanel());
+        this.calculationPanelsHashMap.get("hex").add(new DecimalToHexadecimalPanel());
 
         //Binary Calculation Panel
-        JPanel mainBinaryCalculationPanel = new JPanel();
-        mainBinaryCalculationPanel.setLayout(new GridLayout(3, 1));
-        mainBinaryCalculationPanel.setVisible(false);
-        this.add(mainBinaryCalculationPanel);
-        mainBinaryCalculationPanel.add(new BinaryCalculationPanel());
-        mainBinaryCalculationPanel.add(new BinaryToDecimalPanel());
-        mainBinaryCalculationPanel.add(new DecimalToBinaryPanel());
+        this.calculationPanelsHashMap.get("binary").add(new BinaryCalculationPanel());
+        this.calculationPanelsHashMap.get("binary").add(new BinaryToDecimalPanel());
+        this.calculationPanelsHashMap.get("binary").add(new DecimalToBinaryPanel());
 
         //Big Number Calculation Panel
-        var bigNumberCalculationPanel = new BigNumberCalculationPanel();
-        bigNumberCalculationPanel.setVisible(false);
-        this.add(bigNumberCalculationPanel);
+        this.calculationPanelsHashMap.get("bigNum").add(new BigNumberCalculationPanel());
+        this.calculationPanelsHashMap.get("bigNum").setLayout(new GridLayout(1, 1));
 
         //Decimal Calculation Panel
-        var decimalCalculationPanel = new DecimalCalculationPanel();
-        decimalCalculationPanel.setVisible(false);
-        this.add(decimalCalculationPanel);
-
+        this.calculationPanelsHashMap.get("decimal").add(new DecimalCalculationPanel());
 
         //add action listeners to menu items
-        hexadecimalCalculationMenuItem.addActionListener(e -> {
-            mainBinaryCalculationPanel.setVisible(false);
-            bigNumberCalculationPanel.setVisible(false);
-            decimalCalculationPanel.setVisible(false);
-            mainHexadecimalCalculationPanel.setVisible(true);
-        });
-
-        binaryCalculationMenuItem.addActionListener(e -> {
-            mainHexadecimalCalculationPanel.setVisible(false);
-            bigNumberCalculationPanel.setVisible(false);
-            decimalCalculationPanel.setVisible(false);
-            mainBinaryCalculationPanel.setVisible(true);
-        });
-
-        bigNumberCalculationMenuItem.addActionListener(e -> {
-            mainHexadecimalCalculationPanel.setVisible(false);
-            mainBinaryCalculationPanel.setVisible(false);
-            decimalCalculationPanel.setVisible(false);
-            bigNumberCalculationPanel.setVisible(true);
-        });
-
-        decimalCalculationMenuItem.addActionListener(e -> {
-            mainHexadecimalCalculationPanel.setVisible(false);
-            mainBinaryCalculationPanel.setVisible(false);
-            bigNumberCalculationPanel.setVisible(false);
-            decimalCalculationPanel.setVisible(true);
-        });
+        hexadecimalCalculationMenuItem.addActionListener(e -> this.switchToPanel("hex"));
+        binaryCalculationMenuItem.addActionListener(e -> this.switchToPanel("binary"));
+        bigNumberCalculationMenuItem.addActionListener(e -> this.switchToPanel("bigNum"));
+        decimalCalculationMenuItem.addActionListener(e -> this.switchToPanel("decimal"));
 
         // show menu
         this.setVisible(true);
@@ -103,6 +80,15 @@ public class ObjectOrientedGUICalculator extends JFrame {
     public static void main(String[] args) {
         // write your code here
         new ObjectOrientedGUICalculator(700, 700);
+    }
+
+    /**
+     * @param name the name of panel that need to switch to
+     */
+    private void switchToPanel(String name) {
+        for (String panelName : this.calculationPanelsHashMap.keySet()) {
+            this.calculationPanelsHashMap.get(panelName).setVisible(panelName.equals(name));
+        }
     }
 
 }

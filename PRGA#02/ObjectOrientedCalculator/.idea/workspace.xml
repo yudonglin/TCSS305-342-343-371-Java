@@ -2,14 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e070807e-f937-430f-bc93-b6a7ef4599b6" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../.vscode/settings.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/BigNumberCalculationPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BigNumberCalculationPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BinaryCalculationPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BinaryCalculationPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CalculatorPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CalculatorPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DecimalCalculationPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DecimalCalculationPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GeneralDataType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GeneralDataType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/HexadecimalCalculationPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/HexadecimalCalculationPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/NormalTextLine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/NormalTextLine.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ObjectOrientedGUICalculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ObjectOrientedGUICalculator.java" afterDir="false" />
     </list>
@@ -86,6 +81,8 @@
       <workItem from="1636921450372" duration="3912000" />
       <workItem from="1636928241775" duration="9914000" />
       <workItem from="1636939583178" duration="5284000" />
+      <workItem from="1637122269403" duration="20000" />
+      <workItem from="1637122388392" duration="1225000" />
     </task>
     <servers />
   </component>

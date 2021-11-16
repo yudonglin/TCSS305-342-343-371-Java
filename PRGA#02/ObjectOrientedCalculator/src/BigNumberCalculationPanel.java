@@ -113,7 +113,7 @@ public class BigNumberCalculationPanel extends CalculatorPanel {
         actionButtonsArray[3] = new JButton("X / Y");
         actionButtonsArray[3].addActionListener(e -> {
             if (this.hasValidDecimalInputs() && this.hasValidPrecision()) {
-                var result = BigDecimalOperand1.divide(BigDecimalOperand2).setScale(precisionInInt, RoundingMode.HALF_UP);
+                var result = BigDecimalOperand1.divide(BigDecimalOperand2, precisionInInt, RoundingMode.HALF_UP);
                 var resultInString = String.valueOf(result.doubleValue());
                 if (!resultInString.equals("infinity")) {
                     setResult(resultInString);
@@ -326,14 +326,8 @@ public class BigNumberCalculationPanel extends CalculatorPanel {
             errorMsgForOperand2.setText("");
             return true;
         } else {
-            errorMsgForOperand1.setText("Please provide a valid X value.");
-            errorMsgForOperand2.setText("Please provide a valid Y value.");
-            if (BigDecimalOperand1 != null) {
-                errorMsgForOperand1.setText("");
-            }
-            if (BigDecimalOperand2 != null) {
-                errorMsgForOperand2.setText("");
-            }
+            errorMsgForOperand1.setText(BigDecimalOperand1 == null ? "Please provide a valid X value." : "");
+            errorMsgForOperand2.setText(BigDecimalOperand2 == null ? "Please provide a valid Y value." : "");
             setResult("");
         }
         return false;
