@@ -126,8 +126,14 @@ public class BigNumberCalculationPanel extends CalculatorPanel {
         //power
         actionButtonsArray[4] = new JButton("X ^ Y");
         actionButtonsArray[4].addActionListener(e -> {
-            if (this.hasValidDecimalInputs() && this.hasValidPrecision()) {
-                setResult(String.valueOf(Math.pow(BigDecimalOperand1.doubleValue(), BigDecimalOperand2.doubleValue())).formatted("%." + precision.getText() + "g%n"));
+            if (this.hasValidDecimalInput() && this.hasValidPrecision()) {
+                try {
+                    setResult(String.valueOf(BigDecimalOperand1.pow(Integer.parseInt(operand2.getText())).setScale(precisionInInt, RoundingMode.HALF_UP)));
+                    errorMsgForOperand2.setText("");
+                } catch (Exception error) {
+                    errorMsgForOperand2.setText("Please provide a positive integer as Y value.");
+                    setResult("");
+                }
             }
         });
 
@@ -148,7 +154,7 @@ public class BigNumberCalculationPanel extends CalculatorPanel {
         actionButtonsArray[6] = new JButton("X ^ 2");
         actionButtonsArray[6].addActionListener(e -> {
             if (this.hasValidDecimalInput() && this.hasValidPrecision()) {
-                setResult(BigDecimalOperand1.pow(2).toString().formatted("%." + precision.getText() + "g%n"));
+                setResult(BigDecimalOperand1.pow(2).setScale(precisionInInt, RoundingMode.HALF_UP).toString());
             }
         });
 

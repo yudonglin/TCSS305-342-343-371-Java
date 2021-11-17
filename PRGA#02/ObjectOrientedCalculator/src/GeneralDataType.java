@@ -3,9 +3,13 @@
  * It will handle most of the calculation since it provides a way for converting both Binary and Hexadecimal class into decimal for calculation
  * Based on the {@param positionalNotation} provided by itself child class
  */
-abstract class GeneralDataType {
+abstract class GeneralDataType implements NumberInterface {
+
+    // raw data
     private final String value;
+    // the positional notation that will be used for conversation
     private final int positionalNotation;
+    // is the number negative
     private final boolean isNegative;
 
     /**
@@ -25,12 +29,6 @@ abstract class GeneralDataType {
     }
 
     /**
-     * @param l will be used to generate a new GeneralDataType
-     * @return a new GeneralDataType with the equivalent value of l
-     */
-    public abstract GeneralDataType fromDecimal(long l);
-
-    /**
      * @return a string value that present the real value of this object
      */
     public String toString() {
@@ -38,7 +36,7 @@ abstract class GeneralDataType {
     }
 
     /**
-     * @return a Long that represent the value of this object in decimal integer
+     * @return a long that represent the value of this object in decimal number
      */
     public long toDecimal() {
         return this.isNegative ? -Long.parseUnsignedLong(this.value, this.positionalNotation) : Long.parseUnsignedLong(this.value, this.positionalNotation);

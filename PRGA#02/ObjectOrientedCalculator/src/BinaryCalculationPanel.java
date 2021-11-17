@@ -83,7 +83,7 @@ class DecimalToBinaryPanel extends FromDecimalPanel {
 
     /**
      * @param text the raw value that will be used to generate return Binary
-     * @return a new Binary object created using the input text
+     * @return a new Binary object created using the input string format integer
      */
     protected Binary fromDecimal(String text) {
         return Binary.valueOf(text);

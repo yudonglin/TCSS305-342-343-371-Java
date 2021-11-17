@@ -86,7 +86,7 @@ class DecimalToHexadecimalPanel extends FromDecimalPanel {
 
     /**
      * @param text the raw value that will be used to generate return Hexadecimal
-     * @return a new Hexadecimal object created using the input text
+     * @return a new Hexadecimal object created using the input string format integer
      */
     protected Hexadecimal fromDecimal(String text) {
         return Hexadecimal.valueOf(text);

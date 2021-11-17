@@ -11,7 +11,9 @@ abstract class CalculatorPanel extends JPanel {
     protected final JPanel middlePanel = new JPanel();
     protected final JPanel bottomPanel = new JPanel();
     protected final JPanel desPanel = new JPanel();
+    // trigger the calculation action
     protected final JButton calculateButton = new JButton("Calculate");
+    // the text filed that is used to show result or error message
     private final JTextField result = new JTextField(10);
 
     /**
@@ -61,6 +63,7 @@ abstract class CalculatorPanel extends JPanel {
  * The basic structure of BinaryCalculationPanel and HexadecimalCalculationPanel
  */
 abstract class CalculationPanel extends CalculatorPanel {
+
     private final JTextField operand1 = new JTextField(10);
     private final JTextField operand2 = new JTextField(10);
     private final JComboBox<String> operationComboBox = new JComboBox<>();
@@ -85,7 +88,7 @@ abstract class CalculationPanel extends CalculatorPanel {
             equationInDecimal.setText("Decimal value: ? " + Objects.requireNonNull(operationComboBox.getSelectedItem()) + " ? = ?");
             setResult("");
         });
-
+        // try to generate co-response data object use user input
         calculateButton.addActionListener(e -> {
             GeneralDataType num1;
             try {
@@ -177,6 +180,7 @@ abstract class CalculationPanel extends CalculatorPanel {
  * The basic structure of BinaryToDecimalPanel and HexadecimalToDecimalPanel
  */
 abstract class ToDecimalPanel extends CalculatorPanel {
+
     private final JTextField inputValue = new JTextField(10);
 
     /**
@@ -189,7 +193,7 @@ abstract class ToDecimalPanel extends CalculatorPanel {
             try {
                 text = String.valueOf(creatNumObject(this.inputValue.getText()).toDecimal());
             } catch (Exception invalid_e) {
-                text = "Error: " + invalid_e.getMessage();
+                text = "Error: " + (this.inputValue.getText().length() > 0 ? invalid_e.getMessage() : "input text filed is empty");
             }
             this.setResult(text);
         });
@@ -231,7 +235,7 @@ abstract class FromDecimalPanel extends CalculatorPanel {
             try {
                 text = String.valueOf(this.fromDecimal(this.inputValue.getText()));
             } catch (Exception invalid_e) {
-                text = "Error: " + invalid_e.getMessage();
+                text = "Error: " + (this.inputValue.getText().length() > 0 ? invalid_e.getMessage() : "input text filed is empty");
             }
             this.setResult(text);
         });
