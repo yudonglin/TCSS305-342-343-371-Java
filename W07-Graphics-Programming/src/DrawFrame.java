@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
@@ -8,12 +10,12 @@ import java.nio.file.FileSystems;
 /**
  * A frame that contains a panel with drawings.
  */
-class DrawFrame extends JFrame {
+class DrawFrame extends JFrame implements KeyListener {
+
+    static DrawComponent screen = new DrawComponent();
 
     public DrawFrame() {
         this.setLayout(new FlowLayout());
-
-        var screen = new DrawComponent();
         this.add(screen);
 
         var buttonPanels = new JPanel();
@@ -21,20 +23,20 @@ class DrawFrame extends JFrame {
 
         var upButton = new Button("up");
         upButton.addActionListener(e -> {
-            SpaceShip.addY(-10);
+            SpaceShip.move("up");
             screen.repaint();
         });
         buttonPanels.add(upButton);
         var downButton = new Button("down");
         downButton.addActionListener(e -> {
-            SpaceShip.addY(10);
+            SpaceShip.move("down");
             screen.repaint();
         });
         buttonPanels.add(downButton);
 
         var leftButton = new Button("left");
         leftButton.addActionListener(e -> {
-            SpaceShip.addX(-10);
+            SpaceShip.move("left");
             screen.repaint();
         });
         buttonPanels.add(leftButton);
@@ -42,10 +44,14 @@ class DrawFrame extends JFrame {
 
         var rightButton = new Button("right");
         rightButton.addActionListener(e -> {
-            SpaceShip.addX(10);
+            SpaceShip.move("right");
             screen.repaint();
         });
         buttonPanels.add(rightButton);
+
+        this.addKeyListener(this);
+        this.setFocusable(true);
+        this.requestFocusInWindow();
 
         pack();
     }
@@ -62,20 +68,37 @@ class DrawFrame extends JFrame {
             frame.setVisible(true);
         });
     }
+
+    public void keyTyped(KeyEvent e) {
+    }
+
+    public void keyPressed(KeyEvent e) {
+        switch (e.getKeyCode()) {
+            case KeyEvent.VK_UP -> SpaceShip.move("up");
+            case KeyEvent.VK_DOWN -> SpaceShip.move("down");
+            case KeyEvent.VK_LEFT -> SpaceShip.move("left");
+            case KeyEvent.VK_RIGHT -> SpaceShip.move("right");
+        }
+        this.repaint();
+    }
+
+    public void keyReleased(KeyEvent e) {
+    }
 }
 
 class SpaceShip {
 
     private static final Image _image = new ImageIcon(FileSystems.getDefault().getPath("W07-Graphics-Programming/src/spaceship_icon.png").toAbsolutePath().toString()).getImage();
-
+    private static final int speed = 10;
     private static int x, y = 0;
 
-    public static void addX(int _x) {
-        x += _x;
-    }
-
-    public static void addY(int _y) {
-        y += _y;
+    public static void move(String direction) {
+        switch (direction.toLowerCase()) {
+            case "up" -> y -= speed;
+            case "down" -> y += speed;
+            case "left" -> x -= speed;
+            case "right" -> x += speed;
+        }
     }
 
     public void draw(Graphics2D surface) {
