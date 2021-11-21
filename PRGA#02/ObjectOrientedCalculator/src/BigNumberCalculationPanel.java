@@ -113,12 +113,16 @@ public class BigNumberCalculationPanel extends CalculatorPanel {
         actionButtonsArray[3] = new JButton("X / Y");
         actionButtonsArray[3].addActionListener(e -> {
             if (this.hasValidDecimalInputs() && this.hasValidPrecision()) {
-                var result = BigDecimalOperand1.divide(BigDecimalOperand2, precisionInInt, RoundingMode.HALF_UP);
-                var resultInString = String.valueOf(result.doubleValue());
-                if (!resultInString.equals("infinity")) {
-                    setResult(resultInString);
-                } else {
-                    setResult(result.toString());
+                if (BigDecimal.ZERO.compareTo(BigDecimalOperand2) != 0) {
+                    var result = BigDecimalOperand1.divide(BigDecimalOperand2, precisionInInt, RoundingMode.HALF_UP);
+                    var resultInString = String.valueOf(result.doubleValue());
+                    if (!resultInString.equals("infinity")) {
+                        setResult(resultInString);
+                    } else {
+                        setResult(result.toString());
+                    }
+                }else {
+                    this.setResult("Error: Divide by 0");
                 }
             }
         });
