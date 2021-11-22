@@ -15,6 +15,8 @@ public class BigNumberCalculationPanel extends CalculatorPanel {
     private final NormalTextLine errorMsgForOperand1 = new NormalTextLine("");
     private final NormalTextLine errorMsgForOperand2 = new NormalTextLine("");
     private final NormalTextLine errorMsgForPrecision = new NormalTextLine("");
+    // current action
+    private final NormalTextLine currentAction = new NormalTextLine("Waiting for choosing one.");
     // variables for store data that will be used for calculation
     private BigDecimal BigDecimalOperand1;
     private BigDecimal BigDecimalOperand2;
@@ -28,7 +30,7 @@ public class BigNumberCalculationPanel extends CalculatorPanel {
      */
     public BigNumberCalculationPanel() {
         super("Big Number Calculator");
-        this.setLayout(new GridLayout(8, 1));
+        this.setLayout(new GridLayout(9, 1));
 
         var moreDesPanel = new JPanel();
         moreDesPanel.add(new NormalTextLine("The calculator below can compute very large numbers. Acceptable formats include: integers, decimal,"));
@@ -50,6 +52,10 @@ public class BigNumberCalculationPanel extends CalculatorPanel {
         bottomPanel.add(new NormalTextLine("digits after the decimal place in the result"));
         bottomPanel.add(errorMsgForPrecision);
 
+        var currentActionPanel = new JPanel();
+        currentActionPanel.add(currentAction);
+        this.add(currentActionPanel);
+
         var resultPanel = new JPanel();
         resultPanel.add(new NormalTextLine("Result:"));
         resultPanel.add(getResult());
@@ -58,7 +64,6 @@ public class BigNumberCalculationPanel extends CalculatorPanel {
         var actionDesPanel = new JPanel();
         actionDesPanel.add(new NormalTextLine("Click the buttons below to calculate"));
         this.add(actionDesPanel);
-
 
         // panel for manage action buttons
         var actionButtonsPanel = new JPanel();
@@ -73,6 +78,7 @@ public class BigNumberCalculationPanel extends CalculatorPanel {
             if (this.hasValidDecimalInputs() && this.hasValidPrecision()) {
                 var result = BigDecimalOperand1.add(BigDecimalOperand2).setScale(precisionInInt, RoundingMode.HALF_UP);
                 var resultInString = String.valueOf(result.doubleValue());
+                currentAction.setText("Current calculation: X + Y");
                 if (!resultInString.equals("infinity")) {
                     setResult(resultInString);
                 } else {
@@ -87,6 +93,7 @@ public class BigNumberCalculationPanel extends CalculatorPanel {
             if (this.hasValidDecimalInputs() && this.hasValidPrecision()) {
                 var result = BigDecimalOperand1.subtract(BigDecimalOperand2).setScale(precisionInInt, RoundingMode.HALF_UP);
                 var resultInString = String.valueOf(result.doubleValue());
+                currentAction.setText("Current calculation: X - Y");
                 if (!resultInString.equals("infinity")) {
                     setResult(resultInString);
                 } else {
@@ -101,6 +108,7 @@ public class BigNumberCalculationPanel extends CalculatorPanel {
             if (this.hasValidDecimalInputs() && this.hasValidPrecision()) {
                 var result = BigDecimalOperand1.multiply(BigDecimalOperand2).setScale(precisionInInt, RoundingMode.HALF_UP);
                 var resultInString = String.valueOf(result.doubleValue());
+                currentAction.setText("Current calculation: X * Y");
                 if (!resultInString.equals("infinity")) {
                     setResult(resultInString);
                 } else {
@@ -116,12 +124,13 @@ public class BigNumberCalculationPanel extends CalculatorPanel {
                 if (BigDecimal.ZERO.compareTo(BigDecimalOperand2) != 0) {
                     var result = BigDecimalOperand1.divide(BigDecimalOperand2, precisionInInt, RoundingMode.HALF_UP);
                     var resultInString = String.valueOf(result.doubleValue());
+                    currentAction.setText("Current calculation: X / Y");
                     if (!resultInString.equals("infinity")) {
                         setResult(resultInString);
                     } else {
                         setResult(result.toString());
                     }
-                }else {
+                } else {
                     this.setResult("Error: Divide by 0");
                 }
             }
@@ -132,7 +141,9 @@ public class BigNumberCalculationPanel extends CalculatorPanel {
         actionButtonsArray[4].addActionListener(e -> {
             if (this.hasValidDecimalInput() && this.hasValidPrecision()) {
                 try {
-                    setResult(String.valueOf(BigDecimalOperand1.pow(Integer.parseInt(operand2.getText())).setScale(precisionInInt, RoundingMode.HALF_UP)));
+                    var result_text = String.valueOf(BigDecimalOperand1.pow(Integer.parseInt(operand2.getText())).setScale(precisionInInt, RoundingMode.HALF_UP));
+                    currentAction.setText("Current calculation: X ^ Y");
+                    setResult(result_text);
                     errorMsgForOperand2.setText("");
                 } catch (Exception error) {
                     errorMsgForOperand2.setText("Please provide a positive integer as Y value.");
@@ -146,7 +157,9 @@ public class BigNumberCalculationPanel extends CalculatorPanel {
         actionButtonsArray[5].addActionListener(e -> {
             if (this.hasValidDecimalInput() && this.hasValidPrecision()) {
                 try {
-                    setResult(BigDecimalOperand1.sqrt(new MathContext(precisionInInt, RoundingMode.HALF_UP)).toString());
+                    var result_text = BigDecimalOperand1.sqrt(new MathContext(precisionInInt, RoundingMode.HALF_UP)).toString();
+                    currentAction.setText("Current calculation: √X");
+                    setResult(result_text);
                 } catch (Exception error) {
                     setResult("");
                     errorMsgForOperand1.setText("Please provide a positive integer as X value.");
@@ -158,6 +171,7 @@ public class BigNumberCalculationPanel extends CalculatorPanel {
         actionButtonsArray[6] = new JButton("X ^ 2");
         actionButtonsArray[6].addActionListener(e -> {
             if (this.hasValidDecimalInput() && this.hasValidPrecision()) {
+                currentAction.setText("Current calculation: X ^ 2");
                 setResult(BigDecimalOperand1.pow(2).setScale(precisionInInt, RoundingMode.HALF_UP).toString());
             }
         });
@@ -171,6 +185,7 @@ public class BigNumberCalculationPanel extends CalculatorPanel {
                     result = result.multiply(BigIntegerOperand1);
                     BigIntegerOperand1 = BigIntegerOperand1.subtract(BigInteger.ONE);
                 }
+                currentAction.setText("Current calculation: X!");
                 setResult(result.toString());
             }
         });
@@ -179,6 +194,7 @@ public class BigNumberCalculationPanel extends CalculatorPanel {
         actionButtonsArray[8] = new JButton("MOD");
         actionButtonsArray[8].addActionListener(e -> {
             if (this.hasValidPositiveIntegerInputs() && this.hasValidPrecision()) {
+                currentAction.setText("Current calculation: MOD");
                 setResult(BigIntegerOperand1.mod(BigIntegerOperand2).toString());
             }
         });
@@ -187,6 +203,7 @@ public class BigNumberCalculationPanel extends CalculatorPanel {
         actionButtonsArray[9] = new JButton("GCD");
         actionButtonsArray[9].addActionListener(e -> {
             if (this.hasValidPositiveIntegerInputs() && this.hasValidPrecision()) {
+                currentAction.setText("Current calculation: GCD");
                 setResult(BigIntegerOperand1.gcd(BigIntegerOperand2).toString());
             }
         });
@@ -195,6 +212,7 @@ public class BigNumberCalculationPanel extends CalculatorPanel {
         actionButtonsArray[10] = new JButton("LCM");
         actionButtonsArray[10].addActionListener(e -> {
             if (this.hasValidPositiveIntegerInputs() && this.hasValidPrecision()) {
+                currentAction.setText("Current calculation: LCM");
                 setResult(BigIntegerOperand1.multiply(BigIntegerOperand2.divide(BigIntegerOperand1.gcd(BigIntegerOperand2))).toString());
             }
         });
@@ -211,6 +229,7 @@ public class BigNumberCalculationPanel extends CalculatorPanel {
      */
     public void reset() {
         super.reset();
+        currentAction.setText("Waiting for choosing one.");
         operand1.setText("");
         operand2.setText("");
     }

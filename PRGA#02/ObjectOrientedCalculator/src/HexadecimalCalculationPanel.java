@@ -1,3 +1,5 @@
+import java.math.BigInteger;
+
 /**
  * The child class of GeneralDataType.
  * It will pass the {@param value} to the super class {@code GeneralDataType} as well as 16 as {@param positionalNotation}.
@@ -23,15 +25,15 @@ class Hexadecimal extends GeneralDataType {
      * @return a new Hexadecimal object has an equivalent value to the input value
      */
     public static Hexadecimal valueOf(String value) {
-        return new Hexadecimal().fromDecimal(Long.parseLong(value));
+        return new Hexadecimal().fromDecimal(new BigInteger(value));
     }
 
     /**
      * @param value a long number that will be used to create a new Hexadecimal object
      * @return a new Hexadecimal object has an equivalent value to the input value
      */
-    public Hexadecimal fromDecimal(long value) {
-        return new Hexadecimal(value >= 0 ? Long.toHexString(value) : "-" + Long.toHexString(Math.abs(value)));
+    public Hexadecimal fromDecimal(BigInteger value) {
+        return new Hexadecimal(value.compareTo(BigInteger.ZERO) >= 0 ? value.toString(16) : "-" + value.negate().toString(16));
     }
 
 }

@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.math.BigInteger;
 import java.util.Objects;
 
 /**
@@ -121,10 +122,10 @@ abstract class CalculationPanel extends CalculatorPanel {
                         equationInDecimal.setText("Decimal value: " + num1.toDecimal() + " * " + num2.toDecimal() + " = " + resultTemp.toDecimal());
                     }
                     case "/" -> {
-                        if (num2.toDecimal() != 0) {
+                        if (num2.toDecimal().compareTo(BigInteger.ZERO) != 0) {
                             var resultTemp = num1.divide(num2);
-                            var remainderTemp = num1.modulo(num2);
-                            if (remainderTemp.toDecimal() != 0) {
+                            var remainderTemp = num1.mod(num2);
+                            if (remainderTemp.toDecimal().compareTo(BigInteger.ZERO) != 0) {
                                 this.setResult(resultTemp.toString() + " Remainder: " + remainderTemp);
                                 equationInDecimal.setText("Decimal value: " + num1.toDecimal() + " * " + num2.toDecimal() + " = " + resultTemp.toDecimal() + " Remainder: " + remainderTemp.toDecimal());
                             } else {

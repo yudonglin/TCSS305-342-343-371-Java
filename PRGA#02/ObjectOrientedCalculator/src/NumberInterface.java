@@ -1,15 +1,17 @@
+import java.math.BigInteger;
+
 interface NumberInterface {
 
     /**
      * @return a long that represent the value of this object in decimal number
      */
-    long toDecimal();
+    BigInteger toDecimal();
 
     /**
      * @param l will be used to generate a new GeneralDataType
      * @return a new GeneralDataType with the equivalent value of l
      */
-    GeneralDataType fromDecimal(long l);
+    GeneralDataType fromDecimal(BigInteger l);
 
     /**
      * add two GeneralDataType, no matter whether they are Binary or Hexadecimal classes
@@ -44,5 +46,5 @@ interface NumberInterface {
      *
      * @return a new Binary or Hexadecimal object based on the positional notation of this class
      */
-    GeneralDataType modulo(GeneralDataType o);
+    GeneralDataType mod(GeneralDataType o);
 }

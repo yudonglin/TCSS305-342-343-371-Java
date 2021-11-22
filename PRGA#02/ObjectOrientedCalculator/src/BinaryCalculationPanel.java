@@ -1,3 +1,5 @@
+import java.math.BigInteger;
+
 /**
  * The child class of GeneralDataType.
  * It will pass the {@param value} to the super class {@code GeneralDataType} as well as 2 as {@param positionalNotation}.
@@ -23,15 +25,15 @@ class Binary extends GeneralDataType {
      * @return a new Binary object has an equivalent value to the input value
      */
     public static Binary valueOf(String value) {
-        return new Binary().fromDecimal(Long.parseLong(value));
+        return new Binary().fromDecimal(new BigInteger(value));
     }
 
     /**
      * @param value a long number that will be used to create a new Binary object
      * @return a new Binary object has an equivalent value to the input value
      */
-    public Binary fromDecimal(long value) {
-        return new Binary(value >= 0 ? Long.toBinaryString(value) : "-" + Long.toBinaryString(Math.abs(value)));
+    public Binary fromDecimal(BigInteger value) {
+        return new Binary(value.compareTo(BigInteger.ZERO) >= 0 ? value.toString(2) : "-" + value.negate().toString(2));
     }
 }
 

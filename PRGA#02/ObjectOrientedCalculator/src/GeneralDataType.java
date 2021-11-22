@@ -1,3 +1,5 @@
+import java.math.BigInteger;
+
 /**
  * The super class of both Binary and Hexadecimal class.
  * It will handle most of the calculation since it provides a way for converting both Binary and Hexadecimal class into decimal for calculation
@@ -36,10 +38,11 @@ abstract class GeneralDataType implements NumberInterface {
     }
 
     /**
-     * @return a long that represent the value of this object in decimal number
+     * @return a BigInteger that represent the value of this object in decimal number
      */
-    public long toDecimal() {
-        return this.isNegative ? -Long.parseUnsignedLong(this.value, this.positionalNotation) : Long.parseUnsignedLong(this.value, this.positionalNotation);
+    public BigInteger toDecimal() {
+        var value_temp = new BigInteger(this.value, this.positionalNotation);
+        return this.isNegative ? value_temp.negate() : value_temp;
     }
 
     /**
@@ -48,7 +51,7 @@ abstract class GeneralDataType implements NumberInterface {
      * @return a new Binary or Hexadecimal object based on the positional notation of this class
      */
     public GeneralDataType add(GeneralDataType o) {
-        return fromDecimal(this.toDecimal() + o.toDecimal());
+        return fromDecimal(this.toDecimal().add(o.toDecimal()));
     }
 
     /**
@@ -57,7 +60,7 @@ abstract class GeneralDataType implements NumberInterface {
      * @return a new Binary or Hexadecimal object based on the positional notation of this class
      */
     public GeneralDataType subtract(GeneralDataType o) {
-        return fromDecimal(this.toDecimal() - o.toDecimal());
+        return fromDecimal(this.toDecimal().subtract(o.toDecimal()));
     }
 
     /**
@@ -66,7 +69,7 @@ abstract class GeneralDataType implements NumberInterface {
      * @return a new Binary or Hexadecimal object based on the positional notation of this class
      */
     public GeneralDataType multiply(GeneralDataType o) {
-        return fromDecimal(this.toDecimal() * o.toDecimal());
+        return fromDecimal(this.toDecimal().multiply(o.toDecimal()));
     }
 
     /**
@@ -75,7 +78,7 @@ abstract class GeneralDataType implements NumberInterface {
      * @return a new Binary or Hexadecimal object based on the positional notation of this class
      */
     public GeneralDataType divide(GeneralDataType o) {
-        return fromDecimal(this.toDecimal() / o.toDecimal());
+        return fromDecimal(this.toDecimal().divide(o.toDecimal()));
     }
 
     /**
@@ -83,7 +86,7 @@ abstract class GeneralDataType implements NumberInterface {
      *
      * @return a new Binary or Hexadecimal object based on the positional notation of this class
      */
-    public GeneralDataType modulo(GeneralDataType o) {
-        return fromDecimal(this.toDecimal() % o.toDecimal());
+    public GeneralDataType mod(GeneralDataType o) {
+        return fromDecimal(this.toDecimal().mod(o.toDecimal()));
     }
 }
