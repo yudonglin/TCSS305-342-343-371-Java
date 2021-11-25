@@ -87,6 +87,6 @@ abstract class GeneralDataType implements NumberInterface {
      * @return a new Binary or Hexadecimal object based on the positional notation of this class
      */
     public GeneralDataType mod(GeneralDataType o) {
-        return fromDecimal(this.toDecimal().mod(o.toDecimal()));
+        return fromDecimal(this.toDecimal().remainder(o.toDecimal()));
     }
 }

@@ -127,14 +127,14 @@ abstract class CalculationPanel extends CalculatorPanel {
                             var remainderTemp = num1.mod(num2);
                             if (remainderTemp.toDecimal().compareTo(BigInteger.ZERO) != 0) {
                                 this.setResult(resultTemp.toString() + " Remainder: " + remainderTemp);
-                                equationInDecimal.setText("Decimal value: " + num1.toDecimal() + " * " + num2.toDecimal() + " = " + resultTemp.toDecimal() + " Remainder: " + remainderTemp.toDecimal());
+                                equationInDecimal.setText("Decimal value: " + num1.toDecimal() + " / " + num2.toDecimal() + " = " + resultTemp.toDecimal() + " Remainder: " + remainderTemp.toDecimal());
                             } else {
                                 this.setResult(resultTemp.toString());
                                 equationInDecimal.setText("Decimal value: " + num1.toDecimal() + " / " + num2.toDecimal() + " = " + resultTemp.toDecimal());
                             }
                         } else {
                             this.setResult("Error: Divide by 0");
-                            equationInDecimal.setText("Decimal value: " + num1.toDecimal() + " " + Objects.requireNonNull(operationComboBox.getSelectedItem()) + " " + num2.toDecimal() + " = ERROR");
+                            equationInDecimal.setText("Decimal value: " + num1.toDecimal() + " / 0 = ERROR");
                         }
                     }
                     default -> this.setResult("ERROR");

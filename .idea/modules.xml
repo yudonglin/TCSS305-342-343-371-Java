@@ -8,6 +8,7 @@
       <module fileurl="file://$PROJECT_DIR$/W05-GUI-Programming/W05-GUI-Programming.iml" filepath="$PROJECT_DIR$/W05-GUI-Programming/W05-GUI-Programming.iml" />
       <module fileurl="file://$PROJECT_DIR$/W06-GUI-Design/W06-GU-Design.iml" filepath="$PROJECT_DIR$/W06-GUI-Design/W06-GU-Design.iml" />
       <module fileurl="file://$PROJECT_DIR$/W07-Graphics-Programming/W07-Graphics-Programming.iml" filepath="$PROJECT_DIR$/W07-Graphics-Programming/W07-Graphics-Programming.iml" />
+      <module fileurl="file://$PROJECT_DIR$/W08-AWT-Component-UML/W08-AWT-Component-UML.iml" filepath="$PROJECT_DIR$/W08-AWT-Component-UML/W08-AWT-Component-UML.iml" />
     </modules>
   </component>
 </project>
