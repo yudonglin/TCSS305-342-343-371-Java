@@ -2,3 +2,4 @@ out/
 exportToHTML/
 .vscode/
 workspace.xml
+test/
