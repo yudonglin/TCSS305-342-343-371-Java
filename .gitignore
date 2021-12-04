@@ -3,3 +3,4 @@ exportToHTML/
 .vscode/
 workspace.xml
 test/
+lib/

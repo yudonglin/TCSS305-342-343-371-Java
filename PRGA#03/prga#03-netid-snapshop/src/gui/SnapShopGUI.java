@@ -2,6 +2,8 @@ package gui;
 
 import filters.*;
 import image.PixelImage;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import javax.swing.*;
 import java.awt.*;
@@ -29,10 +31,33 @@ public class SnapShopGUI extends JFrame {
     private final JButton closeImageButton = new JButton("Close Image");
     // a JLabel that will be used to show image
     private final JLabel imageViewer = new JLabel();
+    // the path of icon image
+    private final String iconImagePath = FileSystems.getDefault().getPath("sample_images/huskies_logo.jpg").toAbsolutePath().toString();
     // the image that is current modifying
     private PixelImage imageIsModifying;
     // the extension of the image that is current modifying
     private String extensionOfCurrentImage;
+
+
+    /**
+     * the constructor, call test() when init
+     */
+    public SnapShopGUI() {
+        super();
+        this.test();
+    }
+
+    /**
+     * the JUnit tests
+     */
+    @Test
+    private void test() {
+        Assertions.assertEquals(".jpg", this.getExtension("sample_images/huskies_logo.jpg"));
+        Assertions.assertEquals("", this.getExtension("sample_images/huskies_logo/folder"));
+        // ensure the icon has been set
+        Assertions.assertNotEquals("", this.iconImagePath);
+        Assertions.assertNotNull(this.iconImagePath);
+    }
 
 
     /**
@@ -42,7 +67,7 @@ public class SnapShopGUI extends JFrame {
         //javax.swing.JOptionPane.showMessageDialog(null, "SnapShop placeholder");
 
         this.setTitle("TCSS 305 – Programming Assignment 3 (ydlin)");
-        this.setIconImage(Toolkit.getDefaultToolkit().getImage(FileSystems.getDefault().getPath("sample_images/huskies_logo.jpg").toAbsolutePath().toString()));
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(iconImagePath));
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // add the main panel to the frame
@@ -69,16 +94,16 @@ public class SnapShopGUI extends JFrame {
                 // reset the imageViewer show it will show updated image
                 imageViewer.setIcon(new ImageIcon(imageIsModifying));
             });
+            button_t.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage(FileSystems.getDefault().getPath("icons/paint.png").toAbsolutePath().toString())));
             // put the button into the map
             imageActionButtonsHashMap.put(filter_t.getDescription(), button_t);
             // add the button to the upper panel
             upperPanel.add(button_t);
         }
 
-        // middle panel will be used to store imageViewer (which is used to display image)
-        var middleImagePanel = new JPanel();
-        screen.add(middleImagePanel, BorderLayout.CENTER);
-        middleImagePanel.add(imageViewer);
+        // add imageViewer to the main panel (which is used to display image)
+        imageViewer.setHorizontalAlignment(SwingConstants.CENTER);
+        screen.add(imageViewer, BorderLayout.CENTER);
 
 
         // init lower panel
@@ -101,7 +126,7 @@ public class SnapShopGUI extends JFrame {
                 try {
                     imageIsModifying = PixelImage.load(file);
                     imageViewer.setIcon(new ImageIcon(imageIsModifying));
-                    this.updateExtension(file.getAbsolutePath());
+                    extensionOfCurrentImage = this.getExtension(file.getAbsolutePath());
                     this.setActionButtonsEnabled(true);
                 } catch (IOException ex) {
                     JOptionPane.showMessageDialog(this, "The selected file " + file.getAbsolutePath() + " did not contain an image!", "Error!", JOptionPane.ERROR_MESSAGE);
@@ -159,14 +184,13 @@ public class SnapShopGUI extends JFrame {
     }
 
     /**
-     * store the newly loaded image's extension for saving checking
+     * get a path of a file, return the extension of the file
      *
-     * @param _path the path of newly loaded image
+     * @param _path the path of a file
+     * @return the extension of the file
      */
-    private void updateExtension(String _path) {
+    private String getExtension(String _path) {
         int _index = _path.lastIndexOf('.');
-        if (_index > 0) {
-            extensionOfCurrentImage = _path.substring(_index);
-        }
+        return _index > 0 ? _path.substring(_index) : "";
     }
 }
