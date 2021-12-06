@@ -5,7 +5,9 @@ import image.PixelImage;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.io.IOException;
 import java.nio.file.FileSystems;
@@ -57,6 +59,8 @@ public class SnapShopGUI extends JFrame {
         // ensure the icon has been set
         Assertions.assertNotEquals("", this.iconImagePath);
         Assertions.assertNotNull(this.iconImagePath);
+        // ensure the getIcon method is working
+        Assertions.assertNotNull(this.getIcon("open.gif"));
     }
 
 
@@ -69,6 +73,9 @@ public class SnapShopGUI extends JFrame {
         this.setTitle("TCSS 305 – Programming Assignment 3 (ydlin)");
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(iconImagePath));
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        //set the FileFilter of imageChooser, so it will ask user to select image as default
+        imageChooser.setFileFilter(new FileNameExtensionFilter("Image Files", ImageIO.getReaderFileSuffixes()));
 
         // add the main panel to the frame
         this.add(screen);
@@ -94,7 +101,7 @@ public class SnapShopGUI extends JFrame {
                 // reset the imageViewer show it will show updated image
                 imageViewer.setIcon(new ImageIcon(imageIsModifying));
             });
-            button_t.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage(FileSystems.getDefault().getPath("icons/paint.png").toAbsolutePath().toString())));
+            button_t.setIcon(this.getIcon("paint.png"));
             // put the button into the map
             imageActionButtonsHashMap.put(filter_t.getDescription(), button_t);
             // add the button to the upper panel
@@ -110,13 +117,13 @@ public class SnapShopGUI extends JFrame {
         var lowerPanel = new JPanel();
         screen.add(lowerPanel, BorderLayout.SOUTH);
         // add buttons
-        openButton.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage(FileSystems.getDefault().getPath("icons/open.gif").toAbsolutePath().toString())));
+        openButton.setIcon(this.getIcon("open.gif"));
         lowerPanel.add(openButton);
         saveAsButton.setEnabled(false);
-        saveAsButton.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage(FileSystems.getDefault().getPath("icons/save.gif").toAbsolutePath().toString())));
+        saveAsButton.setIcon(this.getIcon("save.gif"));
         lowerPanel.add(saveAsButton);
         closeImageButton.setEnabled(false);
-        closeImageButton.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage(FileSystems.getDefault().getPath("icons/close.gif").toAbsolutePath().toString())));
+        closeImageButton.setIcon(this.getIcon("close.gif"));
         lowerPanel.add(closeImageButton);
 
         // add ActionListener to open button
@@ -129,7 +136,7 @@ public class SnapShopGUI extends JFrame {
                     extensionOfCurrentImage = this.getExtension(file.getAbsolutePath());
                     this.setActionButtonsEnabled(true);
                 } catch (IOException ex) {
-                    JOptionPane.showMessageDialog(this, "The selected file " + file.getAbsolutePath() + " did not contain an image!", "Error!", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "The selected file\n" + file.getAbsolutePath() + "\ndid not contain an image!", "Error!", JOptionPane.ERROR_MESSAGE);
                 }
             }
             this.pack();
@@ -143,7 +150,7 @@ public class SnapShopGUI extends JFrame {
                 if (file.getPath().endsWith(extensionOfCurrentImage) || JOptionPane.showConfirmDialog(this, "Saving the image with different extension is highly not recommended, are you sure that you want to continue?", "Warning!", JOptionPane.YES_NO_OPTION) == 0) {
                     try {
                         imageIsModifying.save(file);
-                        this.setActionButtonsEnabled(true);
+                        JOptionPane.showMessageDialog(this, "The file has been successfully saved to:\n" + file.getAbsolutePath(), "Success!", JOptionPane.INFORMATION_MESSAGE);
                     } catch (IOException ex) {
                         JOptionPane.showMessageDialog(this, "Fail to save image.", "Error!", JOptionPane.ERROR_MESSAGE);
                     }
@@ -168,6 +175,16 @@ public class SnapShopGUI extends JFrame {
         // start showing content
         this.setVisible(true);
 
+    }
+
+    /**
+     * create a ImageIcon by loading an image file from "icons" folder and use it to create an ImageIcon object
+     *
+     * @param fileName the name of the image file that developer wants to create the ImageIcon from
+     * @return an ImageIcon that is generated using the image
+     */
+    private static ImageIcon getIcon(String fileName) {
+        return new ImageIcon(Toolkit.getDefaultToolkit().getImage(FileSystems.getDefault().getPath("icons/" + fileName).toAbsolutePath().toString()));
     }
 
     /**

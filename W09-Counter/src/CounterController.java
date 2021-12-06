@@ -8,13 +8,10 @@ class CounterController extends JFrame {
     public CounterController() {
         super();
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(300,150);
+        this.setSize(300, 100);
 
-        var _counter1 = new Thread(new Counter());
-        _counter1.start();
-        var _counter2 = new Thread(new Counter2());
-        _counter2.start();
-
+        new Thread(new Counter()).start();
+        new Thread(new Counter2()).start();
 
         var screen = new JPanel();
         this.add(screen);
