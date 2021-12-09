@@ -2,9 +2,11 @@
  * TCSS 305 - Road Rage
  */
 
-package view;
+//package view;
 
-import java.awt.EventQueue;
+import view.RoadRageGUI;
+
+import java.awt.*;
 
 /**
  * Runs the Road Rage program.
@@ -33,7 +35,7 @@ public final class RoadRageMain {
         EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new RoadRageGUI();     
+                new RoadRageGUI();
             }
         });
     }
