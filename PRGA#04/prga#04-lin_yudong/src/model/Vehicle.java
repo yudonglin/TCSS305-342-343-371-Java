@@ -8,7 +8,7 @@ import java.util.Map;
 
 /**
  * An interface for objects that can move in four directions.
- * 
+ *
  * @author Marty Stepp
  * @author Daniel M. Zimmerman
  * @author Alan Fowler (acfowler@u.washington.edu)
@@ -19,18 +19,18 @@ public interface Vehicle {
     /**
      * Returns whether or not this object may move onto the given type of
      * terrain, when the street lights are the given color.
-     * 
+     *
      * @param theTerrain The terrain.
-     * @param theLight The light color.
+     * @param theLight   The light color.
      * @return whether or not this object may move onto the given type of
-     *         terrain when the street lights are the given color.
+     * terrain when the street lights are the given color.
      */
     boolean canPass(Terrain theTerrain, Light theLight);
 
     /**
      * Returns the direction this object would like to move, based on the given
      * map of the neighboring terrain.
-     * 
+     *
      * @param theNeighbors The map of neighboring terrain.
      * @return the direction this object would like to move.
      */
@@ -38,7 +38,7 @@ public interface Vehicle {
 
     /**
      * Called when this Vehicle collides with the specified other Vehicle.
-     * 
+     *
      * @param theOther The other object.
      */
     void collide(Vehicle theOther);
@@ -46,7 +46,7 @@ public interface Vehicle {
     /**
      * Returns the number of updates between this vehicle's death and when it
      * should be revived.
-     * 
+     *
      * @return the number of updates.
      */
     int getDeathTime();
@@ -54,35 +54,56 @@ public interface Vehicle {
     /**
      * Returns the file name of the image for this Vehicle object, such as
      * "car.gif".
-     * 
+     *
      * @return the file name.
      */
     String getImageFileName();
 
     /**
      * Returns this Vehicle object's direction.
-     * 
+     *
      * @return the direction.
      */
     Direction getDirection();
 
     /**
+     * Sets this object's facing direction to the given value.
+     *
+     * @param theDir The new direction.
+     */
+    void setDirection(Direction theDir);
+
+    /**
      * Returns this Vehicle object's x-coordinate.
-     * 
+     *
      * @return the x-coordinate.
      */
     int getX();
 
     /**
+     * Sets this object's x-coordinate to the given value.
+     *
+     * @param theX The new x-coordinate.
+     */
+    void setX(int theX);
+
+    /**
      * Returns this Vehicle object's y-coordinate.
-     * 
+     *
      * @return the y-coordinate.
      */
     int getY();
 
     /**
+     * Sets this object's y-coordinate to the given value.
+     *
+     * @param theY The new y-coordinate.
+     */
+    void setY(int theY);
+
+    /**
      * Returns whether this Vehicle object is alive and should move on the map.
-     * 
+     *
      * @return true if the object is alive, false otherwise.
      */
     boolean isAlive();
@@ -99,25 +120,8 @@ public interface Vehicle {
     void reset();
 
     /**
-     * Sets this object's facing direction to the given value.
-     * 
-     * @param theDir The new direction.
+     * Get the weight of the car, which will be used to decide collision behavior.
      */
-    void setDirection(Direction theDir);
-
-    /**
-     * Sets this object's x-coordinate to the given value.
-     * 
-     * @param theX The new x-coordinate.
-     */
-    void setX(int theX);
-
-    /**
-     * Sets this object's y-coordinate to the given value.
-     * 
-     * @param theY The new y-coordinate.
-     */
-    void setY(int theY);
-
+    int getWeight();
 } // end of interface Vehicle
 

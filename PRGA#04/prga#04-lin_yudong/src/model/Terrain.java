@@ -7,7 +7,7 @@ package model;
 /**
  * An enumeration (and associated functionality) for types of terrain that may
  * appear on the map.
- * 
+ *
  * @author Marty Stepp
  * @author Daniel M. Zimmerman
  * @author Alan Fowler (acfowler@u.washington.edu)
@@ -39,7 +39,7 @@ public enum Terrain {
      * Trail.
      */
     TRAIL('.'),
-    
+
     /**
      * Trail.
      */
@@ -48,13 +48,13 @@ public enum Terrain {
     /**
      * The character corresponding to a particular value of the enumeration.
      */
-    private char myLetter;
+    private final char myLetter;
 
     // Constructor
 
     /**
      * Constructs a new Terrain with the specified letter.
-     * 
+     *
      * @param theLetter The letter.
      */
     Terrain(final char theLetter) {
@@ -65,10 +65,10 @@ public enum Terrain {
 
     /**
      * Returns the Terrain represented by the given letter.
-     * 
+     *
      * @param theLetter The letter.
      * @return the Terrain represented by the given letter, or GRASS if no
-     *         Terrain is represented by the given letter.
+     * Terrain is represented by the given letter.
      */
     public static Terrain valueOf(final char theLetter) {
         Terrain result = GRASS;
@@ -85,7 +85,7 @@ public enum Terrain {
 
     /**
      * Returns a String representation of this Terrain, such as "WALL (X)".
-     * 
+     *
      * @return a String representation of this Terrain.
      */
     @Override

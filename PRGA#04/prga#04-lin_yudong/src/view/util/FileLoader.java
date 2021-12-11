@@ -13,14 +13,14 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import logic.PropertyChangeEnabledRoadRageControls;
 import logic.RoadRage;
-//import model.Atv;
-//import model.Bicycle;
-//import model.Car;
+import model.Atv;
+import model.Bicycle;
+import model.Car;
 import model.Direction;
 import model.Human;
-//import model.Taxi;
+import model.Taxi;
 import model.Terrain;
-//import model.Truck;
+import model.Truck;
 import model.Vehicle;
 
 /**
@@ -104,7 +104,7 @@ public final class FileLoader {
             final char vehicleDirection = theInput.next().charAt(0);
 
             switch (vehicleType) {
-/*              case 'B': // Bicycle
+                case 'B': // Bicycle
                     vehicles.add(new Bicycle(vehicleX, vehicleY,
                                                Direction.valueOf(vehicleDirection)));
                     break;
@@ -113,27 +113,22 @@ public final class FileLoader {
                     vehicles.add(new Atv(vehicleX, vehicleY,
                                            Direction.valueOf(vehicleDirection)));
                     break;
-
                 case 'H': // Human
                     vehicles.add(new Human(vehicleX, vehicleY,
                                              Direction.valueOf(vehicleDirection)));
                     break;
-
                 case 'T': // Truck
                     vehicles.add(new Truck(vehicleX, vehicleY,
                                              Direction.valueOf(vehicleDirection)));
                     break;
-                    
                 case 'X': // Taxi
                     vehicles.add(new Taxi(vehicleX, vehicleY,
                                             Direction.valueOf(vehicleDirection)));
                     break;
-                    
                 case 'C': // Car
                     vehicles.add(new Car(vehicleX, vehicleY,
                                             Direction.valueOf(vehicleDirection)));
                     break;
-*/
                 default:
                     // this should never happen
                     assert false;
