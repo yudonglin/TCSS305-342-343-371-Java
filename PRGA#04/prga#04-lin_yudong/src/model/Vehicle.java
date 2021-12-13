@@ -119,9 +119,5 @@ public interface Vehicle {
      */
     void reset();
 
-    /**
-     * Get the weight of the car, which will be used to decide collision behavior.
-     */
-    int getWeight();
 } // end of interface Vehicle
 

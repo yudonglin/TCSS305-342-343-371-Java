@@ -2,28 +2,50 @@ package model;
 
 import java.util.Map;
 
-public class Car extends AbstractVehicle {
+public final class Car extends AbstractVehicle {
 
+    // the image that will be shown when the vehicle is alive
+    private static final String aliveImageFileName = "car.gif";
+    // the image that will be shown when the vehicle is dead
+    private static final String deadImageFileName = "car_dead.gif";
+    // the number of updates this vehicle's death and when it should revive
+    private static final int deathTime = 15;
+
+    /**
+     * @param x         vehicle's x-coordinate
+     * @param y         vehicle's y-coordinate
+     * @param direction vehicle's direction
+     */
     public Car(int x, int y, Direction direction) {
-        super(x, y, direction, "Car", "car.gif", "car_dead.gif", 15, 4);
+        super(x, y, direction, aliveImageFileName, deadImageFileName, deathTime);
     }
 
-    @Override
-    public boolean canPass(Terrain theTerrain, Light theLight) {
-        return theTerrain == Terrain.STREET || ((theTerrain == Terrain.LIGHT || theTerrain == Terrain.CROSSWALK) && (theLight == Light.GREEN || theLight == Light.YELLOW));
-    }
-
+    /**
+     * Returns the direction this object would like to move, based on the given
+     * map of the neighboring terrain.
+     *
+     * @param theNeighbors The map of neighboring terrain.
+     * @return the direction this object would like to move.
+     */
     @Override
     public Direction chooseDirection(Map<Direction, Terrain> theNeighbors) {
-        if (theNeighbors.get(this.getDirection()) == Terrain.STREET || theNeighbors.get(this.getDirection()) == Terrain.LIGHT || theNeighbors.get(this.getDirection()) == Terrain.CROSSWALK) {
-            return this.getDirection();
-        } else if (theNeighbors.get(this.getDirection().left()) == Terrain.STREET || theNeighbors.get(this.getDirection().left()) == Terrain.LIGHT || theNeighbors.get(this.getDirection().left()) == Terrain.CROSSWALK) {
-            return this.getDirection().left();
-        } else if (theNeighbors.get(this.getDirection().right()) == Terrain.STREET || theNeighbors.get(this.getDirection().right()) == Terrain.LIGHT || theNeighbors.get(this.getDirection().right()) == Terrain.CROSSWALK) {
-            return this.getDirection().right();
-        } else {
-            return this.getDirection().reverse();
-        }
+        return this.chooseOnStreetDirection(theNeighbors);
+    }
+
+    /**
+     * Returns whether this object may move onto the given type of
+     * terrain, when the streetlights are the given color.
+     *
+     * @param theTerrain The terrain.
+     * @param theLight   The light color.
+     * @return whether this object may move onto the given type of
+     * terrain when the streetlights are the given color.
+     */
+    @Override
+    public boolean canPass(Terrain theTerrain, Light theLight) {
+        return theTerrain == Terrain.STREET
+                || (theTerrain == Terrain.LIGHT && theLight != Light.RED)
+                || (theTerrain == Terrain.CROSSWALK && theLight == Light.GREEN);
     }
 }
 
