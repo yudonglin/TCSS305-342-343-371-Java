@@ -16,7 +16,7 @@ public final class Bicycle extends AbstractCar {
      * @param y         vehicle's y-coordinate
      * @param direction vehicle's direction
      */
-    public Bicycle(int x, int y, Direction direction) {
+    public Bicycle(final int x, final int y, final Direction direction) {
         super(x, y, direction, aliveImageFileName, deadImageFileName, deathTime);
     }
 
@@ -27,7 +27,8 @@ public final class Bicycle extends AbstractCar {
      * @param theNeighbors The map of neighboring terrain.
      * @return the direction this object would like to move.
      */
-    public Direction chooseDirection(Map<Direction, Terrain> theNeighbors) {
+    @Override
+    public Direction chooseDirection(final Map<Direction, Terrain> theNeighbors) {
         if (theNeighbors.get(this.getDirection()) == Terrain.TRAIL) {
             return this.getDirection();
         } else if (theNeighbors.get(this.getDirection().left()) == Terrain.TRAIL) {
@@ -49,7 +50,7 @@ public final class Bicycle extends AbstractCar {
      * terrain when the streetlights are the given color.
      */
     @Override
-    public boolean canPass(Terrain theTerrain, Light theLight) {
+    public boolean canPass(final Terrain theTerrain, final Light theLight) {
         return theTerrain == Terrain.STREET
                 || theTerrain == Terrain.TRAIL
                 || ((theTerrain == Terrain.LIGHT || theTerrain == Terrain.CROSSWALK) && theLight == Light.GREEN);

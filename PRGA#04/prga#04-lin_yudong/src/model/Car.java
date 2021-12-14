@@ -12,7 +12,7 @@ public final class Car extends AbstractCar {
      * @param y         vehicle's y-coordinate
      * @param direction vehicle's direction
      */
-    public Car(int x, int y, Direction direction) {
+    public Car(final int x, final int y, final Direction direction) {
         super(x, y, direction, aliveImageFileName, deadImageFileName);
     }
 
@@ -25,7 +25,8 @@ public final class Car extends AbstractCar {
      * @return whether this object may move onto the given type of
      * terrain when the streetlights are the given color.
      */
-    public boolean canPass(Terrain theTerrain, Light theLight) {
+    @Override
+    public boolean canPass(final Terrain theTerrain, final Light theLight) {
         return super.canPass(theTerrain, theLight) || (theTerrain == Terrain.CROSSWALK && theLight == Light.GREEN);
     }
 }

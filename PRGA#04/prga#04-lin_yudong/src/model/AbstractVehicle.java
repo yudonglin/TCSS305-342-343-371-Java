@@ -2,19 +2,30 @@ package model;
 
 public abstract class AbstractVehicle implements Vehicle {
 
+    // the name of the image file that will be shown when the vehicle is alive
     private final String aliveImageFileName;
+    // the name of the image file that will be shown when the vehicle is dead
     private final String deadImageFileName;
+    // the number of updates between this vehicle's death and when it should be revived.
     private final int deathTime;
+    // the initial x position of the vehicle
     private final int init_x;
+    // the initial y position of the vehicle
     private final int init_y;
+    // the initial direction of the vehicle
     private final Direction init_direction;
+    // the current x position of the vehicle
     private int x;
+    // the current y position of the vehicle
     private int y;
+    // the current direction position of the vehicle
     private Direction direction;
+    // the time before the vehicle become alive again
     private int reviveCountDown = 0;
+    // whether the vehicle is truly alive
     private boolean isVehicleAlive = true;
 
-    protected AbstractVehicle(int x, int y, Direction direction, String aliveImageFileName, String deadImageFileName, int deathTime) {
+    protected AbstractVehicle(final int x, final int y, final Direction direction, final String aliveImageFileName, final String deadImageFileName, final int deathTime) {
         this.x = x;
         this.init_x = x;
         this.y = y;
@@ -42,7 +53,7 @@ public abstract class AbstractVehicle implements Vehicle {
      * @param theX The new x-coordinate.
      */
     @Override
-    public final void setX(int theX) {
+    public final void setX(final int theX) {
         this.x = theX;
     }
 
@@ -62,7 +73,7 @@ public abstract class AbstractVehicle implements Vehicle {
      * @param theY The new y-coordinate.
      */
     @Override
-    public final void setY(int theY) {
+    public final void setY(final int theY) {
         this.y = theY;
     }
 
@@ -82,7 +93,7 @@ public abstract class AbstractVehicle implements Vehicle {
      * @param theDir The new direction.
      */
     @Override
-    public final void setDirection(Direction theDir) {
+    public final void setDirection(final Direction theDir) {
         this.direction = theDir;
     }
 
@@ -158,7 +169,7 @@ public abstract class AbstractVehicle implements Vehicle {
      * @param theOther The other object.
      */
     @Override
-    public final void collide(Vehicle theOther) {
+    public final void collide(final Vehicle theOther) {
         if (this.deathTime > theOther.getDeathTime() && this.isAlive() && theOther.isAlive()) {
             this.isVehicleAlive = false;
             this.reviveCountDown = this.deathTime;

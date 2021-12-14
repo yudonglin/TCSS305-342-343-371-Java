@@ -16,13 +16,14 @@ public final class Taxi extends AbstractCar {
      * @param y         vehicle's y-coordinate
      * @param direction vehicle's direction
      */
-    public Taxi(int x, int y, Direction direction) {
+    public Taxi(final int x, final int y, final Direction direction) {
         super(x, y, direction, aliveImageFileName, deadImageFileName);
     }
 
     /**
      * Moves this vehicle back to its original position.
      */
+    @Override
     public void reset() {
         super.reset();
         // and reset count-down
@@ -39,7 +40,7 @@ public final class Taxi extends AbstractCar {
      * terrain when the streetlights are the given color.
      */
     @Override
-    public boolean canPass(Terrain theTerrain, Light theLight) {
+    public boolean canPass(final Terrain theTerrain, final Light theLight) {
         if (theTerrain == Terrain.CROSSWALK) {
             if (theLight != Light.RED || waitCountDown == 0) {
                 waitCountDown = clockCyclesWillWait;

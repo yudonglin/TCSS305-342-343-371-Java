@@ -16,7 +16,7 @@ public final class Atv extends AbstractVehicle {
      * @param y         vehicle's y-coordinate
      * @param direction vehicle's direction
      */
-    public Atv(int x, int y, Direction direction) {
+    public Atv(final int x, final int y, final Direction direction) {
         super(x, y, direction, aliveImageFileName, deadImageFileName, deathTime);
     }
 
@@ -28,9 +28,9 @@ public final class Atv extends AbstractVehicle {
      * @return the direction this object would like to move.
      */
     @Override
-    public Direction chooseDirection(Map<Direction, Terrain> theNeighbors) {
+    public Direction chooseDirection(final Map<Direction, Terrain> theNeighbors) {
         while (true) {
-            var direction = Direction.random();
+            final var direction = Direction.random();
             if (direction != this.getDirection().reverse() && theNeighbors.get(direction) != Terrain.WALL) {
                 return direction;
             }
@@ -47,7 +47,7 @@ public final class Atv extends AbstractVehicle {
      * terrain when the streetlights are the given color.
      */
     @Override
-    public boolean canPass(Terrain theTerrain, Light theLight) {
+    public boolean canPass(final Terrain theTerrain, final Light theLight) {
         return theTerrain != Terrain.WALL;
     }
 

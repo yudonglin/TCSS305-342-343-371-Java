@@ -7,11 +7,11 @@ public abstract class AbstractCar extends AbstractVehicle {
     // the number of updates this vehicle's death and when it should revive
     private static final int deathTime = 15;
 
-    protected AbstractCar(int x, int y, Direction direction, String aliveImageFileName, String deadImageFileName) {
+    protected AbstractCar(final int x, final int y, final Direction direction, final String aliveImageFileName, final String deadImageFileName) {
         super(x, y, direction, aliveImageFileName, deadImageFileName, deathTime);
     }
 
-    protected AbstractCar(int x, int y, Direction direction, String aliveImageFileName, String deadImageFileName, int deathTime) {
+    protected AbstractCar(final int x, final int y, final Direction direction, final String aliveImageFileName, final String deadImageFileName, final int deathTime) {
         super(x, y, direction, aliveImageFileName, deadImageFileName, deathTime);
     }
 
@@ -23,7 +23,7 @@ public abstract class AbstractCar extends AbstractVehicle {
      * @return the direction this object would like to move.
      */
     @Override
-    public Direction chooseDirection(Map<Direction, Terrain> theNeighbors) {
+    public Direction chooseDirection(final Map<Direction, Terrain> theNeighbors) {
         if (
                 theNeighbors.get(this.getDirection()) == Terrain.STREET
                         || theNeighbors.get(this.getDirection()) == Terrain.LIGHT
@@ -57,7 +57,7 @@ public abstract class AbstractCar extends AbstractVehicle {
      * terrain when the streetlights are the given color.
      */
     @Override
-    public boolean canPass(Terrain theTerrain, Light theLight) {
+    public boolean canPass(final Terrain theTerrain, final Light theLight) {
         return theTerrain == Terrain.STREET || (theTerrain == Terrain.LIGHT && theLight != Light.RED);
     }
 }

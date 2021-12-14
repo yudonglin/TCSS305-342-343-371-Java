@@ -20,7 +20,7 @@ public final class Human extends AbstractVehicle {
      * @param y         vehicle's y-coordinate
      * @param direction vehicle's direction
      */
-    public Human(int x, int y, Direction direction) {
+    public Human(final int x, final int y, final Direction direction) {
         super(x, y, direction, aliveImageFileName, deadImageFileName, deathTime);
     }
 
@@ -32,7 +32,7 @@ public final class Human extends AbstractVehicle {
      * @return the direction this object would like to move.
      */
     @Override
-    public Direction chooseDirection(Map<Direction, Terrain> theNeighbors) {
+    public Direction chooseDirection(final Map<Direction, Terrain> theNeighbors) {
         if (theNeighbors.get(this.getDirection()) == Terrain.CROSSWALK) {
             return this.getDirection();
         } else if (theNeighbors.get(this.getDirection().left()) == Terrain.CROSSWALK) {
@@ -45,7 +45,7 @@ public final class Human extends AbstractVehicle {
                         || theNeighbors.get(this.getDirection().right()) == Terrain.GRASS
         ) {
             while (true) {
-                var direction = Direction.random();
+                final var direction = Direction.random();
                 if (direction != this.getDirection().reverse() && theNeighbors.get(direction) == Terrain.GRASS) {
                     return direction;
                 }
@@ -65,7 +65,7 @@ public final class Human extends AbstractVehicle {
      * terrain when the streetlights are the given color.
      */
     @Override
-    public boolean canPass(Terrain theTerrain, Light theLight) {
+    public boolean canPass(final Terrain theTerrain, final Light theLight) {
         return theTerrain == Terrain.GRASS || (theTerrain == Terrain.CROSSWALK && theLight != Light.GREEN);
     }
 }

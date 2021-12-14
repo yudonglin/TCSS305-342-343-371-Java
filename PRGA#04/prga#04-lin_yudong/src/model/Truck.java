@@ -16,7 +16,7 @@ public final class Truck extends AbstractVehicle {
      * @param y         vehicle's y-coordinate
      * @param direction vehicle's direction
      */
-    public Truck(int x, int y, Direction direction) {
+    public Truck(final int x, final int y, final Direction direction) {
         super(x, y, direction, aliveImageFileName, deadImageFileName, deathTime);
     }
 
@@ -28,10 +28,10 @@ public final class Truck extends AbstractVehicle {
      * @return the direction this object would like to move.
      */
     @Override
-    public Direction chooseDirection(Map<Direction, Terrain> theNeighbors) {
+    public Direction chooseDirection(final Map<Direction, Terrain> theNeighbors) {
         if (this.isNextTo(theNeighbors, Terrain.STREET) || this.isNextTo(theNeighbors, Terrain.LIGHT) || this.isNextTo(theNeighbors, Terrain.CROSSWALK)) {
             while (true) {
-                var direction = Direction.random();
+                final var direction = Direction.random();
                 if (direction != this.getDirection().reverse() && (
                         theNeighbors.get(direction) == Terrain.STREET
                                 || theNeighbors.get(direction) == Terrain.LIGHT
@@ -55,7 +55,7 @@ public final class Truck extends AbstractVehicle {
      * terrain when the streetlights are the given color.
      */
     @Override
-    public boolean canPass(Terrain theTerrain, Light theLight) {
+    public boolean canPass(final Terrain theTerrain, final Light theLight) {
         return theTerrain == Terrain.STREET || theTerrain == Terrain.LIGHT || (theTerrain == Terrain.CROSSWALK && theLight != Light.RED);
     }
 
@@ -67,7 +67,7 @@ public final class Truck extends AbstractVehicle {
      * @param theTerrain   The Terrain that developer wants to check
      * @return whether the truck is near a certain Terrain
      */
-    private boolean isNextTo(Map<Direction, Terrain> theNeighbors, Terrain theTerrain) {
+    private boolean isNextTo(final Map<Direction, Terrain> theNeighbors, final Terrain theTerrain) {
         return theNeighbors.get(this.getDirection()) == theTerrain
                 || theNeighbors.get(this.getDirection().left()) == theTerrain
                 || theNeighbors.get(this.getDirection().right()) == theTerrain;
