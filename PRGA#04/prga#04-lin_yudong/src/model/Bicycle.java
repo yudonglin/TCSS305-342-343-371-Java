@@ -2,7 +2,7 @@ package model;
 
 import java.util.Map;
 
-public final class Bicycle extends AbstractVehicle {
+public final class Bicycle extends AbstractCar {
 
     // the image that will be shown when the vehicle is alive
     private static final String aliveImageFileName = "bicycle.gif";
@@ -27,7 +27,6 @@ public final class Bicycle extends AbstractVehicle {
      * @param theNeighbors The map of neighboring terrain.
      * @return the direction this object would like to move.
      */
-    @Override
     public Direction chooseDirection(Map<Direction, Terrain> theNeighbors) {
         if (theNeighbors.get(this.getDirection()) == Terrain.TRAIL) {
             return this.getDirection();
@@ -36,7 +35,7 @@ public final class Bicycle extends AbstractVehicle {
         } else if (theNeighbors.get(this.getDirection().right()) == Terrain.TRAIL) {
             return this.getDirection().right();
         } else {
-            return this.chooseOnStreetDirection(theNeighbors);
+            return super.chooseDirection(theNeighbors);
         }
     }
 

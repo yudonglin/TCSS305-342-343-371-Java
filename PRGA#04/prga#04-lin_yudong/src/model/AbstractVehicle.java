@@ -1,7 +1,5 @@
 package model;
 
-import java.util.Map;
-
 public abstract class AbstractVehicle implements Vehicle {
 
     private final String aliveImageFileName;
@@ -167,34 +165,4 @@ public abstract class AbstractVehicle implements Vehicle {
         }
     }
 
-    /**
-     * Returns the direction of an on street vehicle would like to move, based on the given
-     * map of the neighboring terrain.
-     *
-     * @param theNeighbors The map of neighboring terrain.
-     * @return the direction this object would like to move.
-     */
-    protected Direction chooseOnStreetDirection(Map<Direction, Terrain> theNeighbors) {
-        if (
-                theNeighbors.get(this.getDirection()) == Terrain.STREET
-                        || theNeighbors.get(this.getDirection()) == Terrain.LIGHT
-                        || theNeighbors.get(this.getDirection()) == Terrain.CROSSWALK
-        ) {
-            return this.getDirection();
-        } else if (
-                theNeighbors.get(this.getDirection().left()) == Terrain.STREET
-                        || theNeighbors.get(this.getDirection().left()) == Terrain.LIGHT
-                        || theNeighbors.get(this.getDirection().left()) == Terrain.CROSSWALK
-        ) {
-            return this.getDirection().left();
-        } else if (
-                theNeighbors.get(this.getDirection().right()) == Terrain.STREET
-                        || theNeighbors.get(this.getDirection().right()) == Terrain.LIGHT
-                        || theNeighbors.get(this.getDirection().right()) == Terrain.CROSSWALK
-        ) {
-            return this.getDirection().right();
-        } else {
-            return this.getDirection().reverse();
-        }
-    }
 }
