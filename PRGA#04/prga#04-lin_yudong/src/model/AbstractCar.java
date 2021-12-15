@@ -2,15 +2,39 @@ package model;
 
 import java.util.Map;
 
+
+/**
+ * the parent of Bicycle, Car, and Taxi
+ */
 public abstract class AbstractCar extends AbstractVehicle {
 
     // the number of updates this vehicle's death and when it should revive
     private static final int deathTime = 15;
 
+
+    /**
+     * Constructs a new AbstractCar (with default 15 deathTime)
+     *
+     * @param x                  the x position of the vehicle
+     * @param y                  the y position of the vehicle
+     * @param direction          the direction of the vehicle
+     * @param aliveImageFileName the name of the image file that will be shown when the vehicle is alive
+     * @param deadImageFileName  the name of the image file that will be shown when the vehicle is dead
+     */
     protected AbstractCar(final int x, final int y, final Direction direction, final String aliveImageFileName, final String deadImageFileName) {
         super(x, y, direction, aliveImageFileName, deadImageFileName, deathTime);
     }
 
+    /**
+     * Constructs a new AbstractCar (with custom deathTime)
+     *
+     * @param x                  the x position of the vehicle
+     * @param y                  the y position of the vehicle
+     * @param direction          the direction of the vehicle
+     * @param aliveImageFileName the name of the image file that will be shown when the vehicle is alive
+     * @param deadImageFileName  the name of the image file that will be shown when the vehicle is dead
+     * @param deathTime          the number of updates between this vehicle's death and when it should be revived
+     */
     protected AbstractCar(final int x, final int y, final Direction direction, final String aliveImageFileName, final String deadImageFileName, final int deathTime) {
         super(x, y, direction, aliveImageFileName, deadImageFileName, deathTime);
     }

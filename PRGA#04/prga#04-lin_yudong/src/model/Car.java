@@ -1,5 +1,8 @@
 package model;
 
+/**
+ * A subclass of AbstractCar
+ */
 public final class Car extends AbstractCar {
 
     // the image that will be shown when the vehicle is alive
@@ -8,6 +11,8 @@ public final class Car extends AbstractCar {
     private static final String deadImageFileName = "car_dead.gif";
 
     /**
+     * Constructs a new Car
+     *
      * @param x         vehicle's x-coordinate
      * @param y         vehicle's y-coordinate
      * @param direction vehicle's direction

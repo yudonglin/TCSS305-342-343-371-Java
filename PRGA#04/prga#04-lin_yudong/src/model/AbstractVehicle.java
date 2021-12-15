@@ -1,12 +1,15 @@
 package model;
 
+/**
+ * the parent for all vehicles
+ */
 public abstract class AbstractVehicle implements Vehicle {
 
     // the name of the image file that will be shown when the vehicle is alive
     private final String aliveImageFileName;
     // the name of the image file that will be shown when the vehicle is dead
     private final String deadImageFileName;
-    // the number of updates between this vehicle's death and when it should be revived.
+    // the number of updates between this vehicle's death and when it should be revived
     private final int deathTime;
     // the initial x position of the vehicle
     private final int init_x;
@@ -18,13 +21,24 @@ public abstract class AbstractVehicle implements Vehicle {
     private int x;
     // the current y position of the vehicle
     private int y;
-    // the current direction position of the vehicle
+    // the current direction of the vehicle
     private Direction direction;
     // the time before the vehicle become alive again
     private int reviveCountDown = 0;
     // whether the vehicle is truly alive
     private boolean isVehicleAlive = true;
 
+
+    /**
+     * Constructs a new AbstractVehicle
+     *
+     * @param x                  the x position of the vehicle
+     * @param y                  the y position of the vehicle
+     * @param direction          the direction of the vehicle
+     * @param aliveImageFileName the name of the image file that will be shown when the vehicle is alive
+     * @param deadImageFileName  the name of the image file that will be shown when the vehicle is dead
+     * @param deathTime          the number of updates between this vehicle's death and when it should be revived
+     */
     protected AbstractVehicle(final int x, final int y, final Direction direction, final String aliveImageFileName, final String deadImageFileName, final int deathTime) {
         this.x = x;
         this.init_x = x;
@@ -160,6 +174,7 @@ public abstract class AbstractVehicle implements Vehicle {
      */
     @Override
     public final String toString() {
+        // return this.getClass().getSimpleName().toLowerCase() + ": " + reviveCountDown + " / " + deathTime +" "+this.direction;
         return this.getClass().getSimpleName().toLowerCase() + reviveCountDown;
     }
 

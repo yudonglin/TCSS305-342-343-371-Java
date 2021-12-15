@@ -2,6 +2,9 @@ package model;
 
 import java.util.Map;
 
+/**
+ * A subclass of AbstractCar
+ */
 public final class Bicycle extends AbstractCar {
 
     // the image that will be shown when the vehicle is alive
@@ -12,6 +15,8 @@ public final class Bicycle extends AbstractCar {
     private static final int deathTime = 35;
 
     /**
+     * Constructs a new Bicycle
+     *
      * @param x         vehicle's x-coordinate
      * @param y         vehicle's y-coordinate
      * @param direction vehicle's direction
