@@ -1,10 +1,14 @@
 package model;
 
+import java.util.Random;
+
 /**
  * the parent for all vehicles
  */
 public abstract class AbstractVehicle implements Vehicle {
 
+    // A Random that we use for generating random directions.
+    protected static final Random RANDOM = new Random();
     // the name of the image file that will be shown when the vehicle is alive
     private final String aliveImageFileName;
     // the name of the image file that will be shown when the vehicle is dead

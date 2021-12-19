@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 /**
@@ -34,12 +35,17 @@ public final class Atv extends AbstractVehicle {
      */
     @Override
     public Direction chooseDirection(final Map<Direction, Terrain> theNeighbors) {
-        while (true) {
-            final var direction = Direction.random();
-            if (direction != this.getDirection().reverse() && theNeighbors.get(direction) != Terrain.WALL) {
-                return direction;
-            }
+        final var directions = new ArrayList<Direction>();
+        if (theNeighbors.get(this.getDirection()) != Terrain.WALL) {
+            directions.add(this.getDirection());
         }
+        if (theNeighbors.get(this.getDirection().left()) != Terrain.WALL) {
+            directions.add(this.getDirection().left());
+        }
+        if (theNeighbors.get(this.getDirection().right()) != Terrain.WALL) {
+            directions.add(this.getDirection().right());
+        }
+        return !directions.isEmpty() ? directions.get(RANDOM.nextInt(directions.size())) : this.getDirection().reverse();
     }
 
     /**
@@ -53,6 +59,7 @@ public final class Atv extends AbstractVehicle {
      */
     @Override
     public boolean canPass(final Terrain theTerrain, final Light theLight) {
+        // just in case if atv choose to reverse and there is wall behind it
         return theTerrain != Terrain.WALL;
     }
 

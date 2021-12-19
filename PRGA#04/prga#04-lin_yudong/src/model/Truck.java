@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 /**
@@ -34,20 +35,17 @@ public final class Truck extends AbstractVehicle {
      */
     @Override
     public Direction chooseDirection(final Map<Direction, Terrain> theNeighbors) {
-        if (this.isNextTo(theNeighbors, Terrain.STREET) || this.isNextTo(theNeighbors, Terrain.LIGHT) || this.isNextTo(theNeighbors, Terrain.CROSSWALK)) {
-            while (true) {
-                final var direction = Direction.random();
-                if (direction != this.getDirection().reverse() && (
-                        theNeighbors.get(direction) == Terrain.STREET
-                                || theNeighbors.get(direction) == Terrain.LIGHT
-                                || theNeighbors.get(direction) == Terrain.CROSSWALK
-                )) {
-                    return direction;
-                }
-            }
-        } else {
-            return this.getDirection().reverse();
+        final var directions = new ArrayList<Direction>();
+        if (willFaceTerrain(theNeighbors, this.getDirection(), Terrain.STREET, Terrain.LIGHT, Terrain.CROSSWALK)) {
+            directions.add(this.getDirection());
         }
+        if (willFaceTerrain(theNeighbors, this.getDirection().left(), Terrain.STREET, Terrain.LIGHT, Terrain.CROSSWALK)) {
+            directions.add(this.getDirection().left());
+        }
+        if (willFaceTerrain(theNeighbors, this.getDirection().right(), Terrain.STREET, Terrain.LIGHT, Terrain.CROSSWALK)) {
+            directions.add(this.getDirection().right());
+        }
+        return !directions.isEmpty() ? directions.get(RANDOM.nextInt(directions.size())) : this.getDirection().reverse();
     }
 
     /**
@@ -64,17 +62,20 @@ public final class Truck extends AbstractVehicle {
         return theTerrain == Terrain.STREET || theTerrain == Terrain.LIGHT || (theTerrain == Terrain.CROSSWALK && theLight != Light.RED);
     }
 
-
     /**
-     * check if the truck is near a certain Terrain
+     * check if the truck will face certain Terrain(s) if it chooses to face to a certain direction
      *
      * @param theNeighbors The map of neighboring terrain.
-     * @param theTerrain   The Terrain that developer wants to check
-     * @return whether the truck is near a certain Terrain
+     * @param direction    the direction Truck may choose to go
+     * @param theTerrains  The Terrain(s) that developer wants to check
+     * @return whether the truck will face certain Terrain(s) if it chooses to face to a certain direction
      */
-    private boolean isNextTo(final Map<Direction, Terrain> theNeighbors, final Terrain theTerrain) {
-        return theNeighbors.get(this.getDirection()) == theTerrain
-                || theNeighbors.get(this.getDirection().left()) == theTerrain
-                || theNeighbors.get(this.getDirection().right()) == theTerrain;
+    private boolean willFaceTerrain(final Map<Direction, Terrain> theNeighbors, final Direction direction, final Terrain... theTerrains) {
+        for (Terrain _terrain : theTerrains) {
+            if (theNeighbors.get(direction) == _terrain) {
+                return true;
+            }
+        }
+        return false;
     }
 }

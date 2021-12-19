@@ -4,6 +4,7 @@
 
 package model;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 /**
@@ -44,19 +45,18 @@ public final class Human extends AbstractVehicle {
             return this.getDirection().left();
         } else if (theNeighbors.get(this.getDirection().right()) == Terrain.CROSSWALK) {
             return this.getDirection().right();
-        } else if (
-                theNeighbors.get(this.getDirection()) == Terrain.GRASS
-                        || theNeighbors.get(this.getDirection().left()) == Terrain.GRASS
-                        || theNeighbors.get(this.getDirection().right()) == Terrain.GRASS
-        ) {
-            while (true) {
-                final var direction = Direction.random();
-                if (direction != this.getDirection().reverse() && theNeighbors.get(direction) == Terrain.GRASS) {
-                    return direction;
-                }
-            }
         } else {
-            return this.getDirection().reverse();
+            final var directions = new ArrayList<Direction>();
+            if (theNeighbors.get(this.getDirection()) == Terrain.GRASS) {
+                directions.add(this.getDirection());
+            }
+            if (theNeighbors.get(this.getDirection().left()) == Terrain.GRASS) {
+                directions.add(this.getDirection().left());
+            }
+            if (theNeighbors.get(this.getDirection().right()) == Terrain.GRASS) {
+                directions.add(this.getDirection().right());
+            }
+            return !directions.isEmpty() ? directions.get(RANDOM.nextInt(directions.size())) : this.getDirection().reverse();
         }
     }
 
