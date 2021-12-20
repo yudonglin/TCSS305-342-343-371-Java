@@ -8,10 +8,6 @@ import java.util.Map;
  */
 public final class Atv extends AbstractVehicle {
 
-    // the image that will be shown when the vehicle is alive
-    private static final String aliveImageFileName = "atv.gif";
-    // the image that will be shown when the vehicle is dead
-    private static final String deadImageFileName = "atv_dead.gif";
     // the number of updates this vehicle's death and when it should revive
     private static final int deathTime = 25;
 
@@ -23,7 +19,7 @@ public final class Atv extends AbstractVehicle {
      * @param direction vehicle's direction
      */
     public Atv(final int x, final int y, final Direction direction) {
-        super(x, y, direction, aliveImageFileName, deadImageFileName, deathTime);
+        super(x, y, direction, deathTime);
     }
 
     /**

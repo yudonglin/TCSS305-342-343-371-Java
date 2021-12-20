@@ -9,10 +9,6 @@ public abstract class AbstractVehicle implements Vehicle {
 
     // A Random that we use for generating random directions.
     protected static final Random RANDOM = new Random();
-    // the name of the image file that will be shown when the vehicle is alive
-    private final String aliveImageFileName;
-    // the name of the image file that will be shown when the vehicle is dead
-    private final String deadImageFileName;
     // the number of updates between this vehicle's death and when it should be revived
     private final int deathTime;
     // the initial x position of the vehicle
@@ -36,22 +32,18 @@ public abstract class AbstractVehicle implements Vehicle {
     /**
      * Constructs a new AbstractVehicle
      *
-     * @param x                  the x position of the vehicle
-     * @param y                  the y position of the vehicle
-     * @param direction          the direction of the vehicle
-     * @param aliveImageFileName the name of the image file that will be shown when the vehicle is alive
-     * @param deadImageFileName  the name of the image file that will be shown when the vehicle is dead
-     * @param deathTime          the number of updates between this vehicle's death and when it should be revived
+     * @param x         the x position of the vehicle
+     * @param y         the y position of the vehicle
+     * @param direction the direction of the vehicle
+     * @param deathTime the number of updates between this vehicle's death and when it should be revived
      */
-    protected AbstractVehicle(final int x, final int y, final Direction direction, final String aliveImageFileName, final String deadImageFileName, final int deathTime) {
+    protected AbstractVehicle(final int x, final int y, final Direction direction, final int deathTime) {
         this.x = x;
         this.init_x = x;
         this.y = y;
         this.init_y = y;
         this.direction = direction;
         this.init_direction = direction;
-        this.aliveImageFileName = aliveImageFileName;
-        this.deadImageFileName = deadImageFileName;
         this.deathTime = deathTime;
     }
 
@@ -134,7 +126,7 @@ public abstract class AbstractVehicle implements Vehicle {
      */
     @Override
     public final String getImageFileName() {
-        return this.isAlive() ? aliveImageFileName : deadImageFileName;
+        return this.isAlive() ? this + ".gif" : this + "_dead.gif";
     }
 
     /**
@@ -179,7 +171,7 @@ public abstract class AbstractVehicle implements Vehicle {
     @Override
     public final String toString() {
         // return this.getClass().getSimpleName().toLowerCase() + ": " + reviveCountDown + " / " + deathTime +" "+this.direction;
-        return this.getClass().getSimpleName().toLowerCase() + reviveCountDown;
+        return this.getClass().getSimpleName().toLowerCase();
     }
 
     /**

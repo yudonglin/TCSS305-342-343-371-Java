@@ -5,11 +5,6 @@ package model;
  */
 public final class Car extends AbstractCar {
 
-    // the image that will be shown when the vehicle is alive
-    private static final String aliveImageFileName = "car.gif";
-    // the image that will be shown when the vehicle is dead
-    private static final String deadImageFileName = "car_dead.gif";
-
     /**
      * Constructs a new Car
      *
@@ -18,7 +13,7 @@ public final class Car extends AbstractCar {
      * @param direction vehicle's direction
      */
     public Car(final int x, final int y, final Direction direction) {
-        super(x, y, direction, aliveImageFileName, deadImageFileName);
+        super(x, y, direction);
     }
 
     /**
