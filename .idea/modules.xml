@@ -2,15 +2,15 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/305C-W02-Thu/305C-W02-Thu.iml" filepath="$PROJECT_DIR$/305C-W02-Thu/305C-W02-Thu.iml" />
-      <module fileurl="file://$PROJECT_DIR$/In-Class-Group-Activity-W04/In-Class-Group-Activity-W04.iml" filepath="$PROJECT_DIR$/In-Class-Group-Activity-W04/In-Class-Group-Activity-W04.iml" />
+      <module fileurl="file://$PROJECT_DIR$/305_In-Class-Group-Activity-W04/305_In-Class-Group-Activity-W04.iml" filepath="$PROJECT_DIR$/305_In-Class-Group-Activity-W04/305_In-Class-Group-Activity-W04.iml" />
+      <module fileurl="file://$PROJECT_DIR$/305_W02Thu/305_W02Thu.iml" filepath="$PROJECT_DIR$/305_W02Thu/305_W02Thu.iml" />
+      <module fileurl="file://$PROJECT_DIR$/305_W05-GUI-Programming/305_W05-GUI-Programming.iml" filepath="$PROJECT_DIR$/305_W05-GUI-Programming/305_W05-GUI-Programming.iml" />
+      <module fileurl="file://$PROJECT_DIR$/305_W06-GUI-Design/305_W06-GU-Design.iml" filepath="$PROJECT_DIR$/305_W06-GUI-Design/305_W06-GU-Design.iml" />
+      <module fileurl="file://$PROJECT_DIR$/305_W07-Graphics-Programming/305_W07-Graphics-Programming.iml" filepath="$PROJECT_DIR$/305_W07-Graphics-Programming/305_W07-Graphics-Programming.iml" />
+      <module fileurl="file://$PROJECT_DIR$/305_W08-AWT-Component-UML/305_W08-AWT-Component-UML.iml" filepath="$PROJECT_DIR$/305_W08-AWT-Component-UML/305_W08-AWT-Component-UML.iml" />
+      <module fileurl="file://$PROJECT_DIR$/305_W09-Counter/305_W09-Counter.iml" filepath="$PROJECT_DIR$/305_W09-Counter/305_W09-Counter.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/TCSS305.iml" filepath="$PROJECT_DIR$/.idea/TCSS305.iml" />
-      <module fileurl="file://$PROJECT_DIR$/W05-GUI-Programming/W05-GUI-Programming.iml" filepath="$PROJECT_DIR$/W05-GUI-Programming/W05-GUI-Programming.iml" />
-      <module fileurl="file://$PROJECT_DIR$/W06-GUI-Design/W06-GU-Design.iml" filepath="$PROJECT_DIR$/W06-GUI-Design/W06-GU-Design.iml" />
-      <module fileurl="file://$PROJECT_DIR$/W07-Graphics-Programming/W07-Graphics-Programming.iml" filepath="$PROJECT_DIR$/W07-Graphics-Programming/W07-Graphics-Programming.iml" />
-      <module fileurl="file://$PROJECT_DIR$/W08-AWT-Component-UML/W08-AWT-Component-UML.iml" filepath="$PROJECT_DIR$/W08-AWT-Component-UML/W08-AWT-Component-UML.iml" />
-      <module fileurl="file://$PROJECT_DIR$/W09-Counter/W09-Counter.iml" filepath="$PROJECT_DIR$/W09-Counter/W09-Counter.iml" />
-      <module fileurl="file://$PROJECT_DIR$/PRGA#04/prga#04-lin_yudong/prga#04-lin_yudong.iml" filepath="$PROJECT_DIR$/PRGA#04/prga#04-lin_yudong/prga#04-lin_yudong.iml" />
+      <module fileurl="file://$PROJECT_DIR$/305_PRGA#04/prga#04-lin_yudong/prga#04-lin_yudong.iml" filepath="$PROJECT_DIR$/305_PRGA#04/prga#04-lin_yudong/prga#04-lin_yudong.iml" />
     </modules>
   </component>
 </project>
