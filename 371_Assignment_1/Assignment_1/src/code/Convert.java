@@ -6,6 +6,8 @@
 
 package code;
 
+import java.util.Arrays;
+
 /**
  * A class to provide static methods for converting numbers between bases.
  *
@@ -24,18 +26,40 @@ public final class Convert {
     }
 
     public static void main(String[] args) {
-        var a = new char[]{'0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '1', '0', '1'};
-        var b = new char[]{'0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '1', '1', '0', '1'};
-        System.out.println(Convert.convert2sCompToDecimal(a));
-        System.out.println(Convert.convert2sCompToDecimal(b));
-        System.out.println(Convert.convertDecimalTo2sComp(23));
+        var s1 = Convert.convertStringBinaryToDecimal("11010");
+        var s2 = Convert.convertStringBinaryToDecimal("1100");
+        System.out.println(s1 + s2);
+    }
 
+    /**
+     * Convert a string format binary to decimal(
+     *
+     * @param theStrBinary a string format binary
+     * @return an integer
+     */
+    public static int convertStringBinaryToDecimal(final String theStrBinary) {
+        return convert2sCompToDecimal(convertStringBinaryTo2sComp(theStrBinary));
+    }
+
+    /**
+     * Convert a string format binary to standard char array format binary
+     *
+     * @param theStrBinary a string format binary
+     * @return the decimal equivalent of the 2's complement parameter
+     */
+    public static char[] convertStringBinaryTo2sComp(final String theStrBinary) {
+        var standardBinaryCharArray = new char[16];
+        var flag = theStrBinary.charAt(0);
+        Arrays.fill(standardBinaryCharArray, flag);
+        var strBinaryInCharArray = theStrBinary.toCharArray();
+        System.arraycopy(strBinaryInCharArray, 0, standardBinaryCharArray, standardBinaryCharArray.length - strBinaryInCharArray.length, strBinaryInCharArray.length);
+        return standardBinaryCharArray;
     }
 
     /**
      * Accepts an array of characters representing the bits in a 2's complement number
      * and returns the decimal equivalent.
-     * 
+     * <p>
      * precondition:
      * This method assumes that the maximum length of the parameter array is 16.
      *
@@ -60,7 +84,7 @@ public final class Convert {
     /**
      * Accepts a decimal parameter and returns an array of characters
      * representing the bits in the 16 bit two's complement equivalent.
-     *
+     * <p>
      * precondition:
      * This method assumes that the two's complement equivalent won't require more than 16 bits
      *
