@@ -1,6 +1,6 @@
 # ReadMe!
 
-1. This is **MY** works for CSS350 and CSS371.
+1. This is **MY** works for CSS305, CSS342 and CSS371.
 2. The code is open-sourced as part of the requirements for using Java SE.
 3. The code is distributed under **GNU General Public License v3.0**.
 4. **DO NOT COPY MY WORKS AND SAY THOSE ARE YOUR WORKS!**

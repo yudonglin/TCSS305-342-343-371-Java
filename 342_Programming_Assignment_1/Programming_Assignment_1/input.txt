@@ -1,0 +1,13 @@
+Test1:Input for Encoding
+wwwwaaadexxxxxx
+daaaaaaaaaatttaaaaaaaaSSSSSSSttrrrrrrruuuuuuuuuuuuuuuuuctuuuuuuuuurrrrrrrrrrrrrrrrrrrrrrrrrrrrrreeeessS
+this is a really long sentence
+Test2:Input for Decoding
+3a1b3c3d2a
+6A1F2D7C1A17E
+5#3!1%2&6*
+Test3:Input for Equality
+3a1b 2a1a1b
+3a1b3c 2a1a1b2c1d
+4F 
+2(4[1*4]2) 2(4[1*4]2)
