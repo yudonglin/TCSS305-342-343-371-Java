@@ -1,6 +1,6 @@
 package src;
 
-public class LinkedList implements LinkedListInterface {
+public class LinkedList {
 
     // the head of the list
     private Node head;
@@ -21,24 +21,10 @@ public class LinkedList implements LinkedListInterface {
         return rear;
     }
 
-    @Override
     public int size() {
         return count;
     }
 
-    @Override
-    public void add(char data) {
-        if (this.head != null) {
-            this.rear.next = new Node(data);
-            this.rear = this.rear.next;
-        } else {
-            this.head = new Node(data);
-            this.rear = this.head;
-        }
-        this.count++;
-    }
-
-    @Override
     public String toString() {
         if (count <= 0) {
             return "[]";
@@ -55,6 +41,17 @@ public class LinkedList implements LinkedListInterface {
             name.append(']');
             return name.toString();
         }
+    }
+
+    public void add(String data) {
+        if (this.head != null) {
+            this.rear.next = new Node(data);
+            this.rear = this.rear.next;
+        } else {
+            this.head = new Node(data);
+            this.rear = this.head;
+        }
+        this.count++;
     }
 
     public void clear() {
@@ -79,6 +76,35 @@ public class LinkedList implements LinkedListInterface {
         }
     }
 
+    public void swap(int i, int j) {
+        if (i != j) {
+            var node_j_prev = this.head;
+            for (int k = 0; k < j-2; k++) {
+                node_j_prev = node_j_prev.next;
+            }
+            var node_j = node_j_prev.next;
+            var node_j_next = node_j.next;
+            if (i >= 2) {
+                var node_i_prev = this.head;
+                for (int k = 0; k < i-2; k++) {
+                    node_i_prev = node_i_prev.next;
+                }
+                var node_i = node_i_prev.next;
+                var node_i_next = node_i.next;
+                node_j_prev.next = node_i;
+                node_i_prev.next = node_j;
+                node_i.next = node_j_next;
+                node_j.next = node_i_next;
+            } else {
+                var node_i = head;
+                node_j.next = head.next;
+                head = node_j;
+                node_i.next = node_j_next;
+                node_j_prev.next = node_i;
+            }
+        }
+    }
+
     public void deleteDuplicates() {
         var current = this.head;
         while (current != null) {
@@ -86,7 +112,7 @@ public class LinkedList implements LinkedListInterface {
             while (iterator != null) {
                 if (iterator.next == null) {
                     break;
-                } else if (iterator.next.getData() == current.getData()) {
+                } else if (iterator.next.getData().equals(current.getData())) {
                     iterator.next = iterator.next.next;
                     this.count--;
                 }
