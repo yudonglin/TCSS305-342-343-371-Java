@@ -1,10 +1,10 @@
 package src;
 
-public class LinkedList {
+public class LinkedList<E> {
 
     // the head of the list
-    private Node head;
-    private Node rear;
+    private Node<E> head;
+    private Node<E> rear;
     private int count = 0;
 
     // post: constructs an empty list
@@ -13,11 +13,11 @@ public class LinkedList {
         rear = null;
     }
 
-    public Node getHead() {
+    public Node<E> getHead() {
         return head;
     }
 
-    public Node getRear() {
+    public Node<E> getRear() {
         return rear;
     }
 
@@ -43,12 +43,12 @@ public class LinkedList {
         }
     }
 
-    public void add(String data) {
+    public void add(E data) {
         if (this.head != null) {
-            this.rear.next = new Node(data);
+            this.rear.next = new Node<E>(data);
             this.rear = this.rear.next;
         } else {
-            this.head = new Node(data);
+            this.head = new Node<E>(data);
             this.rear = this.head;
         }
         this.count++;
@@ -60,7 +60,7 @@ public class LinkedList {
         this.count = 0;
     }
 
-    public Node get(int index) {
+    public Node<E> get(int index) {
         if (index < count) {
             if (index == count - 1) {
                 return this.rear;
