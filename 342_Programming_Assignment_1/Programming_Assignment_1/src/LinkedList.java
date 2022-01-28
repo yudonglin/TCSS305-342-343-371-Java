@@ -43,12 +43,32 @@ public class LinkedList<E> {
         }
     }
 
+    public String toStringWithLength() {
+        if (count <= 0) {
+            return "[:0]";
+        } else {
+            var name = new StringBuilder();
+            name.append('[');
+            name.append(this.head.getData());
+            var current = this.head.next;
+            while (current != null) {
+                name.append("->");
+                name.append(current.getData());
+                current = current.next;
+            }
+            name.append(":");
+            name.append(this.size());
+            name.append(']');
+            return name.toString();
+        }
+    }
+
     public void add(E data) {
         if (this.head != null) {
-            this.rear.next = new Node<E>(data);
+            this.rear.next = new Node<>(data);
             this.rear = this.rear.next;
         } else {
-            this.head = new Node<E>(data);
+            this.head = new Node<>(data);
             this.rear = this.head;
         }
         this.count++;
@@ -79,14 +99,14 @@ public class LinkedList<E> {
     public void swap(int i, int j) {
         if (i != j) {
             var node_j_prev = this.head;
-            for (int k = 0; k < j-2; k++) {
+            for (int k = 0; k < j - 2; k++) {
                 node_j_prev = node_j_prev.next;
             }
             var node_j = node_j_prev.next;
             var node_j_next = node_j.next;
             if (i >= 2) {
                 var node_i_prev = this.head;
-                for (int k = 0; k < i-2; k++) {
+                for (int k = 0; k < i - 2; k++) {
                     node_i_prev = node_i_prev.next;
                 }
                 var node_i = node_i_prev.next;
@@ -102,6 +122,23 @@ public class LinkedList<E> {
                 node_i.next = node_j_next;
                 node_j_prev.next = node_i;
             }
+        }
+    }
+
+    public boolean equals(LinkedList<E> other) {
+        if (other.size() == this.size()) {
+            var this_current = this.head;
+            var o_current = other.head;
+            while (this_current != null) {
+                if (!this_current.getData().equals(o_current.getData())) {
+                    return false;
+                }
+                this_current = this_current.next;
+                o_current = o_current.next;
+            }
+            return true;
+        } else {
+            return false;
         }
     }
 
