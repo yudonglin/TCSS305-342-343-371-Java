@@ -1,0 +1,13 @@
+Test 1: Output for Encoding
+[w->w->w->w->a->a->a->d->e->x->x->x->x->x->x:15] [4w3a1d1e6x:10] [1.5]
+[d->a->a->a->a->a->a->a->a->a->a->t->t->t->a->a->a->a->a->a->a->a->S->S->S->S->S->S->S->t->t->r->r->r->r->r->r->r->u->u->u->u->u->u->u->u->u->u->u->u->u->u->u->u->u->c->t->u->u->u->u->u->u->u->u->u->r->r->r->r->r->r->r->r->r->r->r->r->r->r->r->r->r->r->r->r->r->r->r->r->r->r->r->r->r->r->e->e->e->e->s->s->S:103] [1d10a3t8a7S2t7r17u1c1t9u30r4e2s1S:33] [3.121212]
+[t->h->i->s-> ->i->s-> ->a-> ->r->e->a->l->l->y-> ->l->o->n->g-> ->s->e->n->t->e->n->c->e:30] [1t1h1i1s1 1i1s1 1a1 1r1e1a2l1y1 1l1o1n1g1 1s1e1n1t1e1n1c1e:58] [0.51724136]
+Test 2: Output for Decoding
+[3a1b3c3d2a] [a->a->a->b->c->c->c->d->d->d->a->a]
+[6A1F2D7C1A17E] [A->A->A->A->A->A->F->D->D->C->C->C->C->C->C->C->A->7]
+[5#3!1%2&6*] [#->#->#->#->#->!->!->!->%->&->&->*->*->*->*->*->*]
+Test 3: Output for equality
+[3a1b] [2a1a1b] [true]
+[3a1b3c] [2a1a1b2c1d] [false]
+[4F] [] [false]
+[2(4[1*4]2)] [2(4[1*4]2)] [true]
