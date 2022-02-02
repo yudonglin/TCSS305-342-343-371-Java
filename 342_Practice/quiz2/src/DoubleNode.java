@@ -1,5 +1,3 @@
-package src;
-
 public class DoubleNode {
 
     // data stored in this node

@@ -1,5 +1,3 @@
-package src;
-
 public class DoubleLinkedList {
 
     // the head of the list
@@ -49,7 +47,7 @@ public class DoubleLinkedList {
         this.count = 0;
     }
 
-    public void add_rear(String data) {
+    public void addRear(String data) {
         if (this.head != null) {
             this.rear.next = new DoubleNode(data);
             this.rear.next.prev = this.rear;
@@ -61,7 +59,22 @@ public class DoubleLinkedList {
         this.count++;
     }
 
-    public void add_front(String data) {
+    public DoubleNode popRear() {
+        if (this.rear != null) {
+            var _temp = this.getRear();
+            if (this.count > 1) {
+                this.rear = this.rear.prev;
+                this.count--;
+            } else {
+                this.clear();
+            }
+            return _temp;
+        } else {
+            return null;
+        }
+    }
+
+    public void addFront(String data) {
         if (this.head != null) {
             var newNode = new DoubleNode(data);
             newNode.next = this.head;
@@ -69,7 +82,22 @@ public class DoubleLinkedList {
             this.head = newNode;
             this.count++;
         } else {
-            this.add_rear(data);
+            this.addRear(data);
+        }
+    }
+
+    public DoubleNode popHead() {
+        if (this.rear != null) {
+            var _temp = this.getHead();
+            if (this.count > 1) {
+                this.head = this.head.next;
+                this.count--;
+            } else {
+                this.clear();
+            }
+            return _temp;
+        } else {
+            return null;
         }
     }
 
