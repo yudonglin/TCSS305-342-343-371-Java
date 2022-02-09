@@ -1,8 +1,8 @@
 public class Node<E> {
+    // data stored in this node
+    private final E data;
     // link to next node in the list
     public Node<E> next;
-    // data stored in this node
-    private E data;
 
     /**
      * constructs a node with given data and null next
@@ -17,16 +17,7 @@ public class Node<E> {
     /**
      * @return the data that is held by this node
      */
-    public String getData() {
-        return data.toString();
-    }
-
-    /**
-     * set the data that is held by this node
-     *
-     * @param data the new data
-     */
-    public void setData(E data) {
-        this.data = data;
+    public E getData() {
+        return data;
     }
 }
