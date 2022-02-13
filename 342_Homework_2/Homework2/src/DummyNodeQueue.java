@@ -2,27 +2,30 @@ public class DummyNodeQueue<E> {
     private final Node<E> dummy = new Node<>(null);
     private Node<E> head = dummy;
     private Node<E> rear = dummy;
+    private int count = 0;
 
     public void enqueue(E data) {
-        if (dummy.next == null) {
-            head = new Node<>(data);
-            rear = head;
+        if (count == 0) {
+            rear = head = new Node<>(data);
             dummy.next = head;
         } else {
             rear.next = new Node<>(data);
             rear = rear.next;
         }
+        count++;
     }
 
     public E dequeue() {
-        if (head != null) {
+        if (count > 0) {
             var data = head.getData();
-            head = head.next;
-            if (head == null) {
-                head = dummy;
-                rear = dummy;
+            if (count == 1) {
+                head = rear = dummy;
                 dummy.next = null;
+            } else {
+                head = head.next;
+                dummy.next = head;
             }
+            count--;
             return data;
         } else {
             throw new IndexOutOfBoundsException();

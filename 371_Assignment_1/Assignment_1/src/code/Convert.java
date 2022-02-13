@@ -25,12 +25,6 @@ public final class Convert {
         // This design is similar to the Math class in the Java language.
     }
 
-    public static void main(String[] args) {
-        var s1 = Convert.convertStringBinaryToDecimal("11010");
-        var s2 = Convert.convertStringBinaryToDecimal("1100");
-        System.out.println(s1 + s2);
-    }
-
     /**
      * Convert a string format binary to decimal(
      *

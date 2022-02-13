@@ -1,0 +1,74 @@
+; Yudong Lin 2/7/2022
+; This is a program to multiply two numbers.
+; The program first stores a number into address x3100.
+; The program then stores a second number into x3101.
+; In a more complete program the two numbers would be read from the keyboard.
+
+0011 000 000000000     ; Load address x3000 as the start location
+
+; clear R0 and R1
+0101 000 000 1 00000   ; R0 <- 0
+0101 001 001 1 00000   ; R1 <- 0
+
+; store values into R0 and R1
+0001 000 000 1 00101   ; R0 <- #5
+0001 001 001 1 00011   ; R1 <- #3
+
+; store values from R0 and R1 into memory
+0011 000 0 1111 1011   ; x3100 <- R0
+0011 001 0 1111 1011   ; x3101 <- R1
+
+; clear R0 and R1
+0101 000 000 1 00000   ; R0 <- 0
+0101 001 001 1 00000   ; R1 <- 0
+
+; The multiply program starts here.
+; Add code below to complete the assignment requirements.
+
+; clear R3 and R4 and R5 and R6
+0101 011 011 1 00000   ; R3 <- 0
+0101 100 100 1 00000   ; R4 <- 0
+0101 101 101 1 00000   ; R5 <- 0
+0101 110 110 1 00000   ; R6 <- 0
+
+
+; Load register R3 with the number stored in memory location x3100
+0010 011 0 1111 0011   ; R3 <- x3100
+; Load register R4 with the number stored in memory location x3101
+0010 100 0 1111 0011   ; R4 <- x3101
+
+
+; Ensure counter R4 is positive
+0000 011 0 0000 0100   ; branch to the loop if R4 is postive or zero
+; If R4 is negative, the negate both R3 and
+1001 011 011 1 11111    ; R3 <- NOT R3
+0001 011 011 1 00001    ; Add 1 to R3
+1001 100 100 1 11111    ; R4 <- NOT R4
+0001 100 100 1 00001    ; Add 1 to R4
+
+
+; BRANCH past the loop when the loop counter is no longer positive
+0000 010 0 0000 0011
+; Loop
+0001 101 101 0 00 011   ; R5 <- R5+R3 Adds the loop counter to the SUM
+0001 100 100 1 11111    ; Decrement the loop counter
+0000 111 1 1111 1100    ; Branch unconditionaly to the top of the loop
+
+; store values from R5 into memory x3102
+0011 101 0 1110 1010; x3102 <- R5
+
+0001 101 101 1 00000  ; R5 <- R5 + 0
+
+;set the contents of register R6 based on the final result stored in R5
+0000 110 0 0000 0010    ; if R5 < 1, skip ahead to the 'else'
+0001 110 110 1 00001    ; Set R6 = 1
+0000 111 0 0000 0010    ; the 'if' part ran, so skip the else part
+0000 010 0 0000 0001    ; else if R5 = 0, skip the set R6 = -1 part
+0001 110 110 1 11111    ; Set R6 = -1
+
+; clear R3 and R4 and R5
+0101 011 011 1 00000   ; R3 <- 0
+0101 100 100 1 00000   ; R4 <- 0
+0101 101 101 1 00000   ; R5 <- 0
+
+1111 0000 0010 0101    ; halt the program (TRAP with vector x25)
