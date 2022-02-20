@@ -6,11 +6,10 @@ public class PriorityQueue<E> extends ArrayHeap<E> {
     }
 
     public void addElement(E data, int priority) {
-        this.add(new Node<>(data, priority));
+        this.add(new HuffmanTreeNode<>(data, priority));
     }
 
-
-    public Node<E> removeNext() {
+    public HuffmanTreeNode<E> removeNext() {
         return this.removeMin();
     }
 }

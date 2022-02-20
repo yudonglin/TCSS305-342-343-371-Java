@@ -1,10 +1,15 @@
 public class ArrayHeap<E> {
 
-    private final Node<E>[] dataArray;
+    private final HuffmanTreeNode<E>[] dataArray;
     private int count = 1;
 
     public ArrayHeap(int _max_size) {
-        this.dataArray = new Node[_max_size];
+        if (_max_size > 0) {
+            this.dataArray = new HuffmanTreeNode[_max_size];
+        } else {
+            throw new NegativeArraySizeException("You cannot create a ArrayHeap with negative size!");
+        }
+
     }
 
     private void swap(int nodeIndex1, int nodeIndex2) {
@@ -13,7 +18,7 @@ public class ArrayHeap<E> {
         dataArray[nodeIndex2] = _data;
     }
 
-    public void add(Node<E> newNode) {
+    public void add(HuffmanTreeNode<E> newNode) {
         dataArray[count] = newNode;
         int parentIndex;
         var currentNodeIndex = count;
@@ -30,7 +35,7 @@ public class ArrayHeap<E> {
         count++;
     }
 
-    public Node<E> removeMin() {
+    public HuffmanTreeNode<E> removeMin() {
         if (count > 1) {
             var _data = dataArray[1];
             count--;
@@ -39,11 +44,11 @@ public class ArrayHeap<E> {
             int currentIndex = 1;
             int leftChildIndex, rightChildIndex;
             while (currentIndex < count) {
-                leftChildIndex = 2 * currentIndex + 1;
+                leftChildIndex = 2 * currentIndex;
                 rightChildIndex = leftChildIndex + 1;
                 // if left and right child both exist (according to count, and note that right index is left index+1)
                 if (rightChildIndex < count) {
-                    if (this.dataArray[currentIndex].getPriority() > this.dataArray[leftChildIndex].getPriority() || this.dataArray[currentIndex].getPriority() > this.dataArray[rightChildIndex].getPriority()) {
+                    if (this.dataArray[currentIndex].compareTo(this.dataArray[leftChildIndex]) > 0 && this.dataArray[currentIndex].compareTo(this.dataArray[rightChildIndex]) > 0) {
                         if (this.dataArray[leftChildIndex].getPriority() < this.dataArray[rightChildIndex].getPriority()) {
                             this.swap(leftChildIndex, currentIndex);
                             currentIndex = leftChildIndex;
@@ -54,7 +59,7 @@ public class ArrayHeap<E> {
                     } else {
                         break;
                     }
-                } else if (leftChildIndex < count || this.dataArray[currentIndex].getPriority() > this.dataArray[leftChildIndex].getPriority()) {
+                } else if (leftChildIndex < count && this.dataArray[currentIndex].compareTo(this.dataArray[leftChildIndex]) > 0) {
                     this.swap(leftChildIndex, currentIndex);
                     currentIndex = leftChildIndex;
                 } else {
@@ -64,10 +69,11 @@ public class ArrayHeap<E> {
             }
             return _data;
         } else {
-            return null;
+            throw new IndexOutOfBoundsException("The Heap is empty!");
         }
     }
 
+    @Override
     public String toString() {
         var _data = new StringBuilder();
         _data.append("[");
@@ -89,4 +95,7 @@ public class ArrayHeap<E> {
         return count - 1;
     }
 
+    public HuffmanTreeNode<E> peek() {
+        return isEmpty() ? null : dataArray[1];
+    }
 }
