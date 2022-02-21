@@ -2,8 +2,8 @@ class HuffmanTreeNode<E> {
     // data stored in this node
     private final E data;
     private final int priority;
-    public HuffmanTreeNode left;
-    public HuffmanTreeNode right;
+    public HuffmanTreeNode<E> left;
+    public HuffmanTreeNode<E> right;
 
     /**
      * constructs a node with given data and null next
@@ -26,6 +26,10 @@ class HuffmanTreeNode<E> {
 
     public int getPriority() {
         return priority;
+    }
+
+    public boolean isLeaf() {
+        return left == null && right == null;
     }
 
     @Override
