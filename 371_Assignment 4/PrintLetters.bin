@@ -1,0 +1,46 @@
+; Yudong Lin 2/19/2022
+; A machine code program for the LC3 that should print out the letters:  ZYX..DCBAABCD....XYZ.
+; That's a total of 26 * 2 = 52 letters. and use one or two loops.
+; In this case, I used one loop.
+
+0011 0000 01101101     ; Start at x3000
+
+
+1010 0110 0110 1110
+
+; <--- Start of the loop --->
+
+; print the previous character
+0101 000 000 1 00000    ; clear R0
+0010 000 00000 1111     ; LD 2's comp of ASCII A into RO [+OFFSET]
+0001 000 000 0 00 001   ; R0 <- R0 + R1
+1111 0000 0010 0001     ; TRAP x21 OUT
+0001 001 001 0 00 010   ; R1 <- R1 + R2
+
+; add 0 to R2, so we can branch based on the result of R2
+0001 010 010 1 00000    ; R2 <- 0
+0000 001 00000 0101     ; branch to else if R2 is positive [+OFFSET]
+
+; If R2 is negative (which means the loop is print from Z to A):
+0001 001 001 1 00000    ; R1 <- 0
+0000 011 11111 0111     ; loop back until counter R1 < 0 (which means the A just got printed) [-OFFSET]
+0001 010 010 1 00010    ; R2 <- 2, making R2 = 1, so R1-- becomes R1++
+0101 001 001 1 00000    ; clear R1
+0000 111 11111 0101     ; unconditional branch back so the program will start printing from A to Z [-OFFSET]
+
+; If R2 is positive, check if R1 - 25 is greater than 0
+; loop back if R1 - 25 is is greater than 0
+0101 011 011 1 00000    ; clear R3
+0010 011 000000101      ; LD 2's comp of -25 into R3 [+OFFSET]
+0001 011 011 0 00 001   ; R3 <- R1
+0000 110 11111 0000     ; if R3 is not positivie, loop back [-OFFSET]
+
+; <--- End of loop --->
+
+; END
+1111 0000 0010 0101     ; Halt x25
+
+; constant values
+0000 0000 0100 0001     ; 2's comp of ASCII A (65)
+0000 0000 0001 1001     ; 2's comp of 25 (becuase there are 26 letters)
+1111 1111 1110 0111     ; 2's comp of -25
