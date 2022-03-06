@@ -1,0 +1,14 @@
+Collision Count: 6076
+Java's Collision Count: 6388
+Java Hash Map: 40
+Java Hash Set: 15
+self Hash Table: 26
+qiewuro 0
+ssrab 1 brass
+oflg 2 flog golf
+equiye 0
+stair 1 stair
+arts 2 star tsar
+ueenq 1 queen
+aaeilor 0
+plicablexe 1 explicable
