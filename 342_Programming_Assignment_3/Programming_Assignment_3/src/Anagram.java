@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.LinkedList;
 
 public class Anagram {
@@ -6,7 +7,9 @@ public class Anagram {
     private final LinkedList<String> values;
 
     public Anagram(String key) {
-        this.key = key;
+        var keyInCharArray = key.toCharArray();
+        Arrays.sort(keyInCharArray);
+        this.key = Arrays.toString(keyInCharArray);
         this.values = new LinkedList<>();
     }
 

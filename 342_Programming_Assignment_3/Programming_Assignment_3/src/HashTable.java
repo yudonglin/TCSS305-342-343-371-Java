@@ -11,26 +11,26 @@ public class HashTable {
         this.collisions = 0;
     }
 
-    private int hashCode(String key, boolean usingJavaHashing) {
+    public int hashCode(String key) {
+        int prime_index = 0;
+        for (char c : key.toCharArray()) {
+            prime_index += c * c;
+        }
+        return prime_index;
+    }
+
+    private int findValidIndex(String key, int hashCodeOfKey) {
         var keyInCharArray = key.toCharArray();
         Arrays.sort(keyInCharArray);
         var keyInString = Arrays.toString(keyInCharArray);
-        int prime_index = 0;
-        if (!usingJavaHashing) {
-            for (char c : keyInCharArray) {
-                prime_index += c * c;
-            }
-        } else {
-            prime_index = Math.abs(key.hashCode());
-        }
-        prime_index %= SIZE;
-        if (this.table[prime_index] == null || this.table[prime_index].getKey().equals(keyInString)) {
-            return prime_index;
+        hashCodeOfKey = Math.abs(hashCodeOfKey) % SIZE;
+        if (this.table[hashCodeOfKey] == null || this.table[hashCodeOfKey].getKey().equals(keyInString)) {
+            return hashCodeOfKey;
         } else {
             collisions++;
             int index;
             for (int i = 1; i < SIZE - 1; i++) {
-                index = (prime_index + i) % SIZE;
+                index = (hashCodeOfKey + i) % SIZE;
                 if (this.table[index] == null || this.table[index].getKey().equals(keyInString)) {
                     return index;
                 }
@@ -39,30 +39,27 @@ public class HashTable {
         return -1;
     }
 
-    public void add(String key) {
-        var key2 = key.toLowerCase();
-        var index = this.hashCode(key2, false);
+    private void add(String key, int hashCodeOfKey) {
+        var index = this.findValidIndex(key, hashCodeOfKey);
         if (this.table[index] == null) {
-            var keyInCharArray = key2.toCharArray();
-            Arrays.sort(keyInCharArray);
-            this.table[index] = new Anagram(Arrays.toString(keyInCharArray));
+            this.table[index] = new Anagram(key);
         }
-        this.table[index].addValue(key2);
+        this.table[index].addValue(key);
     }
 
-    public void add(String key, boolean usingJavaHashing) {
+    public void add(String key) {
         var key2 = key.toLowerCase();
-        var index = this.hashCode(key2, usingJavaHashing);
-        if (this.table[index] == null) {
-            var keyInCharArray = key2.toCharArray();
-            Arrays.sort(keyInCharArray);
-            this.table[index] = new Anagram(Arrays.toString(keyInCharArray));
-        }
-        this.table[index].addValue(key2);
+        this.add(key2, this.hashCode(key2));
+    }
+
+    public void addUsingJavaHashing(String key) {
+        var key2 = key.toLowerCase();
+        this.add(key2, key2.hashCode());
     }
 
     public int search(String word) {
-        var index = this.hashCode(word.toLowerCase(), false);
+        var key2 = word.toLowerCase();
+        var index = this.findValidIndex(key2, this.hashCode(key2));
         return (index < 0 || this.table[index] == null) ? -1 : index;
     }
 

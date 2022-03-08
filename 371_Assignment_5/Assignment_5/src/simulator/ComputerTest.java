@@ -102,12 +102,17 @@ class ComputerTest {
                 "0101001001100000",   // And R1 with 0
                 "0101010010100000",   // And R2 with 0
                 "0101011011100000",   // And R3 with 0
-                "0010001000000100",   // Load 32767 into R1
-                "0010010000000010",   // Load -1 into R2
+                "0101100100100000",   // And R4 with 0
+                "0101101101100000",   // And R5 with 0
+                "0010001000000110",   // Load 32767 into R1
+                "0010010000000100",   // Load -1 into R2
                 "0001011001000010",   // R3 <- R1 + R2
+                "0010100000000100",   // Load -32768 into R4
+                "0001101100000001",   // R5 <- R1+R4
                 "1111000000100101",   // TRAP - vector x25 - HALT
                 "1111111111111111",   // -1
-                "0111111111111111"    // 32767
+                "0111111111111111",   // 32767
+                "1000000000000000"    // -32768
         };
 
         mComp.loadMachineCode(program);
@@ -119,6 +124,10 @@ class ComputerTest {
         assertEquals(-1, mComp.getRegisters()[2].get2sCompValue());
         // Does R3 now contain the value that it should contain?
         assertEquals(32766, mComp.getRegisters()[3].get2sCompValue());
+        // Does R4 now contain the value that it should contain?
+        assertEquals(-32768, mComp.getRegisters()[4].get2sCompValue());
+        // Does R5 now contain the value that it should contain?
+        assertEquals(-1, mComp.getRegisters()[5].get2sCompValue());
     }
 
     /**
@@ -185,4 +194,48 @@ class ComputerTest {
         // mComp.display();
     }
 
+
+    /**
+     * Test method for {@link Computer#executeTrap()}.
+     */
+    @Test
+    void testExecuteTrap() {
+
+        //mComp.display();
+
+        // NOTE: R5 contains #5 initially when the Computer is instantiated
+        // So, iF we execute R4 <- NOT R5, then R4 should contain 1111 1111 1111 1010
+        // AND CC should be 100
+
+        String[] program = {
+                "0011000000000000",
+                "0101001001100000",
+                "0010001000010100",
+                "0101010001100000",
+                "0001010010111111",
+                "0101000000100000",
+                "0010000000001111",
+                "0001000000000001",
+                "1111000000100001",
+                "0001001001000010",
+                "0001010010100000",
+                "0000001000000101",
+                "0001001001100000",
+                "0000011111110111",
+                "0001010010100010",
+                "0101001001100000",
+                "0000111111110101",
+                "0101011011100000",
+                "0010011000000101",
+                "0001011011000001",
+                "0000110111110000",
+                "1111000000100101",
+                "0000000001000001",
+                "0000000000011001",
+                "1111111111100111",
+        };
+        mComp.loadMachineCode(program);
+        mComp.execute();
+
+    }
 }

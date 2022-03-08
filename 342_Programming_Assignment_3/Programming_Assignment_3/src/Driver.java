@@ -8,6 +8,7 @@ import java.util.*;
 
 public class Driver {
 
+    static final short LOOP_TIMES = 5;
     static long javaHashMapExecutingTime = 0;
     static long javaHashSetExecutingTime = 0;
     static long customHashMapExecutingTime = 0;
@@ -26,47 +27,51 @@ public class Driver {
         inputFile.close();
 
         // test the speed of java hash map
-        var javaHashMap = new HashMap<String, String>(HashTable.SIZE);
+        HashMap<String, String> javaHashMap;
         long startTime = System.currentTimeMillis();
-        for (String word : new ArrayList<>(words)) {
-            var _lower_case_char_array = word.toLowerCase().toCharArray();
-            Arrays.sort(_lower_case_char_array);
-            javaHashMap.put(Arrays.toString(_lower_case_char_array), "");
+        for (int i = 0; i < LOOP_TIMES; i++) {
+            javaHashMap = new HashMap<>(HashTable.SIZE);
+            for (String word : new ArrayList<>(words)) {
+                var _lower_case_char_array = word.toLowerCase().toCharArray();
+                Arrays.sort(_lower_case_char_array);
+                javaHashMap.put(Arrays.toString(_lower_case_char_array), "");
+            }
         }
-        javaHashMapExecutingTime = System.currentTimeMillis() - startTime;
-        javaHashMap = null;
+        javaHashMapExecutingTime = (System.currentTimeMillis() - startTime) / LOOP_TIMES;
 
         // test the speed of java hash set
-        var javaHashSet = new HashSet<String>(HashTable.SIZE);
+        HashSet<String> javaHashSet;
         startTime = System.currentTimeMillis();
-        for (String word : new ArrayList<>(words)) {
-            var _lower_case_char_array = word.toLowerCase().toCharArray();
-            Arrays.sort(_lower_case_char_array);
-            javaHashSet.add(Arrays.toString(_lower_case_char_array));
+        for (int i = 0; i < LOOP_TIMES; i++) {
+            javaHashSet = new HashSet<>(HashTable.SIZE);
+            for (String word : new ArrayList<>(words)) {
+                var _lower_case_char_array = word.toLowerCase().toCharArray();
+                Arrays.sort(_lower_case_char_array);
+                javaHashSet.add(Arrays.toString(_lower_case_char_array));
+            }
         }
-        javaHashSetExecutingTime = System.currentTimeMillis() - startTime;
-        javaHashSet = null;
-
-        // clear the memory
-        System.gc();
+        javaHashSetExecutingTime = (System.currentTimeMillis() - startTime) / LOOP_TIMES;
 
         // init the custom hash table
         var dictTable = new HashTable();
+
+        // add everything again but use the java String's hashing method
         for (String word : new ArrayList<>(words)) {
-            dictTable.add(word, true);
+            dictTable.addUsingJavaHashing(word);
         }
         // print out the collisions for java hashing method
         int javaHashingCollisionCount = dictTable.getCollisions();
 
-        // reset
-        dictTable = new HashTable();
-
         // add everything again but use the custom hashing method
         startTime = System.currentTimeMillis();
-        for (String word : new ArrayList<>(words)) {
-            dictTable.add(word);
+        for (int i = 0; i < LOOP_TIMES; i++) {
+            // reset
+            dictTable = new HashTable();
+            for (String word : new ArrayList<>(words)) {
+                dictTable.add(word);
+            }
         }
-        customHashMapExecutingTime = System.currentTimeMillis() - startTime;
+        customHashMapExecutingTime = (System.currentTimeMillis() - startTime) / LOOP_TIMES;
         int customHashingCollisionCount = dictTable.getCollisions();
 
         // output
@@ -102,5 +107,4 @@ public class Driver {
         // write the result tot the output file
         Files.writeString(Paths.get("output.txt"), outputLines.toString(), StandardCharsets.UTF_8);
     }
-
 }

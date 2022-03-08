@@ -89,7 +89,7 @@ public class Computer {
      *
      * @param destination the place where the result has been stored
      */
-    public void updateCC(BitString destination) {
+    private void updateCC(BitString destination) {
         if (mRegisters[destination.getUnsignedValue()].get2sCompValue() > 0) {
             mCC.setBits(new char[]{'0', '0', '1'});
         } else if (mRegisters[destination.getUnsignedValue()].get2sCompValue() == 0) {
@@ -278,10 +278,13 @@ public class Computer {
      * @return false if this Trap is a HALT command; true otherwise
      */
     public boolean executeTrap() {
-        boolean halt = true;
-
-        // implement the TRAP instruction here
-
+        boolean halt = false;
+        // TRAP instruction
+        if (String.valueOf(mIR.substring(8, 8).getBits()).equals("00100101")) {
+            halt = true;
+        } else {
+            System.out.println((char) mRegisters[0].substring(8, 8).get2sCompValue());
+        }
         return halt;
     }
 
