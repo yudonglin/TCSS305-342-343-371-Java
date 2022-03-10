@@ -204,8 +204,7 @@ public class Computer {
     public void executeLoad() {
         BitString destination = mIR.substring(4, 3);
         int offset = mIR.substring(7, 9).get2sCompValue();
-        int result = mRegisters[destination.getUnsignedValue()].get2sCompValue() + mMemory[mPC.getUnsignedValue() + offset].get2sCompValue();
-        mRegisters[destination.getUnsignedValue()].set2sCompValue(result);
+        mRegisters[destination.getUnsignedValue()].set2sCompValue(mMemory[mPC.getUnsignedValue() + offset].get2sCompValue());
         this.updateCC(destination);
     }
 
@@ -231,7 +230,7 @@ public class Computer {
         mRegisters[destination.getUnsignedValue()] = mRegisters[sr1.getUnsignedValue()].copy();
         var destinationBits = mRegisters[destination.getUnsignedValue()].getBits();
         if (mIR.getBits()[10] == '1') {
-            var imm5Bits = mIR.substring(10, 5).getBits();
+            var imm5Bits = mIR.substring(11, 5).getBits();
             // and the first
             for (int i = 0; i < destinationBits.length - imm5Bits.length; i++) {
                 if (destinationBits[i] != imm5Bits[0]) {
@@ -283,7 +282,7 @@ public class Computer {
         if (String.valueOf(mIR.substring(8, 8).getBits()).equals("00100101")) {
             halt = true;
         } else {
-            System.out.println((char) mRegisters[0].substring(8, 8).get2sCompValue());
+            System.out.println((char) mRegisters[0].get2sCompValue());
         }
         return halt;
     }

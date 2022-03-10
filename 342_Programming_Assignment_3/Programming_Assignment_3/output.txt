@@ -1,8 +1,15 @@
-Collision Count: 6076
+Part 1:
+Collision Count: 5919
 Java's Collision Count: 6388
-Java Hash Map: 18
-Java Hash Set: 8
-self Hash Table: 14
+Time Comparison
+---------------------------
+Data structure  |  Time(ms)
+---------------------------
+Java Hash Map        16
+Java Hash Set        10
+self Hash Table      9
+
+Part 2:
 qiewuro 0
 ssrab 1 brass
 oflg 2 flog golf
