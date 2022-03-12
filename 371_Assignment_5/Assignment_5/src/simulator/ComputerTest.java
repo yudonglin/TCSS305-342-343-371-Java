@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
+ * @author Yudong Lin
  * @author Alan Fowler
  * @version 1.2
  */
@@ -64,6 +65,12 @@ class ComputerTest {
         assertEquals(-15, mComp.getRegisters()[5].get2sCompValue());
         // Does R6 now contain the value that it should contain?
         assertEquals(-1, mComp.getRegisters()[6].get2sCompValue());
+        // Check that CC was set correctly
+        assertEquals("100", String.valueOf(mComp.getCC().getBits()));
+        // check IR
+        assertEquals("1111000000100101", String.valueOf(mComp.getIR().getBits()));
+        // check PC
+        assertEquals(program.length, mComp.getPC().get2sCompValue());
     }
 
     /**
@@ -91,6 +98,10 @@ class ComputerTest {
         assertEquals(9, mComp.getRegisters()[2].get2sCompValue());
         // Does R3 now contain the value that it should contain?
         assertEquals(5, mComp.getRegisters()[3].get2sCompValue());
+        // Check that CC was set correctly
+        assertEquals("001", String.valueOf(mComp.getCC().getBits()));
+        // check IR
+        assertEquals("1111000000100101", String.valueOf(mComp.getIR().getBits()));
     }
 
     /**
@@ -128,6 +139,10 @@ class ComputerTest {
         assertEquals(-32768, mComp.getRegisters()[4].get2sCompValue());
         // Does R5 now contain the value that it should contain?
         assertEquals(-1, mComp.getRegisters()[5].get2sCompValue());
+        // Check that CC was set correctly
+        assertEquals("100", String.valueOf(mComp.getCC().getBits()));
+        // check IR
+        assertEquals("1111000000100101", String.valueOf(mComp.getIR().getBits()));
     }
 
     /**
@@ -148,6 +163,8 @@ class ComputerTest {
                 "0001011011101111",    // R3 <- 15
                 "0101100100100000",    // And R4 with 0
                 "0101100011000010",    // R4 <- R3 AND R2
+                "0101101100000011",    // R5 <- R4 AND R3
+                "0101110110100000",    // AND R6 with 0
                 "1111000000100101"     // TRAP - vector x25 - HALT
         };
 
@@ -162,13 +179,21 @@ class ComputerTest {
         assertEquals(15, mComp.getRegisters()[3].get2sCompValue());
         // Does R4 now contain the value that it should contain?
         assertEquals(7, mComp.getRegisters()[4].get2sCompValue());
+        // Does R5 now contain the value that it should contain?
+        assertEquals(7, mComp.getRegisters()[5].get2sCompValue());
+        // Does R6 now contain the value that it should contain?
+        assertEquals(0, mComp.getRegisters()[6].get2sCompValue());
+        // Check that CC was set correctly
+        assertEquals("010", String.valueOf(mComp.getCC().getBits()));
+        // check IR
+        assertEquals("1111000000100101", String.valueOf(mComp.getIR().getBits()));
     }
 
     /**
      * Test method for {@link Computer#executeNot()}.
      */
     @Test
-    void testExecuteNot5() {
+    void testExecuteNot() {
 
         //mComp.display();
 
@@ -177,35 +202,36 @@ class ComputerTest {
         // AND CC should be 100
 
         String[] program = {
-                "1001100101111111",    // R4 <- NOT R5
+                "0101001001100000",    // And R1 with 0
+                "1001010001111111",    // R2 <- NOT R1
+                "1001011010111111",    // R3 <- NOT R2
+                "0101100100100000",    // And R4 with 0
+                "0001100100110010",    // R4 <- -14
+                "1001101100111111",    // R5 <- NOT R4
                 "1111000000100101"     // TRAP - vector x25 - HALT
         };
 
         mComp.loadMachineCode(program);
         mComp.execute();
 
+        // Does R1 change? It should not.
+        assertEquals(0, mComp.getRegisters()[1].get2sCompValue());
+        // Does R2 now contain the value that it should contain?
+        assertEquals(-1, mComp.getRegisters()[2].get2sCompValue());
+        // Does R3 now contain the value that it should contain?
+        assertEquals(0, mComp.getRegisters()[3].get2sCompValue());
         // Does R4 now contain the value that it should contain?
-        assertEquals(-6, mComp.getRegisters()[4].get2sCompValue());
-
-        // Did R5 change? It should not. Maybe test that too?
-
-        // Also, write a test to check that CC was set correctly
-
-        // mComp.display();
+        assertEquals(-14, mComp.getRegisters()[4].get2sCompValue());
+        // Does R5 now contain the value that it should contain?
+        assertEquals(13, mComp.getRegisters()[5].get2sCompValue());
+        // Check that CC was set correctly
+        assertEquals("001", String.valueOf(mComp.getCC().getBits()));
+        // check IR
+        assertEquals("1111000000100101", String.valueOf(mComp.getIR().getBits()));
     }
-
-
-    /**
-     * Test method for {@link Computer#executeTrap()}.
-     */
+    /*
     @Test
     void testExecuteTrap() {
-
-        //mComp.display();
-
-        // NOTE: R5 contains #5 initially when the Computer is instantiated
-        // So, iF we execute R4 <- NOT R5, then R4 should contain 1111 1111 1111 1010
-        // AND CC should be 100
 
         String[] program = {
                 "0101001001100000",  // clear R1
@@ -235,6 +261,6 @@ class ComputerTest {
         };
         mComp.loadMachineCode(program);
         mComp.execute();
-
     }
+     */
 }

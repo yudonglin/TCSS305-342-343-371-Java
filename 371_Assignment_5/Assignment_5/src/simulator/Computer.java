@@ -4,10 +4,10 @@ import java.util.Arrays;
 
 /**
  * The Computer class is composed of registers, memory, PC, IR, and CC.
- * The Computer can execute a program based on the the instructions in memory.
+ * The Computer can execute a program based on the instructions in memory.
  *
- * @author mmuppa
- * @author acfowler
+ * @author Yudong Lin
+ * @author Alan Fowler
  * @version 1.2
  */
 public class Computer {
@@ -91,11 +91,11 @@ public class Computer {
      */
     private void updateCC(BitString destination) {
         if (mRegisters[destination.getUnsignedValue()].get2sCompValue() > 0) {
-            mCC.setBits(new char[]{'0', '0', '1'});
+            mCC.setBits("001".toCharArray());
         } else if (mRegisters[destination.getUnsignedValue()].get2sCompValue() == 0) {
-            mCC.setBits(new char[]{'0', '1', '0'});
+            mCC.setBits("010".toCharArray());
         } else {
-            mCC.setBits(new char[]{'1', '0', '0'});
+            mCC.setBits("100".toCharArray());
         }
     }
 
@@ -157,12 +157,11 @@ public class Computer {
     public void executeBranch() {
         var branchConditionBits = mIR.substring(4, 3).getBits();
         var currentConditionBits = this.getCC().getBits();
-        //System.out.println(mMemory[mPC.getUnsignedValue()-1].getBits());
         for (int i = 0; i < 3; i++) {
+            // if hit a true
             if (branchConditionBits[i] == currentConditionBits[i] && branchConditionBits[i] == '1') {
-                int offset = mIR.substring(7, 9).get2sCompValue();
-                //System.out.println(offset);
-                mPC.set2sCompValue(mPC.get2sCompValue() + offset);
+                mPC.set2sCompValue(mPC.get2sCompValue() + mIR.substring(7, 9).get2sCompValue());
+                // break out, no need to check the rest
                 break;
             }
         }
@@ -184,14 +183,20 @@ public class Computer {
      * negative, zero, or positive.
      */
     public void executeAdd() {
-        BitString destination = mIR.substring(4, 3);
         BitString sr1 = mIR.substring(7, 3);
+        int newValue;
+        // adding a new value
         if (mIR.getBits()[10] == '1') {
-            mRegisters[destination.getUnsignedValue()].set2sCompValue(mRegisters[sr1.getUnsignedValue()].get2sCompValue() + mIR.substring(11, 5).get2sCompValue());
-        } else {
-            BitString sr2 = mIR.substring(13, 3);
-            mRegisters[destination.getUnsignedValue()].set2sCompValue(mRegisters[sr1.getUnsignedValue()].get2sCompValue() + mRegisters[sr2.getUnsignedValue()].get2sCompValue());
+            newValue = mRegisters[sr1.getUnsignedValue()].get2sCompValue() + mIR.substring(11, 5).get2sCompValue();
         }
+        // adding value from a second source
+        else {
+            BitString sr2 = mIR.substring(13, 3);
+            newValue = mRegisters[sr1.getUnsignedValue()].get2sCompValue() + mRegisters[sr2.getUnsignedValue()].get2sCompValue();
+        }
+        BitString destination = mIR.substring(4, 3);
+        // set the value
+        mRegisters[destination.getUnsignedValue()].set2sCompValue(newValue);
         this.updateCC(destination);
     }
 
@@ -204,7 +209,8 @@ public class Computer {
     public void executeLoad() {
         BitString destination = mIR.substring(4, 3);
         int offset = mIR.substring(7, 9).get2sCompValue();
-        mRegisters[destination.getUnsignedValue()].set2sCompValue(mMemory[mPC.getUnsignedValue() + offset].get2sCompValue());
+        int valueOnThatSpot = mMemory[mPC.getUnsignedValue() + offset].get2sCompValue();
+        mRegisters[destination.getUnsignedValue()].set2sCompValue(valueOnThatSpot);
         this.updateCC(destination);
     }
 
@@ -229,6 +235,7 @@ public class Computer {
         BitString sr1 = mIR.substring(7, 3);
         mRegisters[destination.getUnsignedValue()] = mRegisters[sr1.getUnsignedValue()].copy();
         var destinationBits = mRegisters[destination.getUnsignedValue()].getBits();
+        // and with an imm5 value?
         if (mIR.getBits()[10] == '1') {
             var imm5Bits = mIR.substring(11, 5).getBits();
             // and the first
@@ -242,7 +249,9 @@ public class Computer {
                     destinationBits[destinationBits.length - i] = '0';
                 }
             }
-        } else {
+        }
+        // add with a value on a second source?
+        else {
             BitString sr2 = mIR.substring(13, 3);
             var sr2Bits = mRegisters[sr2.getUnsignedValue()].getBits();
             for (int i = 0; i < sr2Bits.length; i++) {
@@ -281,14 +290,12 @@ public class Computer {
         // TRAP instruction
         if (String.valueOf(mIR.substring(8, 8).getBits()).equals("00100101")) {
             halt = true;
-        } else {
-            System.out.println((char) mRegisters[0].get2sCompValue());
+        } else if (String.valueOf(mIR.substring(8, 8).getBits()).equals("00100001")) {
+            System.out.print((char) mRegisters[0].get2sCompValue());
         }
         return halt;
     }
 
-
-	
 	/*
 		Extra Credit: Implement LEA, LDI, STI, LDR, STR
 		in addition to the above instructions for extra credit.

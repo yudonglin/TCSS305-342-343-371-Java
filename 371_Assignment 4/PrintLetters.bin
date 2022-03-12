@@ -3,10 +3,14 @@
 ; That's a total of 26 * 2 = 52 letters. and use one or two loops.
 ; In this case, I used one loop.
 
-0011 0000 01101101     ; Start at x3000
+0011 0000 0000 0000     ; Start at x3000
 
-
-1010 0110 0110 1110
+; the counter for ASCII value
+0101 001 001 1 00000    ; clear R1
+0010 001 000010100      ; LD 2's comp of 25 into R1 [+OFFSET]
+; R2 will be either +1 or -1
+0101 010 001 1 00000    ; clear R2
+0001 010 010 1 11111    ; R2 <- -1
 
 ; <--- Start of the loop --->
 
