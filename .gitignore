@@ -4,3 +4,4 @@ exportToHTML/
 workspace.xml
 test/
 lib/
+.idea/
