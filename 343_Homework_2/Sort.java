@@ -79,7 +79,7 @@ public class Sort {
             // divide the array into k subarrays and do a k-way merge
 
             // building the heap
-            final Comparable[] subarray = new MergesortHeapNode[k];
+            final MergesortHeapNode[] subarray = new MergesortHeapNode[k];
             for (int i = 0; i < subarray.length; i++) {
                 subarray[i] = new MergesortHeapNode(data[low + i * (high - low + 1) / k], i);
             }
@@ -101,8 +101,8 @@ public class Sort {
                 } catch (EmptyHeapException e) {
                     System.out.println("Tried to delete from an empty heap.");
                 }
-                assert (min != null);
-                // append the element and increment the counter
+                assert (min != null); // running code in try is not efficient
+                // append the element into the cache and increment the counter
                 cache[count++] = min.getKey();
                 // calculate the abs_location in the array
                 final int abs_location = low + min.getWhichSubarray() * (high - low + 1) / k + (++list_index[min.getWhichSubarray()]);
@@ -215,6 +215,44 @@ public class Sort {
 
     }
 
+    private static long testTiming(final int n, final int k) {
+        // timer variables
+        final long startTime;
+
+        // generate an unsorted array for testing
+        final int[] data = getRandomArrayOfIntegers(n);
+
+        // ensure that the array is not sorted
+        final int[] comparison = data.clone();
+        Arrays.sort(comparison);
+        assert !Arrays.equals(data, comparison);
+
+        // start the timer
+        final Date startDate = new Date();
+        startTime = startDate.getTime();
+
+        kwayMergesort(data, k);
+
+        // stop the timer
+        final Date finishDate = new Date();
+
+        // ensure that the array is sorted
+        assert Arrays.equals(data, comparison);
+
+        // return the total time
+        return finishDate.getTime() - startTime;
+    }
+
+    private static void getStatistic() {
+        final int[] all_ks = {2, 3, 5, 10, 20, 50};
+        final int[] all_sizes = {200000, 400000, 800000, 1600000, 3200000};
+        for (final int k : all_ks) {
+            System.out.printf("current k: %d\n", k);
+            for (final int dataSetSize : all_sizes) {
+                System.out.printf("Average time for size %d: %dms\n", dataSetSize, (testTiming(dataSetSize, k) + testTiming(dataSetSize, k) + testTiming(dataSetSize, k)) / 3);
+            }
+        }
+    }
 
     /**
      * code to test the sorting algorithms
@@ -222,5 +260,6 @@ public class Sort {
     public static void main(String[] argv) {
         testCorrectness();
         testTiming();
+        getStatistic();
     }
 }
