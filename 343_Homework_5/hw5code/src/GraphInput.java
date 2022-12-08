@@ -25,9 +25,9 @@ public class GraphInput {
      * @param newgraph a simple graph
      * @returns a hash table of (String, Vertex) pairs
      */
-    public static Hashtable LoadSimpleGraph(SimpleGraph newgraph) {
+    public static Hashtable LoadSimpleGraph(final SimpleGraph newgraph) {
         System.out.print("Please enter the full path and file name for the input data: ");
-        String userinput;
+        final String userinput;
         userinput = KeyboardReader.readString();
         return LoadSimpleGraph(newgraph, userinput);
     }
@@ -45,23 +45,24 @@ public class GraphInput {
      * @param pathandfilename the name of the file, including full path.
      * @returns a hash table of (String, Vertex) pairs
      */
-    public static Hashtable LoadSimpleGraph(SimpleGraph newgraph, String pathandfilename) {
-        BufferedReader inbuf = InputLib.fopen(pathandfilename);
+    public static Hashtable LoadSimpleGraph(final SimpleGraph newgraph, final String pathandfilename) {
+        final BufferedReader inbuf = InputLib.fopen(pathandfilename);
         System.out.println("Opened " + pathandfilename + " for input.");
         String line = InputLib.getLine(inbuf); // get first line
         StringTokenizer sTok;
         int n, linenum = 0;
-        Hashtable table = new Hashtable();
-        SimpleGraph sg = newgraph;
+        final Hashtable table = new Hashtable();
+        final SimpleGraph sg = newgraph;
 
         while (line != null) {
             linenum++;
             sTok = new StringTokenizer(line);
             n = sTok.countTokens();
             if (n == 3) {
-                Double edgedata;
+                final Double edgedata;
                 Vertex v1, v2;
-                String v1name, v2name;
+                final String v1name;
+                final String v2name;
 
                 v1name = sTok.nextToken();
                 v2name = sTok.nextToken();
@@ -96,8 +97,8 @@ public class GraphInput {
     /**
      * Code to test the methods of this class.
      */
-    public static void main(String[] args) {
-        SimpleGraph G;
+    public static void main(final String[] args) {
+        final SimpleGraph G;
         G = new SimpleGraph();
         LoadSimpleGraph(G, args[0]);
     }

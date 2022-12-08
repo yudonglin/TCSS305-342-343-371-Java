@@ -2,7 +2,8 @@
  * A binary minheap of edge objects.
  *
  * @author Donald Chinn
- * @version September 19, 2003
+ * @author yudong lin
+ * @version 1.1 - December 5, 2022
  */
 public class BinaryHeap {
 
@@ -14,59 +15,36 @@ public class BinaryHeap {
 
     // Constructor
     public BinaryHeap() {
-        int initialCapacity = 10;
+        final int initialCapacity = 10;
 
         this.elements = new Edge[initialCapacity + 1];
         this.elements[0] = null;
         this.size = 0;
     }
 
-
     /**
-     * Constructor
+     * compare two edges
      *
-     * @param capacity number of active elements the heap can contain
+     * @param e1 the first edge
+     * @param e2 the second edge
+     * @return a number indicate whether fix edge costs more than second edge
      */
-    public BinaryHeap(int capacity) {
-        this.elements = new Edge[capacity + 1];
-        this.elements[0] = null;
-        this.size = 0;
-    }
-
-
-    /**
-     * Given an array of Edges, return a binary heap of those
-     * elements.
-     *
-     * @param data an array of data (no particular order)
-     * @return a binary heap of the given data
-     */
-    public static BinaryHeap buildHeap(Edge[] data) {
-        BinaryHeap newHeap = new BinaryHeap(data.length);
-        System.arraycopy(data, 0, newHeap.elements, 1, data.length);
-        newHeap.size = data.length;
-        for (int i = newHeap.size / 2; i > 0; i--) {
-            newHeap.percolateDown(i);
-        }
-        return newHeap;
-    }
-
-    private static int compare(Edge e1, Edge e2) {
-        if ((int) e1.getData() < (int) e2.getData()) {
+    private static int compare(final Edge e1, final Edge e2) {
+        if ((double) e1.getData() < (double) e2.getData()) {
             return -1;
-        } else if ((int) e1.getData() > (int) e2.getData()) {
+        } else if ((double) e1.getData() > (double) e2.getData()) {
             return 1;
         }
         return 0;
     }
 
     /**
-     * Determine whether the heap is empty.
+     * Determine whether the heap is not empty.
      *
-     * @return true if the heap is empty; false otherwise
+     * @return true if the heap is not empty; false otherwise
      */
-    public boolean isEmpty() {
-        return (size < 1);
+    public boolean isNotEmpty() {
+        return (size >= 1);
     }
 
     /**
@@ -74,12 +52,12 @@ public class BinaryHeap {
      *
      * @param key a key
      */
-    public void insert(Edge key) {
+    public void insert(final Edge key) {
 
         if (size >= elements.length - 1) {
             // not enough room -- create a new array and copy
             // the elements of the old array to the new
-            Edge[] newElements = new Edge[2 * size];
+            final Edge[] newElements = new Edge[2 * size];
             System.arraycopy(elements, 0, newElements, 0, elements.length);
             elements = newElements;
         }
@@ -95,8 +73,8 @@ public class BinaryHeap {
      * @return the object with minimum key of the heap
      */
     public Edge deleteMin() {
-        if (!isEmpty()) {
-            Edge returnValue = elements[1];
+        if (isNotEmpty()) {
+            final Edge returnValue = elements[1];
             elements[1] = elements[size];
             size--;
             percolateDown(1);
@@ -112,7 +90,7 @@ public class BinaryHeap {
      * @param index an index into the heap array
      */
     private void percolateUp(int index) {
-        Edge temp = elements[index];  // keep track of the item to be moved
+        final Edge temp = elements[index];  // keep track of the item to be moved
         while (index > 1) {
             if (compare(temp, elements[index / 2]) < 0) {
                 elements[index] = elements[index / 2];
@@ -131,7 +109,7 @@ public class BinaryHeap {
      */
     private void percolateDown(int index) {
         int child;
-        Edge temp = elements[index];
+        final Edge temp = elements[index];
 
         while (2 * index <= size) {
             child = 2 * index;

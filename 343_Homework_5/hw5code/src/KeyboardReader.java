@@ -85,17 +85,17 @@ public class KeyboardReader {
         String s = "";
         try {
             s = reader.readLine();
-        } catch (IOException e) {
+        } catch (final IOException e) {
             if (ERROR_MESSAGES)
                 System.out.println("IO error: " + e);
             return ERROR_INT;
         }
         if (s == null)
             return EOI_INT;
-        int n;
+        final int n;
         try {
             n = Integer.parseInt(s.trim());
-        } catch (Exception e) {
+        } catch (final Exception e) {
             if (ERROR_MESSAGES)
                 System.out.println(
                         "Bad input: enter digits without decimal point");
@@ -116,7 +116,7 @@ public class KeyboardReader {
         String s = "";
         try {
             s = reader.readLine();
-        } catch (IOException e) {
+        } catch (final IOException e) {
             if (ERROR_MESSAGES)
                 System.out.println("IO error: " + e);
             return ERROR_DOUBLE;
@@ -124,10 +124,10 @@ public class KeyboardReader {
         if (s == null) {
             return EOI_DOUBLE;
         }
-        double x;
+        final double x;
         try {
             x = Double.parseDouble(s.trim());
-        } catch (Exception e) {
+        } catch (final Exception e) {
             if (ERROR_MESSAGES)
                 System.out.println("Bad input: enter digits only");
             return ERROR_DOUBLE;
@@ -147,7 +147,7 @@ public class KeyboardReader {
         String s = "";
         try {
             s = reader.readLine();
-        } catch (IOException e) {
+        } catch (final IOException e) {
             if (ERROR_MESSAGES)
                 System.out.println("IO error: " + e);
             return ERROR_STRING;
@@ -163,13 +163,13 @@ public class KeyboardReader {
      * This method would not normally be invoked by users of the
      * KeyboardReader class.
      */
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
 
         ERROR_MESSAGES = false;
         // int input
         while (true) {
             System.out.println("Enter an int");
-            int i = KeyboardReader.readInt();
+            final int i = KeyboardReader.readInt();
             if (i == KeyboardReader.EOI_INT) {
                 System.out.println("EOI"); // swallowed!!?
                 System.out.println("EOI");
@@ -184,7 +184,7 @@ public class KeyboardReader {
         // double input
         while (true) {
             System.out.println("Enter a double");
-            double d = KeyboardReader.readDouble();
+            final double d = KeyboardReader.readDouble();
             if (d == KeyboardReader.EOI_DOUBLE) {
                 System.out.println("EOI"); // swallowed!!?
                 System.out.println("EOI");
@@ -199,7 +199,7 @@ public class KeyboardReader {
         // String input
         while (true) {
             System.out.println("Enter a String");
-            String s = KeyboardReader.readString();
+            final String s = KeyboardReader.readString();
             if (s == KeyboardReader.EOI_STRING) {
                 System.out.println("EOI");
                 System.out.println("EOI"); // swallowed!!?

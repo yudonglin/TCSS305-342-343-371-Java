@@ -27,16 +27,22 @@ public class SimpleGraph {
     /**
      * Code to test the correctness of the SimpleGraph methods.
      */
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         // create graph a----b-----c,
         //                X     Y
         // X and Y are objects stored at edges. .
 
         // All Objects stored will be strings.
 
-        SimpleGraph G = new SimpleGraph();
-        Vertex v, w, a, b, c;
-        Edge e, x, y;
+        final SimpleGraph G = new SimpleGraph();
+        Vertex v;
+        final Vertex w;
+        final Vertex a;
+        final Vertex b;
+        final Vertex c;
+        Edge e;
+        final Edge x;
+        final Edge y;
         v = G.insertVertex(null, "a");
         a = v;
         w = G.insertVertex(null, "b");
@@ -60,7 +66,7 @@ public class SimpleGraph {
         for (i = G.vertices(); i.hasNext(); ) {
             v = (Vertex) i.next();
             System.out.println("Vertex " + v.getName());
-            Iterator j;
+            final Iterator j;
 
             for (j = G.incidentEdges(v); j.hasNext(); ) {
                 e = (Edge) j.next();
@@ -109,7 +115,7 @@ public class SimpleGraph {
      * @param v a vertex
      * @returns an iterator to the edge list of that vertex
      */
-    public Iterator incidentEdges(Vertex v) {
+    public Iterator incidentEdges(final Vertex v) {
         return v.incidentEdgeList.iterator();
     }
 
@@ -132,8 +138,8 @@ public class SimpleGraph {
      * @param name a name to be associated with the new vertex
      * @returns the new vertex
      */
-    public Vertex insertVertex(Object data, Object name) {
-        Vertex v;
+    public Vertex insertVertex(final Object data, final Object name) {
+        final Vertex v;
         v = new Vertex(data, name);
         vertexList.addLast(v);
         return v;
@@ -148,8 +154,8 @@ public class SimpleGraph {
      * @param name name to be associated with the new edge
      * @returns the new edge
      */
-    public Edge insertEdge(Vertex v, Vertex w, Object data, Object name) {
-        Edge e;
+    public Edge insertEdge(final Vertex v, final Vertex w, final Object data, final Object name) {
+        final Edge e;
         e = new Edge(v, w, data, name);
         edgeList.addLast(e);
         v.incidentEdgeList.addLast(e);
@@ -166,8 +172,8 @@ public class SimpleGraph {
      * @param e an edge
      * @returns the other endpoint of the edge (or null, if v is not an endpoint of e)
      */
-    public Vertex opposite(Vertex v, Edge e) {
-        Vertex w;
+    public Vertex opposite(final Vertex v, final Edge e) {
+        final Vertex w;
 
         if (e.getFirstEndpoint() == v) {
             w = e.getSecondEndpoint();

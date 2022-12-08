@@ -37,7 +37,7 @@ public class Edge {
      * @param data data to be associated with this edge
      * @param name a name to be associated with this edge
      */
-    public Edge(Vertex v, Vertex w, Object data, Object name) {
+    public Edge(final Vertex v, final Vertex w, final Object data, final Object name) {
         this.data = data;
         this.name = name;
         this.v1 = v;
@@ -76,7 +76,7 @@ public class Edge {
      *
      * @param data the data of this edge
      */
-    public void setData(Object data) {
+    public void setData(final Object data) {
         this.data = data;
     }
 

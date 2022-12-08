@@ -9,18 +9,18 @@ class InputLib {
     /**
      * fopen opens infile or System.in if infile == "-".
      */
-    public static BufferedReader fopen(String infile) {
-        BufferedReader inbuf;
+    public static BufferedReader fopen(final String infile) {
+        final BufferedReader inbuf;
         try {
-            InputStream instream;
+            final InputStream instream;
             if (infile.equals("-"))
                 instream = System.in;
             else
                 instream = new FileInputStream(infile);
 
-            InputStreamReader in = new InputStreamReader(instream);
+            final InputStreamReader in = new InputStreamReader(instream);
             inbuf = new BufferedReader(in);
-        } catch (java.io.IOException e) {
+        } catch (final java.io.IOException e) {
             throw new InputError(e.getMessage());
         }
 
@@ -30,10 +30,10 @@ class InputLib {
     /**
      * fclose closes inbuf, which fopen returned earlier.
      */
-    public static void fclose(BufferedReader inbuf) {
+    public static void fclose(final BufferedReader inbuf) {
         try {
             inbuf.close();
-        } catch (java.io.IOException e) {
+        } catch (final java.io.IOException e) {
             throw new InputError(e.getMessage());
         }
     }
@@ -46,11 +46,11 @@ class InputLib {
      * the line ends with a CR or ends via EOF.
      * Thus it is not quite like fgets() in C.
      */
-    public static String getLine(BufferedReader inbuf) {
-        String line;
+    public static String getLine(final BufferedReader inbuf) {
+        final String line;
         try {
             line = inbuf.readLine();
-        } catch (java.io.IOException e) {
+        } catch (final java.io.IOException e) {
             throw new InputError(e.getMessage());
         }
 
@@ -58,7 +58,7 @@ class InputLib {
     }
 
     static class InputError extends Error {
-        public InputError(String s) {
+        public InputError(final String s) {
             super(s);
         }
     }

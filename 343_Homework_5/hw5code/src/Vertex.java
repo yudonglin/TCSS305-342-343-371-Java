@@ -33,7 +33,7 @@ public class Vertex {
      * @param data an object to be associated with this vertex
      * @param name a name to be associated with this vertex
      */
-    public Vertex(Object data, Object name) {
+    public Vertex(final Object data, final Object name) {
         this.data = data;
         this.name = name;
         this.incidentEdgeList = new LinkedList();
@@ -62,7 +62,7 @@ public class Vertex {
      *
      * @param data the data of this vertex
      */
-    public void setData(Object data) {
+    public void setData(final Object data) {
         this.data = data;
     }
 }
