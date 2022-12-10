@@ -12,7 +12,6 @@ public class PowerGrid {
      * @return a set of edges that comprise a minimum spanning tree of the given graph.
      */
     public static Set<Edge> kruskal(final SimpleGraph graph) {
-        final var edges = new HashSet<Edge>();
 
         // put all edges into the heap
         final BinaryHeap heap = new BinaryHeap();
@@ -32,9 +31,13 @@ public class PowerGrid {
         // create an up tree for tracking whether there will be a cycle
         final UpTree upTree = new UpTree();
 
+        // create a hashset for storing the result
+        final HashSet<Edge> edges = new HashSet<>(heap.getSize());
+
         // deleteMin to get the smallest edge
         while (heap.isNotEmpty()) {
             final Edge _edge = heap.deleteMin();
+            assert _edge != null;
             if (upTree.willNoCauseCycle(_edge)) {
                 edges.add(_edge);
             }
@@ -51,7 +54,7 @@ public class PowerGrid {
         final SimpleGraph G = new SimpleGraph();
         GraphInput.LoadSimpleGraph(G);
         final Set<Edge> setOfEdges = kruskal(G);
-        System.out.printf("The set of edges (%d in total):\n", setOfEdges.size());
+        System.out.printf("The set of edges for MST (%d in total):\n", setOfEdges.size());
         double totalCost = 0;
         for (final Edge _edge : setOfEdges) {
             totalCost += (double) _edge.getData();

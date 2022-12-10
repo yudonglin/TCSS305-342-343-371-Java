@@ -5,7 +5,7 @@
  * @author yudong lin
  * @version 1.1 - December 5, 2022
  */
-public class BinaryHeap {
+final class BinaryHeap {
 
     /* the heap is organized using the implicit array implementation.
      * Array index 0 is not used
@@ -128,5 +128,12 @@ public class BinaryHeap {
         }
         elements[index] = temp;
 
+    }
+
+    /**
+     * @return the size of the heap
+     */
+    int getSize() {
+        return size;
     }
 }

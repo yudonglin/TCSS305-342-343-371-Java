@@ -1,9 +1,9 @@
 import java.util.HashMap;
 
-final public class UpTree {
+final class UpTree {
 
     // a hash map for storing all the nodes of the up tree for union operation
-    private final HashMap<String, SubTreeNode> X;
+    private final HashMap<String, UpTreeNode> X;
 
     /**
      * constructor
@@ -22,8 +22,8 @@ final public class UpTree {
         final String v1parent = find(v1);
         final String v2parent = find(v2);
         if (!v1parent.equals(v2parent)) {
-            final SubTreeNode v1parentNode = X.get(v1parent);
-            final SubTreeNode v2parentNode = X.get(v2parent);
+            final UpTreeNode v1parentNode = X.get(v1parent);
+            final UpTreeNode v2parentNode = X.get(v2parent);
             if (v1parentNode.rank >= v2parentNode.rank) {
                 v2parentNode.parent = v1parent;
                 v1parentNode.rank += v2parentNode.rank;
@@ -57,10 +57,10 @@ final public class UpTree {
      * @return the absolute parent of this node
      */
     private String find(final String v1) {
-        final SubTreeNode v1node = X.get(v1);
+        final UpTreeNode v1node = X.get(v1);
         // if v1 is a need node that does not exist in the up tree, then add it to the tree
         if (v1node == null) {
-            X.put(v1, new SubTreeNode(v1, 0));
+            X.put(v1, new UpTreeNode(v1, 0));
             return v1;
         }
         // while v1 is not an absolute parent, then its parent is always "questionable"
@@ -73,11 +73,11 @@ final public class UpTree {
     /**
      * a data structure for managing node information
      */
-    static final private class SubTreeNode {
+    static final private class UpTreeNode {
         public String parent;
         public int rank;
 
-        public SubTreeNode(final String parent, final int rank) {
+        UpTreeNode(final String parent, final int rank) {
             this.parent = parent;
             this.rank = rank;
         }
